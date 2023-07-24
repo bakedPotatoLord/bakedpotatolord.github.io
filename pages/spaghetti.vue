@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .base {
     background-color: rgb(150, 31, 31);
     color: rgb(226, 230, 174);

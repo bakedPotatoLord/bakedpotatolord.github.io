@@ -1,6 +1,6 @@
 <template>
   <div class=maintext>
-    Home
+    This is the main page
   </div>
   <div class="countbox">
     <div>count: {{ count }}</div>
@@ -25,12 +25,9 @@ watch(echoInput, async () => {
     }
   });
 });
-
-
 </script>
 
 <style lang="scss">
-
   .maintext {
     margin:1rem;
   }

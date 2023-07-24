@@ -1,28 +1,40 @@
 <template>
-  <div>
-    this is the header
-    <br>
-    and this is the navbar
-    <div class="navbar">
-      <NuxtLink to="/">Home</NuxtLink>
-      <NuxtLink to="/potato">potato</NuxtLink>
-      <NuxtLink to="/spaghetti">spaghetti</NuxtLink>
-
-    </div>
+  <div class="base">
+    <h1>
+      The C<span class="potato">🥔</span>de P<span class="potato">🥔</span>tato
+    </h1>
+    <h2>
+      <span class="adjective">{{  randomAdjective  }}  </span>
+      <span class="fullstack">Fullstack</span><br />web developer
+    </h2>
   </div>
 </template>
 
+<script setup lang="ts">
+const adjectives = ref([
+  "Starchy",
+  "Versatile",
+  "Comforting",
+  "Satisfying",
+  "Wholesome",
+  "Down-To-Earth",
+  "Robust",
+  "Resourceful"
+])
+
+const randomAdjective =computed(async() =>{
+
+  //return data[Math.floor(Math.random()*data.value.length)]:""
+})
+
+</script>
+
 <style scoped lang="scss">
-div{
-  font-size: 30px;
+h1 {
+  font-family: "Noto Sans", sans-serif;
 }
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    width:100%;
-    a{
-      color: blue;
-      padding: 1rem;
-    }
-  }
+
+.potato {
+  font-size: 1.5rem;
+}
 </style>
