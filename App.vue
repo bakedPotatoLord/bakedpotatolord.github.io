@@ -1,7 +1,6 @@
 <template>
   <div class="background">
     <Header />
-    <Navbar />
     <br />
     <div class="pagewrapper">
       <NuxtPage />
@@ -22,12 +21,16 @@
 }
 
 :root {
-  background: rgb(41, 44, 61);
-  background: linear-gradient(
-    0deg,
-    rgba(41, 44, 61, 1) 0%,
-    rgba(82, 43, 135, 1) 36%,
-    rgba(82, 43, 135, 1) 100%
-  );
+  body{
+    background: rgb(41, 44, 61);
+    background: linear-gradient(
+      0deg,
+      rgba(41, 44, 61, 1) 0%,
+      rgba(82, 43, 135, 1) 36%,
+      rgba(82, 43, 135, 1) 100%
+    );
+    margin: 0px;
+    font-family: 'Noto Sans', sans-serif;
+  }
 }
 </style>
