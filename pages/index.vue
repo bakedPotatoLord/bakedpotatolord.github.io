@@ -1,38 +1,53 @@
 <template>
-  <div class=maintext>
-    This is the main page
+  <div class="maintext">
+    <h1>
+      C<span class="potato">🥔</span>de P<span class="potato">🥔</span>tato
+    </h1>
+    <h2>
+      The <span class="adjective">{{ adjective }} </span>
+      <span class="fullstack"> Fullstack</span><br />Web Developer
+    </h2>
   </div>
-  <div class="countbox">
-    <div>count: {{ count }}</div>
-    <button @click="count++">count++</button>
+
+  <div class="about">
+    <h3>About</h3>
+
+    Hello there, 
   </div>
-  <input type="text" v-model="echoInput"><br>
-  echo: {{ echo }}
 </template>
 
 <script setup lang="ts">
-const count = ref(0);
-const echoInput = ref("");
 
-let echo = ref("");
+function rand(arr:any[]) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
-watch(echoInput, async () => {
-  console.log(echoInput.value);
-  echo.value = await $fetch('/api/echo',{
-    method: 'POST',
-    body: {
-      message: echoInput.value
-    }
-  });
-});
+const adjective = ref([
+  "Starchy",
+  "Versatile",
+  "Comforting",
+  "Satisfying",
+  "Wholesome",
+  "Down-To-Earth",
+  "Robust",
+  "Resourceful",
+][0]);
+
 </script>
 
 <style lang="scss">
   .maintext {
-    margin:1rem;
+    h1{
+      font-weight: 600;
+    }
+    h2{
+      font-weight: 300;
+    }
+    margin-bottom: 80px;
   }
-
-  .countbox {
-    margin:1rem;
+ .about {
+  h3{
+    font-weight: 400;
   }
+ }
 </style>
