@@ -1,39 +1,40 @@
 <template>
   <div class="base">
-    <h1>
-      The C<span class="potato">🥔</span>de P<span class="potato">🥔</span>tato
-    </h1>
-    <h2>
-      <span class="adjective">{{  randomAdjective  }}  </span>
-      <span class="fullstack"> Fullstack</span><br />web developer
-    </h2>
+    <div class="logo">🥔</div>
+    <div class="navbar">
+      <NuxtLink to="/">Home</NuxtLink>
+      <NuxtLink to="/potato">About</NuxtLink>
+      <NuxtLink to="/spaghetti">spaghetti</NuxtLink>
+    </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const adjectives =  [
-  "Starchy",
-  "Versatile",
-  "Comforting",
-  "Satisfying",
-  "Wholesome",
-  "Down-To-Earth",
-  "Robust",
-  "Resourceful"
-]
-
-const randomAdjective =computed(() =>
-  adjectives[Math.floor(Math.random()*adjectives.length)]
-)
-
-</script>
 
 <style scoped lang="scss">
 h1 {
   font-family: "Noto Sans", sans-serif;
 }
 
-.potato {
-  font-size: 1.5rem;
+.base {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(63, 25, 108);
+  .logo {
+    font-size: 2rem;
+    padding: 0.5rem;
+  }
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 100%;
+    a {
+      color: white;
+      text-decoration: none;
+      padding: 1rem;
+      
+    }
+    
+  }
 }
 </style>
