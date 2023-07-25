@@ -5,13 +5,13 @@
     </h1>
     <h2>
       <span class="adjective">{{  randomAdjective  }}  </span>
-      <span class="fullstack">Fullstack</span><br />web developer
+      <span class="fullstack"> Fullstack</span><br />web developer
     </h2>
   </div>
 </template>
 
 <script setup lang="ts">
-const adjectives = ref([
+const adjectives =  [
   "Starchy",
   "Versatile",
   "Comforting",
@@ -20,12 +20,11 @@ const adjectives = ref([
   "Down-To-Earth",
   "Robust",
   "Resourceful"
-])
+]
 
-const randomAdjective =computed(async() =>{
-
-  //return data[Math.floor(Math.random()*data.value.length)]:""
-})
+const randomAdjective =computed(() =>
+  adjectives[Math.floor(Math.random()*adjectives.length)]
+)
 
 </script>
 
