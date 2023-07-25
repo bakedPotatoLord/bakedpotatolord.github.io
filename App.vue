@@ -1,6 +1,7 @@
 <template>
   <div class="background">
     <Header />
+    <ShapeDivider id="divider"/>
     <br />
     <div class="pagewrapper">
       <NuxtPage />
@@ -12,12 +13,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
 
 .pagewrapper {
-  width: 100%;
-  border: 4px solid black;
+  padding-left:2rem;
+  padding-right:2rem;
 }
 
 .background {
   background: none;
+  #divider{
+    position: relative;
+  }
 }
 
 :root {
@@ -31,6 +35,8 @@
     );
     margin: 0px;
     font-family: 'Noto Sans', sans-serif;
+    font-weight: 300;
+    color: #fff;
   }
 }
 </style>
