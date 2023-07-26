@@ -3,8 +3,9 @@
     <div class="logo">🥔</div>
     <div class="navbar">
       <NuxtLink to="/">Home</NuxtLink>
-      <NuxtLink to="/potato">About</NuxtLink>
-      <NuxtLink to="/spaghetti">Portfolio</NuxtLink>
+      <NuxtLink to="/about">About</NuxtLink>
+      <NuxtLink to="/portfolio">Portfolio</NuxtLink>
+      <NuxtLink to="/contact">Contact</NuxtLink>
     </div>
   </div>
 </template>
