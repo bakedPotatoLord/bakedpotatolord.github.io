@@ -12,60 +12,69 @@
   <div class="about">
     <h3>About</h3>
 
-    Hello there, 
+    <p>
+      Hi, I'm Josiah Hamm, a {{age}} year old freelance developer based in Denver, CO, with a passion for
+      software development, leadership, problem-solving, and teamwork.
+    </p>
   </div>
 
   <div class="headshot">
-    <img src="~/assets/headshot.jpg" alt="headshot">
+    <img src="~/assets/headshot.jpg" alt="headshot" />
   </div>
 </template>
 
 <script setup lang="ts">
-
-function rand(arr:any[]) {
+function rand(arr: any[]) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const adjective = ref([
-  "Starchy",
-  "Versatile",
-  "Comforting",
-  "Satisfying",
-  "Wholesome",
-  "Down-To-Earth",
-  "Robust",
-  "Resourceful",
-][0]);
+const year = Date.parse('1971-01-01T00:00:00.000Z')
+const currentTime = Date.now();
+const birthTime = Date.parse('October 2, 2006')
+const ageMs = currentTime - birthTime
+const age = ref(Math.floor(ageMs/year))
 
+const adjective = ref(
+  [
+    "Starchy",
+    "Versatile",
+    "Comforting",
+    "Satisfying",
+    "Wholesome",
+    "Down-To-Earth",
+    "Robust",
+    "Resourceful",
+  ][0]
+);
 </script>
 
 <style lang="scss">
-  .maintext {
-    #potato{
-      position:absolute;
-      z-index: -1;
-    }
-    h1{
-      font-weight: 600;
-    }
-    h2{
-      font-weight: 300;
-    }
-    margin-bottom: 80px;
+.maintext {
+  #potato {
+    position: absolute;
+    z-index: -1;
   }
- .about {
-  h3{
+  h1 {
+    font-weight: 600;
+  }
+  h2 {
+    font-weight: 300;
+  }
+  margin-bottom: 80px;
+}
+.about {
+  h3 {
     font-weight: 400;
   }
- }
- .headshot{
+}
+.headshot {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  img{
+  img {
     width: 200px;
     border-radius: 50%;
   }
- }
+}
 </style>
