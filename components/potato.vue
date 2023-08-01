@@ -2,58 +2,70 @@
   <canvas ref="canvas"></canvas>
 </template>
 
-<script type="module" lang="ts">
+<script setup lang="ts">
 import * as THREE from "three";
 import { Object3D } from "three";
 //@ts-ignore
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-const cw = 600
-const ch = 600
+function err(): never {
+  throw new Error("Failed to load canvas");
+}
 
-export default {
-  mounted() {
+const canvas = ref<HTMLCanvasElement | null>(null);
 
-  const canvas = <HTMLCanvasElement>this.$refs.canvas
+onMounted(() => {
+  let remValue = parseFloat(
+    getComputedStyle(document.documentElement).fontSize
+  );
+  let cw = window.innerWidth - 4 * remValue;
+  let ch = cw;
 
-    const scene = new THREE.Scene();
-    scene.background = null;
-    const camera = new THREE.PerspectiveCamera( 75, cw/ch, 0.1, 1000 );
+  document.addEventListener("resize", () => {
+    remValue = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    cw = window.innerWidth - 4 * remValue;
+    ch = cw;
+  });
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha:true,
-    });
-    renderer.setSize( cw, ch );
+  const scene = new THREE.Scene();
+  scene.background = null;
+  const camera = new THREE.PerspectiveCamera(75, cw / ch, 0.1, 1000);
 
-    camera.position.z = 4;
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas.value ?? err(),
+    alpha: true,
+  });
+  renderer.setSize(cw, ch);
+  camera.position.z = 4;
 
-    const light = new THREE.PointLight( 0xffffff, 1 );
-    light.position.set( 0, 0, 5 );
-    scene.add( light );
+  const light = new THREE.PointLight(0xffffff, 1);
+  light.position.set(0, 0, 5);
+  scene.add(light);
 
-    const loader = new GLTFLoader();
+  const loader = new GLTFLoader();
+  let potato: Object3D;
+  loader.load(
+    "/potato/potato.glb",
+    (gltf: any) => {
+      potato = gltf.scene;
+      scene.add(gltf.scene);
+    },
+    (xhr: any) => {
+      //console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+    },
+    console.error
+  );
 
-    let potato:Object3D
-
-    loader.load( '/potato/potato.glb',  ( gltf:any )=> {
-      potato  =gltf.scene
-      scene.add( gltf.scene );
-    }, undefined,
-      console.error
-      );
-
-    function animate() {
-      requestAnimationFrame( animate );
-      if(potato){
-        //potato.rotation.x += 0.01;
-        potato.rotation.y += 0.01;
-      }
-
-      renderer.render( scene, camera );
+  function animate() {
+    requestAnimationFrame(animate);
+    if (potato) {
+      //potato.rotation.x += 0.01;
+      potato.rotation.y += 0.01;
     }
 
-    animate();
-  },
-};
+    renderer.render(scene, camera);
+  }
+
+  animate();
+});
 </script>
