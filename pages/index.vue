@@ -13,8 +13,13 @@
     <h3>About</h3>
 
     <p>
-      Hi, I'm Josiah Hamm, a {{age}} year old freelance developer based in Denver, CO, with a passion for
-      software development, leadership, problem-solving, and teamwork.
+      Hi, I'm Josiah Hamm, a {{ age }} year old freelance developer based in
+      Denver, CO, with a passion for software development, leadership,
+      problem-solving, and teamwork.<br />
+      <br />
+      I enjoy building beautiful and functional web applications
+      that join art and technology to create engaging user experiences 
+      
     </p>
   </div>
 
@@ -28,11 +33,11 @@ function rand(arr: any[]) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const year = Date.parse('1971-01-01T00:00:00.000Z')
+const year = Date.parse("1971-01-01T00:00:00.000Z");
 const currentTime = Date.now();
-const birthTime = Date.parse('October 2, 2006')
-const ageMs = currentTime - birthTime
-const age = ref(Math.floor(ageMs/year))
+const birthTime = Date.parse("October 2, 2006");
+const ageMs = currentTime - birthTime;
+const age = ref(Math.floor(ageMs / year));
 
 const adjective = ref(
   [
@@ -53,6 +58,7 @@ const adjective = ref(
   #potato {
     position: absolute;
     z-index: -1;
+    width:100%
   }
   h1 {
     font-weight: 600;
