@@ -18,12 +18,12 @@ onMounted(() => {
   let remValue = parseFloat(
     getComputedStyle(document.documentElement).fontSize
   );
-  let cw = window.innerWidth - 4 * remValue;
+  let cw = Math.min(window.innerWidth - 4 * remValue,500);
   let ch = cw;
 
   document.addEventListener("resize", () => {
     remValue = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    cw = window.innerWidth - 4 * remValue;
+    cw = Math.min(window.innerWidth - 4 * remValue,500);
     ch = cw;
   });
 
