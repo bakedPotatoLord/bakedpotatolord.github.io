@@ -1,6 +1,8 @@
 <template>
   <div class="maintext">
-    <Potato id="potato" />
+    <div class="potatoContainer">
+      <Potato id="potato" />
+    </div>
     <h1>
       C<span class="potato">🥔</span>de P<span class="potato">🥔</span>tato
     </h1>
@@ -33,14 +35,7 @@ function rand(arr: any[]) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const year = Date.parse("1971-01-01T00:00:00.000Z");
-const currentTime = Date.now();
-const birthTime = Date.parse("October 2, 2006");
-const ageMs = currentTime - birthTime;
-const age = ref(Math.floor(ageMs / year));
-
-const adjective = ref(
-  [
+const adjectives =[
     "Starchy",
     "Versatile",
     "Comforting",
@@ -49,16 +44,33 @@ const adjective = ref(
     "Down-To-Earth",
     "Robust",
     "Resourceful",
-  ][0]
-);
+]
+
+const year = Date.parse("1971-01-01T00:00:00.000Z");
+const currentTime = Date.now();
+const birthTime = Date.parse("October 2, 2006");
+const ageMs = currentTime - birthTime;
+const age = ref(Math.floor(ageMs / year));
+
+const adjective = ref(adjectives[0])
+
+onMounted(()=>{
+
+})
+
+
+
+
 </script>
 
 <style lang="scss">
 .maintext {
-  #potato {
+  .potatoContainer{
+    width:calc(100% - 4rem);
+    display:flex;
+    justify-content: right;
     position: absolute;
     z-index: -1;
-    width:100%
   }
   h1 {
     font-weight: 600;
