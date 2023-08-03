@@ -7,7 +7,7 @@
       C<span class="potato">🥔</span>de P<span class="potato">🥔</span>tato
     </h1>
     <h2>
-      The <span class="adjective">{{ adjective }} </span>
+      The <span ref="a" class="adjective">{{ adjective }} </span>
       <span class="fullstack"> Fullstack</span><br />Web Developer
     </h2>
   </div>
@@ -52,14 +52,27 @@ const birthTime = Date.parse("October 2, 2006");
 const ageMs = currentTime - birthTime;
 const age = ref(Math.floor(ageMs / year));
 
-const adjective = ref(adjectives[0])
-
-onMounted(()=>{
-
+const i = ref(0)
+const adjective = computed(() => {
+  return adjectives[i.value]
 })
 
 
+const a = ref<HTMLSpanElement | null>(null)
 
+onMounted(async ()=>{
+  console.log(a.value)
+  if(a.value){
+    a.value.onmouseover = ()=>{
+      console.log('mouse over')
+      i.value = (++i.value) % adjectives.length
+    }
+  }
+})
+
+function err(msg:string):never{
+  throw new Error(msg);
+}
 
 </script>
 
