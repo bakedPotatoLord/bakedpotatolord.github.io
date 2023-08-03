@@ -6,6 +6,7 @@
     <div class="pagewrapper">
       <NuxtPage />
     </div>
+    <Footer />
   </div>
 </template>
 
