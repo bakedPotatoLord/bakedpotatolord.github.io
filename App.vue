@@ -1,11 +1,12 @@
 <template>
   <div class="background">
     <Header />
-    <ShapeDivider id="divider"/>
+    <MultiCurveDivider class="divider"/>
     <br />
     <div class="pagewrapper">
       <NuxtPage />
     </div>
+    <FooterDivider  class="divider"/>
     <Footer />
   </div>
 </template>
@@ -13,14 +14,11 @@
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
 
-.pagewrapper {
-  padding-left:2rem;
-  padding-right:2rem;
-}
+
 
 .background {
   background: none;
-  #divider{
+  .divider{
     position: relative;
   }
 }
