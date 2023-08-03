@@ -1,6 +1,13 @@
+
+<script setup>
+import logo from '@/assets/logo.jpg'
+</script>
+
 <template>
   <div class="base">
-    <div class="logo">🥔</div>
+    <div class="logo">
+      <img :src="logo" alt="potato logo">
+    </div>
     <div class="navbar">
       <NuxtLink to="/">Home</NuxtLink>
       <NuxtLink to="/about">About</NuxtLink>
@@ -23,6 +30,10 @@ h1 {
   .logo {
     font-size: 2rem;
     padding: 0.5rem;
+    img {
+      width: 4rem;
+      border-radius: 50%;
+    }
   }
   .navbar {
     display: flex;
@@ -32,10 +43,12 @@ h1 {
     a {
       color: white;
       text-decoration: none;
+      font-size: 1.0rem;
       padding: 1rem;
-      
+      &:hover {
+        text-shadow: white 0px 0px 10px;
+      }
     }
-    
   }
 }
 </style>
