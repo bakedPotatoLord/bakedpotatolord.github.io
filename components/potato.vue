@@ -19,12 +19,13 @@ onMounted(() => {
     getComputedStyle(document.documentElement).fontSize
   );
   let cw = Math.min(window.innerWidth - 4 * remValue,500);
-  let ch = cw;
+  let ch = cw/Math.SQRT2;
 
   document.addEventListener("resize", () => {
     remValue = parseFloat(getComputedStyle(document.documentElement).fontSize);
     cw = Math.min(window.innerWidth - 4 * remValue,500);
-    ch = cw;
+    ch = cw/Math.SQRT2;
+    renderer.setSize(cw, ch);
   });
 
   const scene = new THREE.Scene();
@@ -36,7 +37,7 @@ onMounted(() => {
     alpha: true,
   });
   renderer.setSize(cw, ch);
-  camera.position.z = 4;
+  camera.position.z = 3.5;
 
   const light = new THREE.PointLight(0xffffff, 1);
   light.position.set(0, 0, 5);
@@ -59,8 +60,9 @@ onMounted(() => {
   function animate() {
     requestAnimationFrame(animate);
     if (potato) {
-      //potato.rotation.x += 0.01;
       potato.rotation.y += 0.01;
+      potato.rotation.x += 0.01;
+      potato.rotation.z += 0.01;
     }
 
     renderer.render(scene, camera);
