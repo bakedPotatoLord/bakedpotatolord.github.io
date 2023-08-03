@@ -70,10 +70,6 @@ onMounted(async ()=>{
   }
 })
 
-function err(msg:string):never{
-  throw new Error(msg);
-}
-
 </script>
 
 <style lang="scss">
