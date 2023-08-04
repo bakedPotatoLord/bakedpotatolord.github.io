@@ -36,7 +36,7 @@
         position: relative;
         display: block;
         width: calc(100% + 1.3px);
-        height: 42px;
+        height: 50px;
     }
     .shape-fill {
         fill: #3F196C;

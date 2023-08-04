@@ -22,7 +22,7 @@
         position: relative;
         display: block;
         width: calc(100% + 1.3px);
-        height: 75px;
+        height: 50px;
         transform: translateY(-1px);
     }
     .shape-fill {
