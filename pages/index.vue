@@ -3,7 +3,7 @@
 const adjectives =[
     "Starchy",
     "Versatile",
-    "Comforting",
+    "Dependable",
     "Satisfying",
     "Wholesome",
     "Down-To-Earth",
@@ -56,10 +56,6 @@ onMounted(async ()=>{
           The <span ref="a" class="adjective">{{ adjective }} </span>
           <span class="fullstack"> Fullstack</span><br />Web Developer
         </h2>
-        <p>
-          After an enlightening spiritual journey in Idaho, 
-          The Code Potato found his calling in web development.
-        </p>
       </div>
     </div>
     <div class="potatoContainer">
@@ -99,7 +95,6 @@ onMounted(async ()=>{
   .maintext {
     display:flex;
     align-items: center;
-    
     .textContainer{
       display:block;
       min-width: 400px;
@@ -109,6 +104,7 @@ onMounted(async ()=>{
       }
       h2 {
         font-weight: 300;
+        margin-bottom: 0px;
         .adjective{
           text-shadow: white 0px 0px 10px ;
         }
