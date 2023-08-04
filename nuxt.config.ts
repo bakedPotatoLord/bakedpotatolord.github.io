@@ -4,4 +4,10 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content'
   ],
+  vite:{
+    build:{
+      minify:true,
+      cssMinify:true,
+    }
+  }
 })
