@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content'
   ],
+  components: [
+    { path: '~/components/dividers', pathPrefix: false },
+    '~/components',
+  ],
   vite:{
     build:{
       minify:true,
