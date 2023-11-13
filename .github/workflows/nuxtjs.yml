@@ -29,9 +29,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: oven-sh/setup-bun@v1
-      with:
-        bun-version: latest
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Pages
