@@ -1,12 +1,12 @@
 <template>
   <div class="background">
     <Header />
-    <MultiCurveDivider class="divider"/>
+    <MultiCurveDivider class="divider" />
     <br />
     <div class="pagewrapper">
       <NuxtPage />
     </div>
-    <FooterDivider  class="divider"/>
+    <FooterDivider class="divider" />
     <Footer />
   </div>
 </template>
@@ -18,20 +18,19 @@
 
 .background {
   background: none;
-  .divider{
+
+  .divider {
     position: relative;
   }
 }
 
 :root {
-  body{
+  body {
     background: rgb(41, 44, 61);
-    background: linear-gradient(
-      0deg,
-      rgba(41, 44, 61, 1) 0%,
-      rgba(82, 43, 135, 1) 36%,
-      rgba(82, 43, 135, 1) 100%
-    );
+    background: linear-gradient(0deg,
+        rgba(41, 44, 61, 1) 0%,
+        rgba(82, 43, 135, 1) 36%,
+        rgba(82, 43, 135, 1) 100%);
     margin: 0px;
     font-family: 'Noto Sans', sans-serif;
     font-weight: 300;
