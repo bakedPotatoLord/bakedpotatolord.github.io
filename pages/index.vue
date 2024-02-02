@@ -67,13 +67,16 @@ onMounted(async ()=>{
     <div class="aboutText">
         <h3>About</h3>
         <p>
-          Hi, I'm Josiah Hamm, a {{ age }} year old freelance developer based in
+          Hey there, I'm Josiah Hamm, a freelance developer and robotics engineer based in
           Denver, CO, with a passion for software development, leadership,
-          problem-solving, and teamwork.<br />
+          problem-solving, and teaching.<br />
           <br />
-          I build beautiful and functional web applications
+          Some days,I build beautiful and functional web applications
           that join art and technology to create engaging user experiences.<br>
           <br>
+          Other days, I design, test, fabricate and build robots and other
+          machines.<br>
+      
           I also enjoy competitive robotics, reading up on 
           Star Wars / Warhammer 40,000 lore, camping, hiking and competitve programming.<br>
           <br>
