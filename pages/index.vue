@@ -75,7 +75,7 @@ onMounted(async () => {
         that join art and technology to create engaging user experiences.<br>
         <br>
         Other days, I design, test, and fabricate robots and other
-        machines. I love watching something move from a thought to a digital model to reality<br>
+        machines. I love watching something move from a thought to a digital model to reality.<br>
         <br>
         I also enjoy competitive robotics, reading up on
         Star Wars / Warhammer 40,000 lore, camping, hiking and competitve programming.<br>
@@ -88,7 +88,7 @@ onMounted(async () => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .intro {
   padding-left: 2rem;
   padding-right: 2rem;
