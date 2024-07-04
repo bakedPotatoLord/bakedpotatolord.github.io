@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div class="aboutText">
-      <h3>About</h3>
+      <h3 class="sectionTitle">About</h3>
       <p>
         Hey there, I'm Josiah Hamm, a freelance developer and robotics engineer based in
         Denver, CO, with a passion for making ideas real, leadership,
@@ -35,11 +35,16 @@
   background-color: #39125c;
 
   .aboutText {
-    h3 {
+    .sectionTitle {
       font-weight: 400;
-      font-size: 1.5rem;
+      font-size: 2rem;
+      margin: 0.5rem;
+      transition: text-shadow 0.3s ease-in-out;
     }
 
+    .sectionTitle:hover{
+      text-shadow: white 0px 0px 10px;
+    }
     max-width:500px
   }
 
