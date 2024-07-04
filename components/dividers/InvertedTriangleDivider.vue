@@ -18,7 +18,7 @@
     width: 100%;
     overflow: hidden;
     line-height: 0;
-    transform: scaleY(1) translateY(-1px);
+    transform: scaleY(1) translateY(1px);
     margin-block-end:0px;
     svg {
       position: relative;
@@ -29,6 +29,7 @@
     .shape-fill {
       fill: #39125c;
     }
+    height:100px;
   }
 }
 </style>
