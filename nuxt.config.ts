@@ -5,6 +5,7 @@ export default defineNuxtConfig({
 
   components: [
     { path: '~/components/dividers', pathPrefix: false },
+    { path: '~/components/sections', pathPrefix: false },
     '~/components',
   ],
 
