@@ -16,7 +16,7 @@ defineProps<Props>()
 <template>
 <div class="main">
   <div class="image">
-    <NuxtImg :src="projectImage" />
+    <NuxtImg :src="projectImage" width="500px" sizes=" sm:200px md:500px lg:700px" />
   </div>
   <div class="textBody">
     <h2>{{projectName}}</h2>
@@ -25,7 +25,6 @@ defineProps<Props>()
       <div class="tool" v-for="tool of tools?.map(t=>getToolUrl(t))">
         <NuxtImg :src="tool" width="30px"/>
       </div>
-
     </div>
     <div class="buttons">
       <a :href="projectLink" target="_blank">Launch Project</a>
