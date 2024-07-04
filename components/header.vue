@@ -10,9 +10,10 @@ import logo from '@/assets/logo.jpg'
     </div>
     <div class="navbar">
       <NuxtLink to="/">Home</NuxtLink>
-      <NuxtLink to="/about">About</NuxtLink>
-      <NuxtLink to="/portfolio">Portfolio</NuxtLink>
-      <NuxtLink to="/contact">Contact</NuxtLink>
+      <NuxtLink to="#about">About</NuxtLink>
+      <NuxtLink to="#portfolio">Portfolio</NuxtLink>
+      <NuxtLink to="#blog">Blog</NuxtLink>
+      <NuxtLink to="#contact">Contact</NuxtLink>
     </div>
   </div>
 </template>
