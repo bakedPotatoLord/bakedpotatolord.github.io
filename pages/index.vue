@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import About from '~/components/sections/About.vue';
+import Portfolio from '~/components/sections/Portfolio.vue';
 
 const adjectives = [
   "Starchy",
@@ -46,7 +48,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="intro">
+  <section class="intro">
     <div class="maintext">
       <div class="textContainer">
         <h1>
@@ -61,31 +63,17 @@ onMounted(async () => {
     <div class="potatoContainer">
       <Potato id="potato" />
     </div>
-  </div>
+  </section>
   <DiagonalDivider id="diagonalDivider" />
-  <div class="about">
-    <div class="aboutText">
-      <h3>About</h3>
-      <p>
-        Hey there, I'm Josiah Hamm, a freelance developer and robotics engineer based in
-        Denver, CO, with a passion for making ideas real, leadership,
-        problem-solving, and teaching.<br />
-        <br />
-        Some days, I build beautiful and functional web applications
-        that join art and technology to create engaging user experiences.<br>
-        <br>
-        Other days, I design, test, and fabricate robots and other
-        machines. I love watching something move from a thought to a digital model to reality.<br>
-        <br>
-        I also enjoy competitive robotics, reading up on
-        Star Wars / Warhammer 40,000 lore, camping, hiking and competitve programming.<br>
-        <br>
-      </p>
-    </div>
-    <div class="headshot">
-      <img src="~/assets/headshot.jpg" alt="headshot" />
-    </div>
-  </div>
+  <section class="about">
+    <About />
+  </section>
+  <TriangleDivider />
+
+  <section class="portfolio">
+    <Portfolio />
+  </section>
+
 </template>
 
 <style lang="scss" scoped>
@@ -132,40 +120,4 @@ onMounted(async () => {
   position: relative;
 }
 
-.about {
-  margin-top: 0px;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  background-color: #39125c;
-
-  .aboutText {
-    h3 {
-      font-weight: 400;
-      font-size: 1.5rem;
-    }
-
-    max-width:500px
-  }
-
-  .headshot {
-    flex: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    width: 100%;
-
-    img {
-      transition: box-shadow 0.3s ease-in-out;
-      width: 250px;
-      border-radius: 50%;
-
-      &:hover {
-        box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.3);
-      }
-    }
-  }
-}</style>
+</style>
