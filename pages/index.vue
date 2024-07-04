@@ -69,11 +69,13 @@ onMounted(async () => {
     <About />
   </section>
   <TriangleDivider />
-
   <section class="portfolio">
     <Portfolio />
   </section>
+  <InvertedTriangleDivider />
+  <section class="blog">
 
+  </section>
 </template>
 
 <style lang="scss" scoped>
