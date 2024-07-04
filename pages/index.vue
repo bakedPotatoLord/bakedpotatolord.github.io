@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import About from '~/components/sections/About.vue';
-import Portfolio from '~/components/sections/Portfolio.vue';
 
 const adjectives = [
   "Starchy",
@@ -74,7 +72,7 @@ onMounted(async () => {
   </section>
   <InvertedTriangleDivider />
   <section class="blog">
-
+    <Blog />
   </section>
 </template>
 
