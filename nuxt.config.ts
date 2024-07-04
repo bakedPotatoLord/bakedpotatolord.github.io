@@ -1,17 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   //devtools: { enabled: true },
-  modules: [
-    '@nuxt/content'
-  ],
+  modules: ['@nuxt/content', "@nuxt/image"],
+
   components: [
     { path: '~/components/dividers', pathPrefix: false },
     '~/components',
   ],
+
   vite:{
     build:{
       minify:true,
       cssMinify:true,
     }
-  }
+  },
+
+  compatibilityDate: '2024-07-04'
 })
