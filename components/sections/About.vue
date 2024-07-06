@@ -40,10 +40,10 @@
       font-size: 2rem;
       margin: 0.5rem;
       transition: text-shadow 0.3s ease-in-out;
-    }
 
-    .sectionTitle:hover{
-      text-shadow: white 0px 0px 10px;
+      &:hover {
+        text-shadow: white 0px 0px 10px;
+      }
     }
     max-width:500px
   }
