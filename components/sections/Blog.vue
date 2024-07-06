@@ -7,14 +7,6 @@ export interface BlogPost{
   images: string[]
 }
 
-const blog:BlogPost[] = [
-  {
-    title: "Energy Discharge of Biblical Proportions",
-    body: "placeholder",
-    images: ["/images/icons/bun.png"]
-  }
-]
-
 
 </script>
 
@@ -23,11 +15,14 @@ const blog:BlogPost[] = [
   <div class="blog">
     <h2 class="sectionTitle">Blog</h2>
 
-    <div class="blogItems">
-      <div class="blogItem" v-for="{title,images} of blog">
-        <BlogCard :title="title" :images="images" />
+    <ContentList path="/posts" v-slot="{ posts }"  >
+      {{ posts }}
+      <div v-for="article in posts" :key="article._path">
+
+        {{ article }}
       </div>
-    </div>
+    </ContentList>
+
   </div>
 </template>
 
