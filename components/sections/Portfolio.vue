@@ -4,7 +4,7 @@ import PortfolioCard from "~/components/PortfolioCard.vue";
 
 <template>
   <div class="portfolio">
-
+    <SectionTitle title="Portfolio"/>
     <div class="cardHolder">
       <PortfolioCard 
       projectName="Robo Lobo Bellos — Robotics Team Website"

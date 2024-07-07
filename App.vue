@@ -14,20 +14,8 @@
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
 
-.sectionTitle {
-      font-weight: 400;
-      font-size: 2rem;
-      margin: 0.5rem;
-      transition: text-shadow 0.3s ease-in-out;
-
-      &:hover {
-        text-shadow: white 0px 0px 10px;
-      }
-    }
-
 .background {
   background: none;
-
   .divider {
     position: relative;
   }

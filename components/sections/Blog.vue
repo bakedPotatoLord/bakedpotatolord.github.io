@@ -8,11 +8,11 @@ export interface BlogPost {
 
 <template>
   <div class="blog">
-    <h2 class="sectionTitle">Blog</h2>
+    <SectionTitle title="Blog"/>
     <div class="blogItems">
       <ContentList path="/posts">
-        <div v-for="article of [1, 2, 3]" :key="{ article }" class="blogItem">
-          <h3 class="title">ARTICLE TITLE</h3>
+        <div v-for="article of [1,2,3]"  class="blogItem">
+          <h3 class="title">ARTICLE {{article}}</h3>
           <NuxtImg
             src="https://media.istockphoto.com/id/157430678/photo/three-potatoes.jpg?s=612x612&w=0&k=20&c=qkMoEgcj8ZvYbzDYEJEhbQ57v-nmkHS7e88q8dv7TSA="
             width="500px"

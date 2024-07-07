@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-
+    <SectionTitle title="Contact Me"/>
   </div>
 </template>
 
