@@ -41,10 +41,11 @@ h1 {
     align-items: center;
     justify-content: right;
     width: 100%;
+    padding-right:1rem;
     a {
       color: white;
       text-decoration: none;
-      font-size: 1.0rem;
+      font-size: 2rem;
       padding: 1rem;
       &:hover {
         text-shadow: white 0px 0px 10px;

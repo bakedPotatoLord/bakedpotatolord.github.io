@@ -87,20 +87,18 @@ onMounted(async () => {
   .maintext {
     display: flex;
     align-items: center;
-
     .textContainer {
       display: block;
       min-width: 400px;
       max-width: 500px;
-
       h1 {
         font-weight: 600;
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
       }
-
       h2 {
         font-weight: 300;
         margin-bottom: 0px;
-
         .adjective {
           text-shadow: white 0px 0px 10px;
         }
