@@ -1,3 +1,9 @@
+
+<script setup lang="ts">
+
+
+</script>
+
 <template>
   <div class="about">
     <SectionTitle title="About" />
@@ -20,7 +26,7 @@
         </p>
       </div>
       <div class="headshot">
-        <img src="~/assets/headshot.jpg" alt="headshot" />
+        <NuxtImg src="/images/headshot.png" alt="headshot" width="200" />
       </div>
     </div>
   </div>
