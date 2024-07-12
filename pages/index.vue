@@ -74,6 +74,10 @@ onMounted(async () => {
   <section class="blog">
     <Blog />
   </section>
+  <FooterDivider class="divider" />
+  <section class="contact">
+    <Contact/>
+  </section>
 </template>
 
 <style lang="scss" scoped>

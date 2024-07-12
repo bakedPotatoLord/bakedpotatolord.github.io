@@ -6,7 +6,6 @@
     <div class="pagewrapper">
       <NuxtPage />
     </div>
-    <FooterDivider class="divider" />
     <Footer />
   </div>
 </template>

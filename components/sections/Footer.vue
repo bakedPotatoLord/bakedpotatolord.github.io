@@ -1,14 +1,19 @@
+
+<script setup lang="ts">
+
+const year = (new Date).getFullYear()
+
+</script>
+
 <template>
   <div class="footer">
-    <SectionTitle title="Contact Me"/>
-    <div class="contactCards">
-      <ContactCard social-image="/images/instagram.jpg" tag="baked_potato_lord" link="https://www.instagram.com/baked_potato_lord/"/>
-    </div>
+    © Josiah Hamm {{ year }}
   </div>
 </template>
 
 <style scoped lang="scss">
   .footer{
+    position:relative;
     height:100px;
     background-color: rgb(64, 61, 64);
   }
