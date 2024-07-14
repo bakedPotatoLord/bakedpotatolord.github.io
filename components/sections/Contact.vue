@@ -4,13 +4,13 @@
 
     <SectionTitle title="Contact Me" />
     <div class="contactCards">
-      <ContactCard class="card" social-image="/images/instagram.png" tag="baked_potato_lord"
+      <ContactCard class="card" social-image="/images/contact/instagram.png" tag="baked_potato_lord"
         link="https://www.instagram.com/baked_potato_lord/"  />
-      <ContactCard class="card" social-image="/images/discord.png" tag="potatolord4545"
+      <ContactCard class="card" social-image="/images/contact/discord.png" tag="potatolord4545"
         link="https://discordapp.com/users/750347468826345492" />
-      <ContactCard class="card" social-image="/images/github.png" tag="bakedPotatoLord"
+      <ContactCard class="card" social-image="/images/contact/github.png" tag="bakedPotatoLord"
         link="https://github.com/bakedpotatolord" image-style="filter: invert(1)"/>
-      <ContactCard class="card" social-image="/images/linkedin.png" tag="Josiah Hamm"
+      <ContactCard class="card" social-image="/images/contact/linkedin.png" tag="Josiah Hamm"
         link="https://www.linkedin.com/in/josiah-hamm-36208625b/" />
     </div>
   </div>
