@@ -1,13 +1,8 @@
 <script setup lang="ts">
-export interface BlogPost {
-  title: string;
-  body: string;
-  images: string[];
-}
 
 
 const {data:content,status} = useAsyncData(async()=>
-   queryContent().limit(5).find()
+   queryContent().where({inProgress: {$ne: "true"}}).limit(5).sort({datePublished:-1}).find()
 )
 
 </script>
@@ -24,7 +19,7 @@ const {data:content,status} = useAsyncData(async()=>
             :src="post.coverImg"
             width="500px"
             sizes=" sm:200px md:500px lg:700px"
-            alt="potato"
+            :alt="post.coverImgAlt"
             class="image"
           />
           <p class="description">{{ post.description }}</p>
@@ -52,7 +47,7 @@ const {data:content,status} = useAsyncData(async()=>
     align-items: center;
     padding-bottom: 5rem;
 
-    color: orange;
+    color: white;
     .blogItem {
       max-width: 400px;
       min-width: 300px;
@@ -67,7 +62,8 @@ const {data:content,status} = useAsyncData(async()=>
       }
       .image {
         width: 100%;
-        height: auto;
+        border-radius: 1rem;
+        aspect-ratio: 1.618 /1;
       }
       .description {
         margin-bottom:0px;
