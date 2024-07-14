@@ -1,12 +1,7 @@
-
-<script setup>
-import logo from '@/assets/logo.jpg'
-</script>
-
 <template>
   <div class="base">
     <div class="logo">
-      <img :src="logo" alt="potato logo">
+      <NuxtImg src="/images/logo.jpg" alt="potato logo" width="150" />
     </div>
     <div class="navbar">
       <NuxtLink to="/">Home</NuxtLink>
