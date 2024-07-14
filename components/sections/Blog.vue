@@ -4,25 +4,32 @@ export interface BlogPost {
   body: string;
   images: string[];
 }
+
+
+const {data:content,status} = useAsyncData(async()=>
+   queryContent().limit(5).find()
+)
+
 </script>
 
 <template>
   <div class="blog">
     <SectionTitle title="Blog"/>
-    <div class="blogItems">
-      <ContentList path="/posts">
-        <div v-for="article of [1,2,3]"  class="blogItem">
-          <h3 class="title">ARTICLE {{article}}</h3>
+
+    <div class="blogItems" v-if="status==='success'">
+        <div v-for="post of content"  class="blogItem">
+          <ContentRenderer :value="post" >
+          <h3 class="title">{{post.title}}</h3>
           <NuxtImg
-            src="https://media.istockphoto.com/id/157430678/photo/three-potatoes.jpg?s=612x612&w=0&k=20&c=qkMoEgcj8ZvYbzDYEJEhbQ57v-nmkHS7e88q8dv7TSA="
+            :src="post.coverImg"
             width="500px"
             sizes=" sm:200px md:500px lg:700px"
             alt="potato"
             class="image"
           />
-          <p class="description">ARTICLE DESCRIPTION</p>
+          <p class="description">{{ post.description }}</p>
+        </ContentRenderer>
         </div>
-      </ContentList>
     </div>
   </div>
 </template>
