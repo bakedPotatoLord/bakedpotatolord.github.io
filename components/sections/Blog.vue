@@ -1,30 +1,27 @@
 <script setup lang="ts">
 
 
-const {data:content,status} = useAsyncData(async()=>
-   queryContent().where({inProgress: {$ne: "true"}}).limit(5).sort({datePublished:-1}).find()
+const { data: content, status } = useAsyncData(async () =>
+  queryContent().where({ inProgress: { $ne: "true" } }).limit(5).sort({ datePublished: -1 }).find()
 )
 
 </script>
 
 <template>
   <div class="blog">
-    <SectionTitle title="Blog"/>
+    <SectionTitle title="Blog" />
 
-    <div class="blogItems" v-if="status==='success'">
-        <div v-for="post of content"  class="blogItem">
-          <ContentRenderer :value="post" >
-          <h3 class="title">{{post.title}}</h3>
-          <NuxtImg
-            :src="post.coverImg"
-            width="500px"
-            sizes=" sm:200px md:500px lg:700px"
-            :alt="post.coverImgAlt"
-            class="image"
-          />
-          <p class="description">{{ post.description }}</p>
-        </ContentRenderer>
-        </div>
+    <div class="blogItems" v-if="status === 'success'">
+      <div v-for="post of content" class="blogItem">
+        <a :href="'/blog/' + post.titleUrl">
+          <ContentRenderer :value="post">
+            <h3 class="title">{{ post.title }}</h3>
+            <NuxtImg :src="post.coverImg" width="500px" sizes=" sm:200px md:500px lg:700px" :alt="post.coverImgAlt"
+              class="image" />
+            <p class="description">{{ post.description }}</p>
+          </ContentRenderer>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -47,14 +44,13 @@ const {data:content,status} = useAsyncData(async()=>
     align-items: center;
     padding-bottom: 5rem;
 
-    color: white;
     .blogItem {
       max-width: 400px;
       min-width: 300px;
       background-color: rgb(64, 61, 64);
       border-radius: 10px;
-      padding:2%;
-      margin:2%;
+      padding: 2%;
+      margin: 2%;
 
       .title {
         margin-top: 0px;
@@ -66,11 +62,10 @@ const {data:content,status} = useAsyncData(async()=>
         aspect-ratio: 1.618 /1;
       }
       .description {
-        margin-bottom:0px;
+        margin-bottom: 0px;
       }
-
       &:hover {
-        box-shadow:  0 0 10px 10px rgba(64, 61, 64, 0.5);
+        box-shadow: 0 0 10px 10px rgba(64, 61, 64, 0.5);
       }
     }
   }
