@@ -14,6 +14,7 @@
 
 .rel{
     position: relative;
+    
     .custom-shape-divider-bottom-1691102391 {
         position: absolute;
         bottom: 0;
@@ -21,7 +22,7 @@
         width: 100%;
         overflow: hidden;
         line-height: 0;
-        transform: rotate(180deg);
+        transform: scale(1,-1);
         background-color: #39125c;
         svg {
             position: relative;
@@ -29,6 +30,7 @@
             width: calc(100% + 1.3px);
             height: 50px;
             transform: translateY(-1px);
+            z-index: 10;
         }
         .shape-fill {
             fill: rgb(64, 61, 64);
