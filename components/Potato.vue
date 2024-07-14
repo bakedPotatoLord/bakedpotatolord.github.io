@@ -5,7 +5,6 @@
 <script setup lang="ts">
 import * as THREE from "three";
 import { Object3D } from "three";
-//@ts-ignore
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 const canvas = ref<HTMLCanvasElement | null>(null);
@@ -19,8 +18,8 @@ onMounted(() => {
   let remValue = parseFloat(
     getComputedStyle(document.documentElement).fontSize
   );
-  cw = Math.min(window.innerWidth - 4 * remValue, 400);
-  ch = cw / Math.SQRT2;
+  cw = Math.min(window.innerWidth - 4 * remValue, 300);
+  ch = cw ;
 
   if (canvas.value) {
     if (width.value > 800) {
@@ -35,7 +34,7 @@ onMounted(() => {
     console.log("resize");
     width.value = window.innerWidth;
     remValue = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    cw = Math.min(window.innerWidth - 4 * remValue, 400);
+    cw = Math.min(window.innerWidth - 4 * remValue, 300);
     ch = cw / Math.SQRT2;
     renderer?.setSize(cw, ch);
     if (canvas.value) {
@@ -50,7 +49,6 @@ onMounted(() => {
 });
 
 function setupCanvas(canvas: HTMLCanvasElement) {
-  console.log("setupCanvas");
   const scene = new THREE.Scene();
   scene.background = null;
   const camera = new THREE.PerspectiveCamera(75, cw / ch, 0.1, 1000);
