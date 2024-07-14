@@ -33,4 +33,10 @@
     color: #fff;
   }
 }
+
+a:-webkit-any-link{
+  color:white;
+  text-decoration: none;
+}
+
 </style>
