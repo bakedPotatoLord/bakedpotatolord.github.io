@@ -11,7 +11,7 @@
       <div class="aboutText">
         <p>
           Hey there, I'm Josiah Hamm, a freelance developer and robotics engineer based in
-          Denver, CO, with a passion for making ideas real, leadership,
+          Denver, CO, with a passion for making ideas real through leadership,
           problem-solving, and teaching.<br />
           <br />
           Some days, I build beautiful and functional web applications
