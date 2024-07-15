@@ -46,22 +46,22 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="intro">
+  <section id="intro">
     <NameBar/>
   </section>
   <DiagonalDivider id="diagonalDivider" />
-  <section class="about">
+  <section id="about">
     <About />
   </section>
   <TriangleDivider />
-  <section class="portfolio">
+  <section id="portfolio">
     <Portfolio />
   </section>
   <InvertedTriangleDivider />
-  <section class="blog">
+  <section id="blog">
     <Blog />
   </section>
-  <section class="contact">
+  <section id="contact">
     <Contact/>
   </section>
 </template>
