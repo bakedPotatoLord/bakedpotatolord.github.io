@@ -1,0 +1,83 @@
+<script setup lang="ts">
+
+const route = useRoute()
+const locator = route.params.locator
+const { data: content, status, error } = useAsyncData(async () =>
+  queryContent().where({ titleUrl: locator }).findOne()
+)
+
+const safeData = computed(() => content.value ?? <never>console.error(`aaah no content`))
+
+const keywords = computed(() => content.value?.keywords?.split(','))
+
+function parseDate(date:Date){
+  return date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()
+}
+
+const publishedDate = computed(() =>parseDate( new Date( content.value?.datePublished)))
+const editedDate = computed(() =>parseDate( new Date( content.value?.datePublished)))
+
+
+</script>
+
+<template>
+  <div class="blogPost">
+    <div class="title">
+      <SectionTitle :title="content?.title" />
+      <NuxtImg :src="content?.coverImg" width="800" sizes="sm: 300 md: 500 lg: 800" />
+    </div>
+    <div class="content" v-if="status === 'success'">
+      <div class="metadata">
+        Written by Josiah Hamm <br>
+        Published {{ publishedDate }} <br>
+        Last Edited {{ editedDate }}
+      </div>
+      <hr>
+      <ContentRenderer :value="safeData">
+        <ContentRendererMarkdown :value="safeData" />
+      </ContentRenderer>
+      <hr>
+    </div>
+    <div class="content" v-if="status === 'pending'"> pending data</div>
+    <div class="content" v-if="status === 'error'"> Error fetching post: <br>{{ error }} </div>
+
+    <div class="keywords">
+      Keywords:
+      <div class="keyword" v-for="key of keywords">
+        <h2>
+          {{ key }}
+        </h2>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.blogPost{
+  padding-left:1rem;
+  padding-right:1rem;
+  .title{
+    img{
+      width:100%
+    }
+  }
+
+  .content{
+    .metadata{
+      padding-top:1rem;
+      padding-bottom: 1rem;
+    }
+    hr{
+      margin:0;
+    }
+  }
+  .keywords{
+    display:flex;
+    align-items: center;
+    .keyword{
+      margin-left:0.5rem;
+      font-size: 0.5rem;
+    }
+  }
+}
+</style>
