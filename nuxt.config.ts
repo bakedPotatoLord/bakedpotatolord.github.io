@@ -16,5 +16,21 @@ export default defineNuxtConfig({
     }
   },
 
+  content:{
+    highlight:{
+      theme:"github-dark",
+      langs:[
+        'c',
+        'cpp',
+        'java',
+        'css',
+        'scss',
+        'bash',
+        'json',
+        "zig",
+      ]
+    },
+  },
+
   compatibilityDate: '2024-07-04'
 })
