@@ -10,6 +10,4 @@ datePublished: 1720998725181
 dateEdited: 1720998725183
 ---
 
-# CG Art Made With Depth First Search
-
 TODO: write blog post

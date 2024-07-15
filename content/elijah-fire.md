@@ -10,6 +10,5 @@ datePublished: 1720998725183
 dateEdited: 1720998725183
 ---
 
-# Divine Energy Output in 1 Kings 18
 
 TODO: write blog post
