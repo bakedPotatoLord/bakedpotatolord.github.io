@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 interface Props {
-  title: string
+  title?: string
 }
 
 defineProps<Props>();
@@ -26,7 +26,7 @@ justify-content: left;
     transition: text-shadow 0.1s ease-in-out;
     width:fit-content;
     font: 400 3rem "Raleway", sans-serif;
-    text-decoration: dotted underline;
+    text-decoration: none ;
     &:hover {
       text-shadow: white 0px 0px 10px;
     }
