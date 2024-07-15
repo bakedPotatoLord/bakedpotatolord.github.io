@@ -23,9 +23,9 @@
 :root {
   body {
     background: rgb(41, 44, 61);
-    background: linear-gradient(0deg,
-        rgba(41, 44, 61, 1) 0%,
-        rgba(82, 43, 135, 1) 36%,
+    background: linear-gradient(-45deg,
+        rgb(65, 34, 107) 0%,
+        rgba(82, 43, 135, 1) 50%,
         rgba(82, 43, 135, 1) 100%);
     margin: 0px;
     font-family: 'Noto Sans', sans-serif;
