@@ -7,7 +7,9 @@ const year = (new Date).getFullYear()
 
 <template>
   <div class="footer">
-    © Josiah Hamm {{ year }}
+    <div class="text">
+      © Josiah Hamm {{ year }}
+    </div>
   </div>
 </template>
 
@@ -16,5 +18,14 @@ const year = (new Date).getFullYear()
     position:relative;
     height:100px;
     background-color: rgb(64, 61, 64);
+
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:end;
+
+    .text{
+      padding:0.5rem
+    }
   }
 </style>
