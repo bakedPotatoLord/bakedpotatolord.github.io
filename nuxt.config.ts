@@ -30,6 +30,11 @@ export default defineNuxtConfig({
         "zig",
       ]
     },
+    markdown:{
+      rehypePlugins:[
+        "rehype-katex"
+      ],
+    },
   },
 
   compatibilityDate: '2024-07-04'
