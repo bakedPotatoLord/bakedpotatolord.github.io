@@ -10,12 +10,12 @@ const safeData = computed(() => content.value ?? <never>console.error(`aaah no c
 
 const keywords = computed(() => content.value?.keywords?.split(','))
 
-function parseDate(date:Date){
-  return date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear()
+function parseDate(date: Date) {
+  return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
 }
 
-const publishedDate = computed(() =>parseDate( new Date( content.value?.datePublished)))
-const editedDate = computed(() =>parseDate( new Date( content.value?.datePublished)))
+const publishedDate = computed(() => parseDate(new Date(content.value?.datePublished)))
+const editedDate = computed(() => parseDate(new Date(content.value?.datePublished)))
 
 
 </script>
@@ -33,7 +33,7 @@ const editedDate = computed(() =>parseDate( new Date( content.value?.datePublish
         Last Edited {{ editedDate }}
       </div>
       <hr>
-      <ContentRenderer :value="safeData">
+      <ContentRenderer :value="safeData" class="contentRenderer">
         <ContentRendererMarkdown :value="safeData" />
       </ContentRenderer>
       <hr>
@@ -49,35 +49,71 @@ const editedDate = computed(() =>parseDate( new Date( content.value?.datePublish
         </h2>
       </div>
     </div>
+
+    <a href=""></a>
+
   </div>
 </template>
 
-<style scoped lang="scss">
-.blogPost{
-  padding-left:1rem;
-  padding-right:1rem;
-  .title{
-    img{
-      width:100%
+<style lang="scss">
+.blogPost {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  .title {
+    img {
+      width: 100%
     }
   }
 
-  .content{
-    .metadata{
-      padding-top:1rem;
+  .content {
+    .metadata {
+      padding-top: 1rem;
       padding-bottom: 1rem;
     }
-    hr{
-      margin:0;
+
+    hr {
+      margin: 0;
     }
+
+    .contentRenderer{
+      
+      img{
+        width:50%;
+      }
+
+    }
+
   }
-  .keywords{
-    display:flex;
+
+  .keywords {
+    display: flex;
     align-items: center;
-    .keyword{
-      margin-left:0.5rem;
+
+    .keyword {
+      margin-left: 0.5rem;
       font-size: 0.5rem;
     }
   }
 }
+
+a:-webkit-any-link{
+  text-decoration: underline;
+  color: rgb(203, 154, 203);
+
+}
+
+
+
+code{
+  background-color:rgb(64, 61, 64);
+  border-radius: 0.25rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.katex-html{
+  display:none;
+}
+
 </style>
