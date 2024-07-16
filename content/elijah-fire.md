@@ -54,10 +54,8 @@ In his paper, he has a really handy table of measurements, which caused me to do
 
 With all this evidence in mind, it seemed like the volume was closer to 12 or 13 litres, but since I didn't want to piss off the translators for the Jewish Study Bible, I chose to round up to 13.
 
-Next, I turned my attention to the bull atop the altar. I let go of my shame, and typed into the search bar, `calories in a bull`. The first search result was a reddit post 
+Next, I turned my attention to the bull atop the altar. I let go of my shame, and typed into the search bar, `calories in a bull`. The first search result was a [reddit post](https://www.reddit.com/r/theydidthemonstermath/comments/a8ha9r/how_many_calories_are_in_a_whole_cow/?rdt=51992) on [r/theydidthemonstermath](https://www.reddit.com/r/theydidthemonstermath/) by [u/Sexy-Octopus](https://www.reddit.com/user/Sexy-Octopus/). There, I found the general equation of
 
-
-
-<code class="language-math"> </code>
+<code class="language-math"> (m_{b u l l} * edible_percent) </code> 
 
 
