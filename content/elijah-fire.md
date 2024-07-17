@@ -38,7 +38,7 @@ So it looks like there are 12 `barrels` of water that are poured, and they at le
 
 To begin, let's standardize our measurement system. Since I enjoy role-playing as a scientist, I'm going to use the litre for volume and standard metric for everything else.
 
-I'm also going to use the [The Jewish Study Bible](https://archive.org/details/isbn_9780195297515/), which estimates that the  biblical seah equals 7.7 freedom liters
+I'm also going to use the [The Jewish Study Bible](https://archive.org/details/isbn_9780195297515/), which estimates that the  biblical seah equals 7.7 litres
 
 Using this, we can find that: <code class="language-math"> 2seah * \frac{7.7litre}{1seah} = 15.4litre </code>
 
@@ -46,16 +46,56 @@ This looks great, but let's see what other internet sources say.
 
 The first source I found online was [defendinginerrancy.com](https://defendinginerrancy.com/bible-solutions/1_Kings_18.32-35.php), which states that the total volume of water amounts to "about 13 quarts". That's 12.3026 litres. That's a lot less than the 15.4 litres that I calculated, but let's keep going.
 
-The next source that I visited was [https://claudemariottini.com/](https://claudemariottini.com/2021/10/18/two-seahs-of-seed/). In the article I read, Prof. Claude Mariottini consults quite a few bible transltions (including many I hadn't heard of), and eventually quotes a paper he wrote, and claims that "a seah is equal to 7 quarts", and therefore the water volume is 13.2489 litres.
+The next source that I visited was [https://claudemariottini.com/](https://claudemariottini.com/2021/10/18/two-seahs-of-seed/). In the article I read, Prof. Claude Mariottini consults quite a few bible transltions (including many I hadn't heard of), and eventually quotes a paper he wrote, and claims that "a seah is equal to 7 \[freedom\] quarts", and therefore the water volume is 13.2489 litres.
 
-In his paper, he has a really handy table of measurements, which caused me to doubt the truthfulness of the Jewish Study Bible. This Professor seemed to have a better grasp on biblical units of measure than my preception of an average bible translator.
+In his paper, he has a really handy table of measurements, which caused me to doubt the truthfulness of the Jewish Study Bible. This Professor seemed to have a better grasp on biblical units of measure than my perception of an average bible translator.
 
 ![measurement table](/images/blog/biblical-measures.png)
 
 With all this evidence in mind, it seemed like the volume was closer to 12 or 13 litres, but since I didn't want to piss off the translators for the Jewish Study Bible, I chose to round up to 13.
 
-Next, I turned my attention to the bull atop the altar. I let go of my shame, and typed into the search bar, `calories in a bull`. The first search result was a [reddit post](https://www.reddit.com/r/theydidthemonstermath/comments/a8ha9r/how_many_calories_are_in_a_whole_cow/?rdt=51992) on [r/theydidthemonstermath](https://www.reddit.com/r/theydidthemonstermath/) by [u/Sexy-Octopus](https://www.reddit.com/user/Sexy-Octopus/). There, I found the general equation of
+Next, I turned my attention to the bull atop the altar. I let go of my shame, and typed into the search bar, `calories in a bull`. The first search result was a [reddit post](https://www.reddit.com/r/theydidthemonstermath/comments/a8ha9r/how_many_calories_are_in_a_whole_cow/?rdt=51992) on [r/theydidthemonstermath](https://www.reddit.com/r/theydidthemonstermath/) by [u/Sexy-Octopus](https://www.reddit.com/user/Sexy-Octopus/). There, I found  the general equation of:
 
-<code class="language-math"> (m_{b u l l} * edible_percent) </code> 
+$$
+  E_{bull} = m_{bull} * (meat_{percent} * \frac{E_{steak}}{m_{steak}}) +
+  (bone_{percent} * \frac{E_{bone}}{m_{bone}}) +
+  (fat_{percent} * \frac{E_{fat}}{m_{fat}}) +
+  (organ_{percent} * \frac{E_{organ}}{m_{organ}})
+$$
+
+And from there, I searched the internet and found:
+
+- a [publication](https://www.researchgate.net/figure/Proportion-of-carcass-components-meat-bone-fat-and-meat-bone-ratio-of-crossbred_tbl1_272773598) claiming, that an average steer weighed 235.5 kg at time of death with a bone:meat:fat:other ratio of 16:73.9:8.3:133.3
+- a [USDA article](https://fdc.nal.usda.gov/fdc-app.html#/food-details/172164/nutrients) claiming that steak contains 2710kcal per kg
+- another [USDA article](https://fdc.nal.usda.gov/fdc-app.html#/food-details/2630491/nutrients) claiming that beef bones contain 3010kcal per kg
+- a final [USDA article](https://fdc.nal.usda.gov/fdc-app.html#/food-details/171400/nutrients) claiming that beef fat contained  9020kcal per kg
+
+I'm also going to assume that all the organs of the cow are basically muscle but with less energy density, about 1700 kcal per kg
+
+With this Information, we can find that:
+
+$$
+  E_{bull} = 235.5 * (
+  (\frac{73.9}{235.5} * \frac{2710}{1} ) +
+  (\frac{16}{235.5} * \frac{3010}{1}) +
+  (\frac{8.3}{235.5} * \frac{9020}{1}) +
+  (\frac{133.3}{235.5} * \frac{1700}{1}) )
+   = 2,589,528.3 kcal
+$$
+
+That's a lot of energy! Definitely more than I could eat in one serving. Regardless, this calculation was completely tangential and unrelated to the actual question, namely, "how much energy is required to evaporate the entire sacrifice"
+
+We can define our initial (`i`) energy with:
+$$
+E_i = T_i * m_i
+$$
+
+And we can define our final (`f`) energy with:
+$$
+E_f = T_f * m_f
+$$
+
+
+
 
 
