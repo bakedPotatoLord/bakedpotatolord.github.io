@@ -40,5 +40,11 @@ export default defineNuxtConfig({
     },
   },
 
+  routeRules:{
+    '/': { ssr: true },
+    "/blog/**/*": { ssr: false },
+    "/blog": { ssr: false },
+  },
+
   compatibilityDate: '2024-07-04'
 })
