@@ -33,12 +33,9 @@ export default defineNuxtConfig({
     markdown:{
       rehypePlugins:[
         "rehype-katex",
-        //"rehype-stringify",
       ],
       remarkPlugins:[
         "remark-math",
-        //"remark-parse",
-
       ]
     },
   },
