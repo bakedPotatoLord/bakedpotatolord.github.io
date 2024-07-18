@@ -87,12 +87,12 @@ That's a lot of energy! Definitely more than I could eat in one serving. Regardl
 
 We can define our initial (`i`) energy with:
 $$
-E_i = T_i * m_i
+E_i = T_i * m
 $$
 
 And we can define our final (`f`) energy with:
 $$
-E_f = T_f * m_f
+E_f = T_f * m
 $$
 
 
