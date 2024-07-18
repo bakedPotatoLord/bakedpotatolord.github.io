@@ -32,7 +32,7 @@ defineProps<ContactCard>()
   color:white;
   .card {
     background-color: rgb(29, 27, 30);
-    border-radius: calc(1rem);
+    border-radius: 1rem;
 
     display: flex;
     padding: 0.5rem;
