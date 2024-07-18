@@ -88,7 +88,7 @@ onUnmounted(()=>{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc( fit-content - 20%)
+    width: 80%
   }
 }
 </style>
