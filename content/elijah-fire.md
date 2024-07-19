@@ -65,7 +65,7 @@ $$
 
 And from there, I searched the internet and found:
 
-- a [publication](https://www.researchgate.net/figure/Proportion-of-carcass-components-meat-bone-fat-and-meat-bone-ratio-of-crossbred_tbl1_272773598) claiming, that an average steer weighed 235.5 kg at time of death with a bone:meat:fat:other ratio of 16:73.9:8.3:133.3
+- a [publication](https://www.researchgate.net/figure/Proportion-of-carcass-components-meat-bone-fat-and-meat-bone-ratio-of-crossbred_tbl1_272773598) claiming, that an average steer weighed 235.5 kg at time of death with a bone:meat:fat:other ratio of 16 : 73.9 : 8.3 : 133.3
 - a [USDA article](https://fdc.nal.usda.gov/fdc-app.html#/food-details/172164/nutrients) claiming that steak contains 2710kcal per kg
 - another [USDA article](https://fdc.nal.usda.gov/fdc-app.html#/food-details/2630491/nutrients) claiming that beef bones contain 3010kcal per kg
 - a final [USDA article](https://fdc.nal.usda.gov/fdc-app.html#/food-details/171400/nutrients) claiming that beef fat contained  9020kcal per kg
@@ -94,6 +94,55 @@ And we can define our final (`f`) energy with:
 $$
 E_f = T_f * m
 $$
+
+Thereforce, we can calculate our $$ \delta $$ energy with:
+
+$$
+\delta E = m ( T_f - T_i )
+$$
+
+And then we can calculate the total energy with:
+
+$$
+\displaystyle\sum_{x \in sacrice} \delta E_x
+$$
+
+Of course, I am only using summation notation and set theory to attempt to impress people, and make the bible translators for the `Jewish Study Bible` think twice before sending me hatemail. I'm actually just going to use a spreadsheet like a normal person.
+
+I found the mass of the water based off of it's density, and then from there, I started my spreadsheet. At that point, it looked like this:
+
+| Item       | Mass (kg) | Starting temperature (Celsius) | Starting Energy (J) | Vapor point (Celsius) | Vapor Point(J) | Delta Energy (J) |
+|------------|-----------|--------------------------------|----------------------|------------------------|-----------------|------------------|
+| Water      | 13        |                                |                      |                        |                 |                  |
+| Bull Bone  | 16        |                                |                      |                        |                 |                  |
+| Bull Meat  | 73.9      |                                |                      |                        |                 |                  |
+| Bull Fat   | 8.3       |                                |                      |                        |                 |                  |
+| Bull Organs| 133.3     |                                |                      |                        |                 |                  |
+| Stone      |           |                                |                      |                        |                 |                  |
+| Wood       |           |                                |                      |                        |                 |                  |
+
+From here, I went looking for the size of the rocks that made up the altar. I started with an intreguing article from [biblicalarchaeology.org](https://library.biblicalarchaeology.org/article/has-joshuas-altar-been-found-on-mt-ebal/) which goes in-depth into the sacrifice practices of early iron age israelites, and describes an archeological dig, which has some fascinating results. I won't spoil it, so you'll have to read it if you are interested. 
+
+To start, it didn't have my information, which was super lame, but It did contain some great information about altars in general. It seems that israelites had two main types of altars: 
+
+- small incense altars, which never exceed a half a meter (19 freedom inches) in length or width.
+- burnt offering altars, which have construction instructions ranging from 8 to 32 feet long, but could be smaller for personal, non-ceremonial purposes.
+
+![small altar](/images/blog/smallaltar.jpg)
+![burnt offering altar](/images/blog/largealtar.jpg)
+
+[biblicalarchaeology.org](https://library.biblicalarchaeology.org/article/has-joshuas-altar-been-found-on-mt-ebal/) also provides a great comparison chart for the altar construction.
+
+![altar comparison](/images/blog/altarsteps.jpg)
+
+Even so, I couldn't find any information about personal 12-stone altars, as are described on many occasions on the bible. I even searched [wikipedia](https://en.wikipedia.org/wiki/Altar_(Bible)#:~:text=Altars%20(Hebrew:%20%D7%9E%D6%B4%D7%96%D6%B0%D7%91%D6%B5%D6%BC%D7%97%D6%B7%2C%20m%C4%ABzb%C4%93a%E1%B8%A5,4;%2023:8).) for any traces of 12-stone altars and came up with nothing. However, I didn't bother with consulting [The Jewish Study Bible](https://jewishstudybible.com/altars/). I had lost trust with their measurement translation.
+
+It seemed at this point I'd need to either get in contact with an altar expert, do an in-depth readthrough of Leviticus (the least exciting book of the bible), or assume that I have similar body compesition and body measurements to elijah, and use my max 1x12 deadlift weight as the assumed weight of each stone.
+
+I was at quite the dilemma, as I'd have to confront social anxiety by arguably wasting the time of an expert, bore myself out of my mind with Leviticus, or deal with performance anxiety and scientific inacuracy of assuming myself to be just as buff as a dude who [outran a chariot](https://www.biblegateway.com/passage/?search=1+Kings+18%3A44-48&version=KJV), and hiked for [40 days on one meal](https://www.biblegateway.com/passage/?search=1+Kings+19%3A6-8&version=KJV).
+
+
+
 
 
 
