@@ -24,9 +24,16 @@ defineProps<{images: string[]}>()
 
   .image {
     scroll-snap-align: start;
-    width: 100%;
-    flex: 2 0 400px;
+    height: 400px;
     margin-right: 2rem;
+
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+
+    }
   }
 }
 </style>
