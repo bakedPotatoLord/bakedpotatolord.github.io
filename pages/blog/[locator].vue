@@ -76,6 +76,21 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
       margin: 0;
     }
 
+    table{
+      border-spacing: 0px;
+      border: 1px solid white;
+      
+      td{
+        border: 1px solid white;
+        margin:0;
+      }
+      th{
+        border: 1px solid white;
+        margin:0;
+      }
+    }
+
+
     .contentRenderer{
       
       img{
