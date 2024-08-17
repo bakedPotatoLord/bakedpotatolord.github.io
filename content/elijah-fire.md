@@ -16,7 +16,7 @@ It's a powerful passage that touches on themes of the holiness, patience, and ju
 
 - After three years of drought, the word of the Lord comes to Elijah (A Prophet), instructing him to present himself to King Ahab.
 - Obadiah, a devout believer in the Lord who works for Ahab, meets Elijah. Elijah instructs Obadiah to inform Ahab of his return.
-- Ahab's Accusation: Ahab calls Elijah the "troubler of Israel." (1 Kings 18:17) Elijah counters that it is Ahab and his family who have troubled Israel by forsaking the Lord's commands and following Baal (1 Kings 18:18).
+- Ahab calls Elijah the "troubler of Israel." Elijah counters that it is Ahab and his family who have troubled Israel by forsaking the Lord's commands and following Baal.
 - Elijah challenges the prophets of Baal to a contest on Mount Carmel to prove who is the true God.
 - Two bulls are prepared for sacrifice, one for Baal's prophets and one for Elijah. The prophets of Baal call on their god from morning until noon without success.
 - Elijah mocks the prophets of Baal, saying: "Cry aloud: for he is a god; either he is talking, or he is pursuing, or he is in a journey, or peradventure he sleepeth, and must be awaked."
@@ -111,7 +111,7 @@ Of course, I am only using summation notation and set theory to attempt to impre
 
 I found the mass of the water based off of it's density, and then from there, I started my spreadsheet. At that point, it looked like this:
 
-| Item       | Mass (kg) | Starting temperature (Celsius) | Starting Energy (J) | Vapor point (Celsius) | Vapor Point(J) | Delta Energy (J) |
+| Item       | Mass (kg) | Starting temperature (Celsius) | Starting Energy (J) | Vapor point (Celsius) | Final Energy (J) | Delta Energy (J) |
 |------------|-----------|--------------------------------|----------------------|------------------------|-----------------|------------------|
 | Water      | 13        |                                |                      |                        |                 |                  |
 | Bull Bone  | 16        |                                |                      |                        |                 |                  |
