@@ -140,6 +140,8 @@ It seemed at this point I'd need to either get in contact with an altar expert, 
 
 I was at quite the dilemma, as I'd have to confront social anxiety by arguably wasting the time of an expert, bore myself out of my mind with Leviticus, or deal with performance anxiety and scientific inacuracy of assuming myself to be just as buff as a dude who [outran a chariot](https://www.biblegateway.com/passage/?search=1+Kings+18%3A44-48&version=KJV), and hiked for [40 days on one meal](https://www.biblegateway.com/passage/?search=1+Kings+19%3A6-8&version=KJV).
 
+After reaching this dilema, I didn't add anything to this blog post for 2 months. I reached out to my youth pastor, to see if he knew anyone from bible colege who could help me out, but he didn't know anyone
+
 
 
 
