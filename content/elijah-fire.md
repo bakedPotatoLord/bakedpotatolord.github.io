@@ -2,7 +2,7 @@
 title: "Divine Energy Output in 1 Kings 18"
 titleUrl: "energy-usage-1-kings-18"
 description: "An In-Depth Discussion on Thermodynamics and Theology"
-coverImg:  "/images/blog/elijah-fire.jpg"
+coverImg:  "/images/blog/energy-usage-1-kings-18/elijah-fire.jpg"
 coverImgAlt: "The prophet Samuel calls down fire from heaven in religous iconography"
 inProgress: "false"
 keywords: "samuel,theology,physics,fire"
@@ -27,7 +27,7 @@ It's a powerful passage that touches on themes of the holiness, patience, and ju
 
 This passage had a profound effect on me through the miracoulous work that God uses to show himself to his people. Specifically, I was amazed at the Energy required to instantly vaporize `4 * 3 barrels of water`, not to mention the bull, and 12 rocks.
 
-![sacrifice](/images/blog/sacrifice.jpg)
+:carousel{:images='["/images/blog/energy-usage-1-kings-18/sacrifice.jpg"]'} 
 
 The first thing I set out to do was figure out the mass and volume of all of these materials. I knew that I would be working with ancient units of measurement, but I wasn't expecting the variety that I'd soon come across. either way, I began with the water.
 
@@ -50,7 +50,9 @@ The next source that I visited was [https://claudemariottini.com/](https://claud
 
 In his paper, he has a really handy table of measurements, which caused me to doubt the truthfulness of the Jewish Study Bible. This Professor seemed to have a better grasp on biblical units of measure than my perception of an average bible translator.
 
-![measurement table](/images/blog/biblical-measures.png)
+
+:carousel{:images='["/images/blog/energy-usage-1-kings-18/biblical-measures.png"]'} 
+
 
 With all this evidence in mind, it seemed like the volume was closer to 12 or 13 litres, but since I didn't want to piss off the translators for the Jewish Study Bible, I chose to round up to 13.
 
@@ -128,12 +130,9 @@ To start, it didn't have my information, which was super lame, but It did contai
 - small incense altars, which never exceed a half a meter (19 freedom inches) in length or width.
 - burnt offering altars, which have construction instructions ranging from 8 to 32 feet long, but could be smaller for personal, non-ceremonial purposes.
 
-![small altar](/images/blog/smallaltar.jpg)
-![burnt offering altar](/images/blog/largealtar.jpg)
-
 [biblicalarchaeology.org](https://library.biblicalarchaeology.org/article/has-joshuas-altar-been-found-on-mt-ebal/) also provides a great comparison chart for the altar construction.
 
-![altar comparison](/images/blog/altarsteps.jpg)
+:carousel{:images='["/images/blog/energy-usage-1-kings-18/smallaltar.jpg","/images/blog/energy-usage-1-kings-18/largealtar.jpg","/images/blog/energy-usage-1-kings-18/altarsteps.jpg"]'} 
 
 Even so, I couldn't find any information about personal 12-stone altars, as are described on many occasions on the bible. I even searched [wikipedia](https://en.wikipedia.org/wiki/Altar_(Bible)#:~:text=Altars%20(Hebrew:%20%D7%9E%D6%B4%D7%96%D6%B0%D7%91%D6%B5%D6%BC%D7%97%D6%B7%2C%20m%C4%ABzb%C4%93a%E1%B8%A5,4;%2023:8).) for any traces of 12-stone altars and came up with nothing. However, I didn't bother with consulting [The Jewish Study Bible](https://jewishstudybible.com/altars/). I had lost trust with their measurement translation.
 
