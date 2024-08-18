@@ -44,6 +44,11 @@ export default defineNuxtConfig({
         'bash',
         'json',
         "zig",
+        "ts",
+        "js",
+        "json",
+        "html",
+        "vue",
       ]
     },
     markdown: {

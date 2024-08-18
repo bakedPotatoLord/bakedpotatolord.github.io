@@ -55,7 +55,7 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" >
 .blogPost {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -110,6 +110,24 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
       font-size: 0.5rem;
     }
   }
+  .shiki{
+    background-color:rgb(34, 32, 34);
+    border-radius: 0.25rem;
+    code{
+      background: none;
+    }
+  }
+  
+  code{
+    background-color:rgb(64, 61, 64);
+    border-radius: 0.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  
+  .katex-html{
+    display:none;
+  }
 }
 
 a:-webkit-any-link{
@@ -118,17 +136,5 @@ a:-webkit-any-link{
 
 }
 
-
-
-code{
-  background-color:rgb(64, 61, 64);
-  border-radius: 0.25rem;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-}
-
-.katex-html{
-  display:none;
-}
 
 </style>
