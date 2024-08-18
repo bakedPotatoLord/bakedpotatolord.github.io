@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { QueryBuilderParams } from '@nuxt/content';
 
+const dev = import.meta.dev;
+
 const query: QueryBuilderParams = {
-  where: [{ inProgress: { $ne: "true" } }],
+  where: dev? undefined : [{ inProgress: { $eq: "false" } }],
   sort: [{ datePublished: -1 }]
 }
 

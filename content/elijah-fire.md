@@ -4,7 +4,7 @@ titleUrl: "energy-usage-1-kings-18"
 description: "An In-Depth Discussion on Thermodynamics and Theology"
 coverImg:  "/images/blog/energy-usage-1-kings-18/elijah-fire.jpg"
 coverImgAlt: "The prophet Samuel calls down fire from heaven in religous iconography"
-inProgress: "false"
+inProgress: "true"
 keywords: "samuel,theology,physics,fire"
 datePublished: 1720998725183
 dateEdited: 1720998725183

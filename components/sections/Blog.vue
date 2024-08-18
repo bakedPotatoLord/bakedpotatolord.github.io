@@ -1,8 +1,9 @@
 <script setup lang="ts">
 
+const dev = import.meta.dev;
 
 const { data: content, status } = useAsyncData(async () =>
-  queryContent().where({ inProgress: { $ne: "true" } }).limit(5).sort({ datePublished: -1 }).find()
+  queryContent().where(dev  ? {} : { inProgress: { $ne: "true" } }).limit(5).sort({ datePublished: -1 }).find()
 )
 
 </script>
