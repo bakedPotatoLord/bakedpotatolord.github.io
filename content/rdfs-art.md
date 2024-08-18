@@ -6,8 +6,8 @@ coverImg:  "/images/blog/rdfs-art/RDFS-ART.png"
 coverImgAlt: "some funky artwork; it sure is lame that your browser cant render it or you cant see it."
 inProgress: "false"
 keywords: "rdfs,art,graph,theory"
-datePublished: 1720998725181
-dateEdited: 1720998725183
+datePublished: 1724020383240
+dateEdited: 1724020383240
 ---
 
 
