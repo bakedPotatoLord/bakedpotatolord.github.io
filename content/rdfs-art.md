@@ -2,7 +2,7 @@
 title: "CG Art Made With Depth First Search"
 titleUrl: "rdfs-art"
 description: "How I Made Art with Graph Theory"
-coverImg:  "/images/blog/RDFS-ART.png"
+coverImg:  "/images/blog/rdfs-art/RDFS-ART.png"
 coverImgAlt: "some funky artwork; it sure is lame that your browser cant render it or you cant see it."
 inProgress: "false"
 keywords: "rdfs,art,graph,theory"
@@ -17,6 +17,8 @@ I've already done some work with BFS, actually, and it had some pretty nice resu
 
 ::Carousel{:images='["/images/blog/rdfs-art/art6.png","/images/blog/rdfs-art/art5.png","/images/blog/rdfs-art/art4.png","/images/blog/rdfs-art/art3.png","/images/blog/rdfs-art/art2.png","/images/blog/rdfs-art/art1.png"]'}
 ::
+
+depending on your experience with graph theory and BFS, you might understand what's happening in the above images. 
 
 
 
