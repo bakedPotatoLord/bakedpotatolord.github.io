@@ -6,8 +6,8 @@ coverImg:  "/images/blog/energy-usage-1-kings-18/elijah-fire.jpg"
 coverImgAlt: "The prophet Samuel calls down fire from heaven in religous iconography"
 inProgress: "true"
 keywords: "samuel,theology,physics,fire"
-datePublished: 1720998725183
-dateEdited: 1720998725183
+datePublished: 0
+dateEdited: 0
 ---
 
 About a year ago, I was attending a meeting of [youth group](https://en.wikipedia.org/wiki/Youth_ministry) at my church, and after a fun game of some ultimate frisbee, and far too much ice cream, we took some time to dig into scripture. Specifically, Chapter 18 of the book of 1st Kings in the Bible. 
