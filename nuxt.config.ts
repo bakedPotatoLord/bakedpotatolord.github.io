@@ -31,6 +31,13 @@ export default defineNuxtConfig({
     url: 'https://bakedpotatolord.vercel.app',
     name: 'BakedPotatoLord'
   },
+  
+  sitemap: {
+    sources: [
+      '/api/__sitemap__/urls'
+    ]
+  },
+
 
   content: {
     highlight: {
@@ -62,9 +69,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': { ssr: true },
+    '/': { ssr: true, sitemap: { lastmod: new Date("8-18-2024")} },
     "/blog/**/*": { ssr: false },
-    "/blog": { ssr: false },
+    "/blog": { ssr: false, sitemap: { lastmod: new Date("8-18-2024")} },
   },
 
   compatibilityDate: '2024-07-04'
