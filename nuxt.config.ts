@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@nuxt/content', "@nuxt/image"],
+  modules: ['@nuxt/content', "@nuxt/image", "@nuxtjs/sitemap"],
 
   components: {
     global: true,
@@ -25,6 +25,11 @@ export default defineNuxtConfig({
   vue: {
     compilerOptions: {
     },
+  },
+
+  site: {
+    url: 'https://bakedpotatolord.vercel.app',
+    name: 'BakedPotatoLord'
   },
 
   content: {
