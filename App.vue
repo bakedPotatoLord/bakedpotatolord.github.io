@@ -10,6 +10,29 @@
   </div>
 </template>
 
+<script setup lang="ts">
+
+useServerSeoMeta({
+  title: 'BakedPotatoLord',
+  ogTitle: 'BakedPotatoLord',
+  description: 'My portfolio and blog',
+  ogDescription: 'My portfolio and blog',
+  ogUrl: 'https://bakedpotatolord.com',
+  ogImage: 'https://bakedpotatolord.com/images/bakedpotatolord.png',
+
+})
+
+useHead({
+  meta:[
+    {
+      name:"google-site-verification", content: "itA05HY6ZVwXH-Taj-j_DCaTOS9cFJ9ir12MKpaQbbk",
+    }
+  ]
+})
+
+</script>
+
+
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
 
