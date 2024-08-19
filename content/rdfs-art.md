@@ -137,9 +137,9 @@ I also apply the mutate function here, Which will change the color of the pixel 
 ```
 When there is no more points in the que, we are done, and can export the image. You may notice that the `postMessage` function is used here which is not in the utility functions. This is because this algorithm is happening in a worker thread. MWAHAHAHA! I bet you thought That JS was a single [threaded](https://en.wikipedia.org/wiki/Thread_(computing)) language, and that I was just going to freeze my host's computer on a big graph, but we weren't even on the main thread the whole time.
 
-regardless, at this point, the algorithm is done. I have a [live demo](https://cg-art.vercel.app/) up right now that you can try out for yourself. It has options to either render it locally (and asynchronously to avoid crashing) or using a webworker (which is much faster).
+Regardless, at this point, the algorithm is done. I have a [live demo](https://cg-art.vercel.app/) up right now that you can try out for yourself. It has options to either render it locally (and asynchronously to avoid crashing) or using a webworker (which is much faster).
 
-If you're to lazy to generate your own, however, I'll put a carousel here.
+If you're too lazy to generate your own, however, I'll put a carousel here.
 
 :Carousel{:images='["/images/blog/rdfs-art/p1.png","/images/blog/rdfs-art/p2.png","/images/blog/rdfs-art/p3.png","/images/blog/rdfs-art/p4.png","/images/blog/rdfs-art/p5.png","/images/blog/rdfs-art/p6.png","/images/blog/rdfs-art/p7.png","/images/blog/rdfs-art/p8.png","/images/blog/rdfs-art/p9.png","/images/blog/rdfs-art/p10.png"]'}
 
