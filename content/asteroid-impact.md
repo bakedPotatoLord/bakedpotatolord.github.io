@@ -4,10 +4,10 @@ titleUrl: "gold-asteroid"
 description: "A stupid discord question, and and a stupid discord answer"
 coverImg:  "/images/blog/gold-asteroid/asteroid-art.jpg"
 coverImgAlt: "art of a gold asteroid"
-inProgress: "true"
-keywords: ""
-datePublished: 0
-dateEdited: 0
+inProgress: "false"
+keywords: "asteroid,physics,space,gold,impact,math,science,useless"
+datePublished: 1724028912066
+dateEdited: 1724028912066
 ---
 
 I'm in a [discord](https://discord.com) server for fans of an internet pesonality named [Andrew Heaton](https://mightyheaton.com/aboutandrewheaton). His website claims that:
