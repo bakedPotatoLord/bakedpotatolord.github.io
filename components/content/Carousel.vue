@@ -1,5 +1,4 @@
 <template>
-  {{  }}
   <div class="carousel">
     <div class="image" v-for="image of images">
       <NuxtImg  :src="image"  />
