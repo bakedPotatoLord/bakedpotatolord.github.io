@@ -30,7 +30,7 @@ defineProps<BlogCard>()
   border-radius: 10px;
   padding: 2%;
   margin: 2%;
-  aspect-ratio: 1/1 ;
+  height:fit-content;
 
   .title {
     margin-top: 0.5rem;
