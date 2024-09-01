@@ -35,7 +35,7 @@ onUnmounted(()=>{
     <div class="maintext">
       <div class="textContainer">
         <h1>
-          C<span class="potato">🥔</span>de P<span class="potato">🥔</span>tato
+          C<span class="potato">🥔</span>de&nbsp; P<span class="potato">🥔</span>tato
         </h1>
         <h2>
           The <span ref="a" class="adjective">{{ adjective }} </span> Developer
@@ -66,7 +66,6 @@ onUnmounted(()=>{
     align-items: center;
     .textContainer {
       display: block;
-      min-width: 400px;
       max-width: 500px;
       h1 {
         font-weight: 600;

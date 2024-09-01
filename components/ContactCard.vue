@@ -50,6 +50,7 @@ defineProps<ContactCard>()
       padding-right: 3rem;
       width:fit-content;
       h3 {
+        font-size: 0.75rem;
         text-align: center;
         margin: 0px;
         width: 16ch;
