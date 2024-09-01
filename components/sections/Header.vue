@@ -19,7 +19,6 @@ function toggleMenu() {
     <div class="logo">
       <NuxtImg src="/images/logo.jpg" alt="potato logo" width="150" />
     </div>
-    {{ viewportWidth }}
     <div v-if="viewportWidth == Infinity"></div>
     <div class="navbar" v-else-if="viewportWidth > 800">
       <NuxtLink to="/">Home</NuxtLink>
