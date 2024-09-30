@@ -1,7 +1,7 @@
 ---
 title: "CG Art Made With Depth First Search"
 titleUrl: "rdfs-art"
-description: "How I Made Art with Graph Theory"
+description: "How I Made Art with Graph Theory, with cool visuals for non-programmers"
 coverImg:  "/images/blog/rdfs-art/RDFS-ART.png"
 coverImgAlt: "some funky artwork; it sure is lame that your browser cant render it or you cant see it."
 inProgress: "false"
