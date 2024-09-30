@@ -1,7 +1,7 @@
 <template>
   <div class="background">
     <Header />
-    <MultiCurveDivider class="divider" />
+    
     <br />
     <div class="pagewrapper">
       <NuxtPage />
