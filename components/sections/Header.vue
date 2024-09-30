@@ -31,7 +31,7 @@ function toggleMenu() {
         <NuxtLink to="/#contact">Contact</NuxtLink>
       </div>
       <div class="navtab" v-show="viewportWidth <= 800 && viewportWidth != Infinity">
-        <NuxtImg src="/images/icons/hamburger.png" alt="potato logo" width="64"
+        <NuxtImg src="/images/icons/hamburger.png" alt="hamburger" width="64"
           :style="{ transform: menuOpen ? 'rotate(45deg)' : 'rotate(0deg)' }" @click="toggleMenu" class="hamburger" />
 
       </div>
@@ -98,8 +98,11 @@ h1 {
         }
       }
     }
-    div .hamburger {
-      width: 3rem;
+    .navtab  {
+      .hamburger{
+        margin:1rem;
+        width: 3rem;
+      }
     }
   }
   .smallMenu {
