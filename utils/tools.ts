@@ -9,7 +9,8 @@ export enum tool {
   Onshape,
   Vcarve,
   WPILib,
-
+  rasPi,
+  GSheets,
 }
 
 const toolMap = new Map<tool, string>([
@@ -22,7 +23,11 @@ const toolMap = new Map<tool, string>([
   [tool.Onshape, "/images/icons/onshape-logo.svg"],
   [tool.Vcarve, "/images/icons/vcarve.svg"],
   [tool.WPILib, "/images/icons/wpi.png"],
+  [tool.rasPi, "/images/icons/raspberry-pi-icon.png"],
+  [tool.GSheets, "/images/icons/sheetsLogo.png"],
 ])
+
+
 
 export const getToolUrl = (tool: tool) => {
   return toolMap.get(tool) 
