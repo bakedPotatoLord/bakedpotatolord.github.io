@@ -4,10 +4,10 @@ titleUrl: "energy-usage-1-kings-18"
 description: "An In-Depth Discussion on Thermodynamics and Theology"
 coverImg:  "/images/blog/energy-usage-1-kings-18/elijah-fire.jpg"
 coverImgAlt: "The prophet Samuel calls down fire from heaven in religous iconography"
-inProgress: "true"
+inProgress: "false"
 keywords: "samuel,theology,physics,fire"
-datePublished: 0
-dateEdited: 0
+datePublished: 1731882629528
+dateEdited: 1731882629528
 ---
 
 About a year ago, I was attending a meeting of [youth group](https://en.wikipedia.org/wiki/Youth_ministry) at my church, and after a fun game of some ultimate frisbee, and far too much ice cream, we took some time to dig into scripture. Specifically, Chapter 18 of the book of 1st Kings in the Bible. 
@@ -140,10 +140,14 @@ It seemed at this point I'd need to either get in contact with an altar expert, 
 
 I was at quite the dilemma, as I'd have to confront social anxiety by arguably wasting the time of an expert, bore myself out of my mind with Leviticus, or deal with performance anxiety and scientific inacuracy of assuming myself to be just as buff as a dude who [outran a chariot](https://www.biblegateway.com/passage/?search=1+Kings+18%3A44-48&version=KJV), and hiked for [40 days on one meal](https://www.biblegateway.com/passage/?search=1+Kings+19%3A6-8&version=KJV).
 
+
+Update 9/18/24:
+
 After reaching this dilema, I didn't add anything to this blog post for 2 months. I reached out to my youth pastor, to see if he knew anyone from bible colege who could help me out, but he didn't know anyone
 
 
-
+Update 11/17/24:
+I have now realized that this post has been in the works for 4 months, So I'm just gonna post this and move on. I might return If I recieve new information.
 
 
 
