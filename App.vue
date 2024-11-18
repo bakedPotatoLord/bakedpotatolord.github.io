@@ -13,8 +13,8 @@
 <script setup lang="ts">
 
 useServerSeoMeta({
-  title: 'BakedPotatoLord',
-  ogTitle: 'BakedPotatoLord',
+  title: 'BakedPotatoLord | Josiah Hamm',
+  ogTitle: 'BakedPotatoLord | Josiah Hamm',
   description: 'My portfolio and blog',
   ogDescription: 'My portfolio and blog',
   ogUrl: 'https://bakedpotatolord.com',
