@@ -16,7 +16,7 @@ defineProps<Props>()
 <template>
 <div class="main">
   <div class="image">
-    <NuxtImg :src="projectImage" width="500px" sizes=" sm:200px md:500px lg:700px" />
+    <NuxtImg :src="projectImage" width="500px" sizes="  md:500px lg:700px" />
   </div>
   <div class="textBody">
     <h2>{{projectName}}</h2>
@@ -27,8 +27,8 @@ defineProps<Props>()
       </div>
     </div>
     <div class="buttons">
-      <a :href="projectLink" target="_blank">Launch Project</a>
-      <a :href="projectGithub" target="_blank">View on Github</a>
+      <a v-if="projectLink !== undefined" :href="projectLink" target="_blank">Launch Project</a>
+      <a v-if="projectGithub !== undefined" :href="projectGithub" target="_blank">View on Github</a>
     </div>
   </div>
 </div>
@@ -40,17 +40,23 @@ defineProps<Props>()
   display: flex;
   flex-direction: row;
   align-items:center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap:wrap;
   .image {
 
+    max-width: 500px;
+    padding: 1rem;
     img {
-      max-width: 500px;
-      padding: 5%;
-      width:90%;
+      position: relative;
+      aspect-ratio: 2/1;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      
     }
   }
   .textBody {
+    padding:1rem;
     max-width:  500px;
     display: flex;
     flex-direction: column;
