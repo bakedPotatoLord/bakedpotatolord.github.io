@@ -36,7 +36,7 @@ import PortfolioCard from "~/components/PortfolioCard.vue";
 For my Eagle Scout project, I designed and built a native plant garden with raised planter boxes at the Senac Creek Nature Center, featuring educational nameplates for each plant. This project enhances the center’s beauty, promotes environmental stewardship, and provides a lasting educational resource for visitors and school programs to learn about native Colorado plants."
       projectImage="/images/planters.jpg"
       :tools="[tool.GSheets, tool.Onshape ]"
-      projectLink="/documents/projecreportsigned.pdf"
+      projectLink="/documents/projectreportsigned.pdf"
       />
       
     </div>
