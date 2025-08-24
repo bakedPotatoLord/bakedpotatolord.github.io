@@ -10,16 +10,14 @@ datePublished: 1724028912066
 dateEdited: 1724028912066
 ---
 
-In this post, I'm going to detail the overall strategy behind Jimmi, as well as some specifics of certain mechanisms.
-
-# Links
+## Links
 
 Here are some links to different parts of the robot:
 
 - [CAD](https://cad.onshape.com/documents/97b68f4e6d4f04a6a4c2fe29/w/7bc27fb3c93e964f3484ea38/e/306a28354efb4335537e654d?renderMode=0&uiState=6615670c9b3a1f349c96fd0d)  
 - [Code](https://github.com/lobobellos/Robot_Code_Crescendo)
 
-# Game
+## Game
 
 If you haven't seen the reveal for the 2024 game, you can view it here:
 
@@ -27,7 +25,7 @@ If you haven't seen the reveal for the 2024 game, you can view it here:
 
 The game has two main objectives: score notes into the speaker/amp, and climb on the chain.
 
-# Build Season
+## Build Season
 
 We started with an idea of only scoring notes into the amp and climbing at the end of the game using a Climber-in-a-Box with a modified hook for chain.
 
