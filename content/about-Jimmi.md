@@ -9,6 +9,10 @@ keywords: "FRC robotics, swerve drive, robot CAD, robot code, FIRST Robotics, ro
 datePublished: 1724028912066
 dateEdited: 1724028912066
 ---
+## Abstract
+
+This post covers the design, strategy, and lessons learned from Jimmi, Team 7243’s 2024 FRC robot. Built for the CRESCENDO℠ game, Jimmi featured a swerve drive, flywheel-based scoring system, and a Climber-in-a-Box. Over the season, our team iterated from an amp-focused design to a speaker shooter, balancing trade-offs between flexibility, structural strength, and reliability. While we faced setbacks such as mechanical failures and electrical issues, the season ultimately strengthened our technical knowledge, team leadership, and ability to adapt under pressure. This write-up documents the journey from concept to competition, highlighting both our achievements and the challenges we’ll improve on moving forward.
+
 
 ## Links
 
