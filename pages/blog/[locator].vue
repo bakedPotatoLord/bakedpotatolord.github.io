@@ -62,7 +62,8 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
 
   .title {
     img {
-      width: 100%
+      width: 100%;
+      max-width: 800px;
     }
   }
 
