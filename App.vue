@@ -41,6 +41,10 @@ useHead({
   .divider {
     position: relative;
   }
+
+  .pagewrapper {
+    padding-top:3rem;
+  }
 }
 
 :root {
