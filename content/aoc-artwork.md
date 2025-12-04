@@ -18,4 +18,4 @@ Happy advent, and Happy coding!
 
 I'll attach the svg here:
 
-[link to svg](/images/blog/aoc-art/AOC4.svg)
+![hi](/images/blog/aoc-art/AOC4.svg)
