@@ -43,9 +43,9 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
 
     <div class="keywords">
       Keywords:
-      <div class="keyword" v-for="key of keywords">
+      <div class="keyword" v-for="[i,word] of keywords.entries()" :key="i">
         <h2 >
-          {{ key }}
+          {{ word }}
         </h2>
       </div>
     </div>
