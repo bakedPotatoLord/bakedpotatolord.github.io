@@ -8,10 +8,10 @@ const { data: content, status, error } = useAsyncData(async () =>
 
 const safeData = computed(() => content.value ?? <never>console.error(`aaah no content`))
 
-const keywords = computed(() => content.value?.keywords?.split(','))
+const keywords = computed(() => content.value?.keywords?.split(',')?.map((s:string)=>s.trim()))
 
 function parseDate(date: Date) {
-  return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
+  return  (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear()
 }
 
 const publishedDate = computed(() => parseDate(new Date(content.value?.datePublished)))
@@ -44,7 +44,7 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
     <div class="keywords">
       Keywords:
       <div class="keyword" v-for="key of keywords">
-        <h2>
+        <h2 >
           {{ key }}
         </h2>
       </div>
