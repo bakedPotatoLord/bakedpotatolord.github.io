@@ -17,7 +17,7 @@
           and working as a makerspace technical assistant, with the end goal of starting my own company in the robotics industry.<br>
           <br>
           Additionally, by the grace of God, I have been freed from the enslavement of sin and death,
-          and am now a servant of Jesus Christ, currently serving on the plant team of crown hill evanglical free church.<br>
+          and am now a servant of Jesus Christ, currently serving on the plant team of Crown Hill Evanglical Free Church.<br>
           <br>
           I love projects that involve CAD, code, electronics, manufacturing, and control systems.
           You'll usually find me working on a project if I'm not suffering through some schoolwork.<br>
