@@ -72,15 +72,12 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
       padding-top: 1rem;
       padding-bottom: 1rem;
     }
-
     hr {
       margin: 0;
     }
-
     table{
       border-spacing: 0px;
       border: 1px solid white;
-      
       td{
         border: 1px solid white;
         margin:0;
@@ -90,23 +87,17 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
         margin:0;
       }
     }
-
-
     .contentRenderer{
-      
       img{
         width:50%;
       }
-
     }
-
   }
 
   .keywords {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-
     .keyword {
       margin-left: 0.5rem;
       font-size: 0.5rem;
@@ -135,8 +126,6 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
 a:-webkit-any-link{
   text-decoration: underline;
   color: rgb(203, 154, 203);
-
 }
-
 
 </style>
