@@ -105,6 +105,7 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
   .keywords {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     .keyword {
       margin-left: 0.5rem;
