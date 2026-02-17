@@ -85,7 +85,7 @@ there's a suprising amount of people that wouldn't agree with this.
 
 - if iran gets a nuke, israel leaves them alone, and respects them
 
-- I think we would start treating iran like north korea. we don't need tp like them, but we will always respect their territory.
+- I think we would start treating iran like north korea. we don't need to like them, but we will always respect their territory.
 
 in this situation, i think I prefer a world where iran announces that It has a nuke, and will use it if missles do not stop within 24 hrs. 
 
