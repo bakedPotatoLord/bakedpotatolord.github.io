@@ -10,18 +10,19 @@
     <div class="aboutItems">
       <div class="aboutText">
         <p>
-          Hey there, I'm Josiah Hamm, a freelance developer and robotics engineer based in
-          Denver, CO, with a passion for making ideas real through leadership,
-          problem-solving, and teaching.<br />
+          Hey there, I'm Josiah Hamm, a software developer and robotics engineer based in
+          Denver, CO.<br />
           <br />
-          Some days, I build beautiful and functional web applications
-          that join art and technology to create engaging user experiences.<br>
+          A Presidential Scholar at the Colorado School of Mines, I am pursuing my bachelors degree
+          and working as a makerspace technical assistant, with the end goal of starting my own company in the robotics industry.<br>
           <br>
-          Other days, I design, test, and fabricate robots and other
-          machines. I love watching something move from a thought to a digital model to reality.<br>
+          Additionally, by the grace of God, I have been freed from the enslavement of sin and death,
+          and am now a servant of Jesus Christ, currently serving on the plant team of crown hill evanglical free church.<br>
           <br>
-          I also enjoy competitive robotics, reading up on
-          Star Wars / Warhammer 40,000 lore, rock climbing, hiking and competitve programming.<br>
+          I love projects that involve CAD, code, electronics, manufacturing, and control systems.
+          You'll usually find me working on a project if I'm not suffering through some schoolwork.<br>
+          <br>
+          I also enjoy competitive robotics, studying theology (calvinist btw), rock climbing, and competitve programming.<br>
           <br>
         </p>
       </div>
