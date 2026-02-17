@@ -14,7 +14,7 @@ const adjectives = [
 const i = ref(0)
 const a = ref<HTMLSpanElement | null>(null)
 const adjective = computed(() => adjectives[i.value])
-let interval: NodeJS.Timer
+let interval: NodeJS.Timeout
 
 onMounted( () => {
   interval= setInterval(changeWord,2500)
