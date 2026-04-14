@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@nuxt/content', "@nuxt/image", "@nuxtjs/sitemap"],
+  modules: ["@nuxt/image", "@nuxtjs/sitemap",'@nuxt/content',],
 
   components: {
     global: true,
@@ -33,9 +33,16 @@ export default defineNuxtConfig({
   },
   
   sitemap: {
-    sources: [
-      '/api/__sitemap__/urls'
-    ]
+    strictNuxtContentPaths: true,
+    sitemaps:{
+      pages: {
+        includeAppSources: true,
+        exclude: ['/admin/**'],
+      },
+      posts: {
+        sources: ['/api/__sitemap__/urls'],
+      }
+    }
   },
 
 
