@@ -8,6 +8,7 @@ inProgress: "false"
 keywords: "rdfs,art,graph,theory"
 datePublished: 1724020383240
 dateEdited: 1724020383240
+images: ["/images/blog/rdfs-art/art6.png","/images/blog/rdfs-art/art5.png","/images/blog/rdfs-art/art4.png","/images/blog/rdfs-art/art3.png","/images/blog/rdfs-art/art2.png","/images/blog/rdfs-art/art1.png","/images/blog/rdfs-art/p1.png","/images/blog/rdfs-art/p2.png","/images/blog/rdfs-art/p3.png","/images/blog/rdfs-art/p4.png","/images/blog/rdfs-art/p5.png","/images/blog/rdfs-art/p6.png","/images/blog/rdfs-art/p7.png","/images/blog/rdfs-art/p8.png","/images/blog/rdfs-art/p9.png","/images/blog/rdfs-art/p10.png"]
 ---
 
 
