@@ -34,13 +34,13 @@ export default defineNuxtConfig({
   
   sitemap: {
     strictNuxtContentPaths: true,
+    excludeAppSources: true,
     sitemaps:{
       pages: {
-        includeAppSources: true,
-        exclude: ['/admin/**'],
+        urls: ['/','/blog',],
       },
       posts: {
-        sources: ['/api/__sitemap__/urls'],
+        sources: ['/api/__sitemap__/posts'],
       }
     }
   },
