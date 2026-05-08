@@ -55,7 +55,7 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
   </div>
 </template>
 
-<style lang="scss" >
+<style lang="scss">
 .blogPost {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -131,6 +131,19 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
 a:-webkit-any-link{
   text-decoration: underline;
   color: rgb(203, 154, 203);
+
+  :visited{
+    color: rgb(203, 154, 203);
+  }
+
 }
+
+h2, h3{
+  a:-webkit-any-link{
+    text-decoration: underline;
+    color: white;
+  }
+}
+
 
 </style>
