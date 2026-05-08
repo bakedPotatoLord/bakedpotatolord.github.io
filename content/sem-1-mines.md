@@ -157,6 +157,7 @@ I was embroidering a “Soli Deo Gloria” design into a hoodie, when the bobbin
 I broke a bunch of needles trying to fix it, and looking back, I should have just waited and told an officer what was going on. Regardless, after a 2-week probationary period, I was reinstated to being able to use the space, and I now have a functional relationship with the leadership in the space.
 
 ![picture from behind the stands at KCMT](/images/blog/sem-1-mines/KCMT.png)
+
 I also volunteered at KCMT at Regis University with the Mines First Alumni Association. Volunteering at that event was a great opportunity to serve the organization that grew and developed me so greatly in high school. 
 
 :carousel{:images='["/images/blog/sem-1-mines/utah-1.png","/images/blog/sem-1-mines/utah-2.png","/images/blog/sem-1-mines/utah-3.png","/images/blog/sem-1-mines/utah-4.png","/images/blog/sem-1-mines/utah-5.png","/images/blog/sem-1-mines/utah-6.png","/images/blog/sem-1-mines/utah-7.png"]'} 
