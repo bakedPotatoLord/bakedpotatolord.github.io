@@ -2,7 +2,7 @@
 title: "Thoughts on the Iranian Nuclear debacle"
 titleUrl: "iran-nuclear-thoughts"
 description: "="
-coverImg:  "/images/blog/"
+coverImg:  "/images/blog/rdfs-art/RDFS-ART.png"
 coverImgAlt: ""
 inProgress: "true"
 keywords: ""
