@@ -125,7 +125,8 @@ Additionally, I got involved in the [Oaks Ministry](https://oaksintl.org/collegi
 
 :carousel{:images='["/images/blog/sem-1-mines/plant-1.png","/images/blog/sem-1-mines/plant-3.png","/images/blog/sem-1-mines/plant-2.png"]'} 
 
-https://www.youtube.com/shorts/e28ziBhlXYA
+
+:youtubeEmbed{:src="https://www.youtube.com/embed/e28ziBhlXYA"}
 
 Firstly, I joined a combat robot team. We designed a horizontal drum spinner robot, and got it within weight literally the night before the competition. The center of mass was off-balance, so the robot vibrated out of control whenever it was spinning really fast. Ultimately, we lost our first two rounds, due to the horizontal spinner getting friction-welded to the side of itself. Even with the disappointing results, working with the robot helped me develop my CAD skills, and learn about a hobby I had long been interested in. 
 
@@ -150,7 +151,8 @@ I was embroidering a “Soli Deo Gloria” design into a hoodie, when the bobbin
 
 ![rats nest of thread](/images/blog/sem-1-mines/ratsNest.png)
 
-[https://youtube.com/shorts/bIj9tDVnZ\_o](https://youtube.com/shorts/bIj9tDVnZ_o) 
+
+:youtubeEmbed{:src="https://www.youtube.com/embed/bIj9tDVnZ_o"}
 
 I broke a bunch of needles trying to fix it, and looking back, I should have just waited and told an officer what was going on. Regardless, after a 2-week probationary period, I was reinstated to being able to use the space, and I now have a functional relationship with the leadership in the space.
 
