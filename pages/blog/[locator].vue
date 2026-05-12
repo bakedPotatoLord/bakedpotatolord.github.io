@@ -69,6 +69,7 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
   }
 
   .content {
+    width:100%;
     justify-self: center;
     
     max-width: 56rem;
@@ -91,12 +92,12 @@ const editedDate = computed(() => parseDate(new Date(content.value?.datePublishe
         margin:0;
       }
     }
-    .contentRenderer{
-      img{
-        width:50%;
-        max-width: fit-content;
-      }
-    }
+    
+  }
+
+  img{
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .keywords {
