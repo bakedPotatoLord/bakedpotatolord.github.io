@@ -16,14 +16,15 @@ defineProps<Props>()
 <template>
 <div class="main">
   <div class="image">
-    <NuxtImg :src="projectImage" width="500px" sizes="  md:500px lg:700px" />
+    <img :src="projectImage" alt="Project Image" v-if="projectImage?.endsWith('.svg')"/>
+    <NuxtImg :src="projectImage" width="500px" sizes="  md:500px lg:700px" v-else />
   </div>
   <div class="textBody">
     <h2>{{projectName}}</h2>
     <p>{{projectDescription}}</p>
     <div class="tools">
-      <div class="tool" v-for="tool of tools?.map(t=>getToolUrl(t))">
-        <NuxtImg :src="tool" width="30px"/>
+      <div class="tool" v-for=" [k,tool] of tools?.map(t=>getToolUrl(t))?.entries() || []" v-bind:key="k">
+        <NuxtImg :src="tool" width="30px" />a
       </div>
     </div>
     <div class="buttons">
