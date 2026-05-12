@@ -24,7 +24,7 @@ defineProps<Props>()
     <p>{{projectDescription}}</p>
     <div class="tools">
       <div class="tool" v-for=" [k,tool] of tools?.map(t=>getToolUrl(t))?.entries() || []" v-bind:key="k">
-        <NuxtImg :src="tool" width="30px" />a
+        <NuxtImg :src="tool" width="30px" />
       </div>
     </div>
     <div class="buttons">
