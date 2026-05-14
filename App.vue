@@ -27,7 +27,10 @@ useHead({
     {
       name:"google-site-verification", content: "itA05HY6ZVwXH-Taj-j_DCaTOS9cFJ9ir12MKpaQbbk",
     }
-  ]
+  ],
+  htmlAttrs: {
+    lang: 'en',
+  },
 })
 
 </script>
