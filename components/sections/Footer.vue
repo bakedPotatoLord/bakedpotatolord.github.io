@@ -6,7 +6,7 @@ const year = (new Date).getFullYear()
 </script>
 
 <template>
-  <div class="footer">
+  <div class="footer" role="contentinfo">
     <div class="text">
       © Josiah Hamm {{ year }}
     </div>

@@ -92,7 +92,7 @@ defineProps<Props>()
       flex-direction: row;
       flex-wrap:wrap;
       a{
-        background-color: #8868d3;
+        background-color: #39125c;
         color: white;
         padding: 5px 10px;
         border-radius: 10px;

@@ -16,14 +16,14 @@ function toggleMenu() {
 
 <template>
   <div class="spacer"></div>
-  <div class="absolute">
+  <div class="absolute" role="banner">
 
     <div class="base">
       <div class="logo">
         <NuxtImg src="/images/logo.jpg" alt="potato logo" width="150" />
       </div>
 
-      <div class="navbar" v-show="viewportWidth > 800 && viewportWidth != Infinity">
+      <div class="navbar" v-show="viewportWidth > 800 && viewportWidth != Infinity" role="navigation">
         <NuxtLink to="/">Home</NuxtLink>
         <NuxtLink to="/#about">About</NuxtLink>
         <NuxtLink to="/#portfolio">Portfolio</NuxtLink>
