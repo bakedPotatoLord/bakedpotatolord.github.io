@@ -7,7 +7,7 @@ interface Props{
   projectImage?: string
   projectLink?: string
   projectGithub?: string
-  tools?: [tool:tool,alt:string][]
+  tools?: tool[]
 }
 
 defineProps<Props>()
@@ -23,8 +23,8 @@ defineProps<Props>()
     <h2>{{projectName}}</h2>
     <p>{{projectDescription}}</p>
     <div class="tools">
-      <div class="tool" v-for=" [k,[tool,alt]] of tools?.entries() || []" v-bind:key="k">
-        <NuxtImg :src="getToolUrl(tool)" width="30px" :alt="alt" />
+      <div class="tool" v-for=" [k,tool] of tools?.map(t=>getToolUrl(t))?.entries() || []" v-bind:key="k">
+        <NuxtImg :src="tool" width="30px" />
       </div>
     </div>
     <div class="buttons">
