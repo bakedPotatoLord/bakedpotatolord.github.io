@@ -27,8 +27,25 @@ const toolMap = new Map<tool, string>([
   [tool.GSheets, "/images/icons/sheetsLogo.png"],
 ])
 
+const altMap = new Map<tool, string>([
+  [tool.Nuxt, "Nuxt.js"],
+  [tool.Vue, "Vue.js"],
+  [tool.TypeScript, "TypeScript"],
+  [tool.Vite, "Vite"],
+  [tool.Bun, "Bun"],
+  [tool.Java, "Java"],
+  [tool.Onshape, "Onshape"],
+  [tool.Vcarve, "Vcarve"],
+  [tool.WPILib, "WPILib"],
+  [tool.rasPi, "Raspberry Pi"],
+  [tool.GSheets, "Google Sheets"],
+])
 
 
 export const getToolUrl = (tool: tool) => {
   return toolMap.get(tool) 
+}
+
+export const getToolAlt = (tool: tool) => {
+  return altMap.get(tool) || "unlabeled tool"
 }
