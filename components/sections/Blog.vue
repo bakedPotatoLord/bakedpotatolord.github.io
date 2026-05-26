@@ -13,7 +13,7 @@ const { data: content, status } = useAsyncData(async () =>
     <SectionTitle title="Blog" />
 
     <div class="blogItems" v-if="status === 'success'">
-      <div v-for="post of content" class="blogItem">
+      <div v-for="post of content" class="blogItemOuter">
         <a :href="'/blog/' + post.titleUrl">
           <BlogCard :title="post.title" :image="post.coverImg" :imageAlt="post.coverImgAlt"
             :description="post.description" />
@@ -41,11 +41,14 @@ const { data: content, status } = useAsyncData(async () =>
   }
 
   .blogItems {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    gap:3rem;
+
+    .blogItemOuter {
+      min-width: 200px;
+    }
   }
 
   .container {

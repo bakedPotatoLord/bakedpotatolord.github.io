@@ -25,12 +25,13 @@ defineProps<BlogCard>()
 <style scoped lang="scss">
 .blogItem {
   max-width: 400px;
-  min-width: 300px;
+  min-width: 200px;
   background-color: rgb(64, 61, 64);
   border-radius: 10px;
   padding: 2%;
   margin: 2%;
-  height:fit-content;
+  aspect-ratio: 1.618 / 1;
+  
 
   .title {
     margin-top: 0.5rem;
@@ -38,7 +39,7 @@ defineProps<BlogCard>()
   }
 
   .image {
-    width: 100%;
+    max-width: 100%;
     border-radius: 1rem;
     aspect-ratio: 1.618 /1;
   }
@@ -46,6 +47,7 @@ defineProps<BlogCard>()
   .description {
     margin-bottom: 0px;
     overflow: hidden;
+    height: 5ch
 
   }
 
