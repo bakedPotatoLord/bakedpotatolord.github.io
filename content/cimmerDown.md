@@ -104,85 +104,105 @@ Sure enough, after running the  numbers, I can say that I could have built a Mol
 | total capacity (Wh) | 173.16 | 186.48 | 372.96 |
 | total cost | $140.00 | $94.00 | $142.00 |
 
+:carousel{:images='["/images/blog/cimmerDown/chainbreaker.png","/images/blog/cimmerDown/chainbreaker2.png"]'} 
+
 :youtubeEmbed{:src="https://www.youtube.com/embed/RuOs7EVG5zs"}
 
 With this done, Diego and I got the chain down to length, and then we were able to bench-test the driving of the hub. In the video above, I quickly wired up an [Arduino Uno knockoff](https://www.sparkfun.com/sparkfun-redboard-programmed-with-arduino.html) to read from an [analog joystick](https://www.adafruit.com/product/3102?srsltid=AfmBOor9tgAxFQHyHyY1mwJWMUYcK-kZK6FYR_xUf9U7dw9ABYezqxSy) and then send an output [PWM](https://en.wikipedia.org/wiki/Pulse-width_modulation) signal to the connected Spark ESC. The code used for this ended up not being too dissimilar to what I used on actual code for the finished longboard.   
-
-![][image11]\[related pics\]![][image12]
 
 ## Metal Manufacturing
 
 :youtubeEmbed{:src="https://www.youtube.com/embed/Q6am0fOPwuA"}
 
+:carousel{:images='["/images/blog/cimmerDown/wjet-1.png","/images/blog/cimmerDown/wjet-2.png","/images/blog/cimmerDown/wjet-3.png","/images/blog/cimmerDown/wjet-4.png"]'} 
+
 
 All the sheet plates were cut on the [waterjet](https://en.wikipedia.org/wiki/Water_jet_cutter) out of 3/8“ [6061 aluminum plate](https://en.wikipedia.org/wiki/6061_aluminium_alloy). The first two parts came out great, but the other two failed. I'm not sure exactly what caused the failure, but I had made the rookie mistake of only having enough material for if nothing went wrong and was learning that lesson the hard way. I was thankfully able to hit up the metals supermarket with a friend who had a car and get some more scrap, but it was still pretty annoying.   
-![][image13]  
+
+
+:youtubeEmbed{:src="https://www.youtube.com/embed/aGZCXQ_afOQ"}
+
+:carousel{:images='["/images/blog/cimmerDown/spl-1.png","/images/blog/cimmerDown/spl-2.png","/images/blog/cimmerDown/spl-3.png","/images/blog/cimmerDown/spl-4.png"]'} 
+
 For the remaining parts, my roommate and I had to split our stock, clean it up, and then waterjet it again, making sure it was really clamped down this time. 
 
-\<drilling and spacers\>
 
-With these done, I just had to [drill](https://en.wikipedia.org/wiki/Drilling) a couple of holes on the [manual mills](https://en.wikipedia.org/wiki/Milling_\(machining\)) and [turn down](https://en.wikipedia.org/wiki/Turning) some spacers on the lathe. I had actually never used a lathe before, so learning it for this project was a lot of fun. I'd love to use a more powerful lathe where I could crank the feed rate up a bit, but for my small batch of parts, it was okay to take my time. 
+:carousel{:images='["/images/blog/cimmerDown/drill-1.png","/images/blog/cimmerDown/drill-2.png"]'} 
 
-\<triangle machining\>
+:youtubeEmbed{:src="https://www.youtube.com/embed/v9m5OZf0QXo"}
+
+With these done, I just had to [drill](https://en.wikipedia.org/wiki/Drilling) a couple of holes on the [manual mills](https://en.wikipedia.org/wiki/Milling_\(machining\)) and [turn down](https://en.wikipedia.org/wiki/Turning) some spacers on the lathe. I had actually never used a lathe before, so learning it for this project was a lot of fun. I'd love to use a more powerful lathe where I could crank the feed rate up a bit, but for my small batch of parts, it was okay to take my time. The video has a 2-4x speedup. 
+
+![machining a triangle slot for the bolts](/images/blog/cimmerDown/triangle.png)
 
 Next, I had Diego machine a little recessed section for the bolts to fit into. He definitely should have just machined them on the [CNC](https://en.wikipedia.org/wiki/Computer_numerical_control) mill, but instead he chose to use a [rotary table](https://en.wikipedia.org/wiki/Rotary_table) on a manual mill. I hope that learning to use that was worthwhile for him. 
 
-![][image14]
+![Machined parts assembly](/images/blog/cimmerDown/machined-parts.png)
 
 Just like that, our truck clamp assembly was done\! It's crazy how it's possible to condense 20+ hours of work into 3 minutes of reading. My teammates and I were pretty hyped, but we knew that we still had a lot to get done, including urethane molding and the entire electronics system.
 
 ## Battery harness
 
-\[battery wires image\]
+![EC5 wires connecting to the battery](/images/blog/cimmerDown/wires.png)
 
 The battery connected through [EC5 connectors](https://www.reddit.com/r/rccars/comments/y25zbh/i_hate_ec5_connectors_i_have_push_through_top/), and I stupidly chose to use 12AWG wire to carry the current from the batteries to the ESCs. Little did I know that that wire would cause a ton of [voltage sag](https://en.wikipedia.org/wiki/Voltage_sag) (an estimated 1-2 volts) and melt the surrounding insulation. If this project taught me anything, it's that cutting corners will almost always come back to bite you. There are so many times in this project where I decided to rush something or attempt it without enough research, and these usually resulted in a faster (though jankier) prototype, but they also almost always prompted fixing eventually. Back to EC5s, though, I tried to use my soldering iron to melt solder in the pins, but its 60 watts couldn't handle it, so I had to take it to the electronics lab to solder them with a big-boy 110W iron. EC5 connectors are decent, but they are a massive pain to plug into their housings, so for that reason alone I wish I would have gone with XT90s. I must have spent about one or two whole hours just trying to press those pins in. I used vices, clamps, and screwdrivers to press them in, but I couldn't find any real one-size-fits-all trick for it. Afterward, I would learn that dedicated [EC5 press-in tools](https://www.progressiverc.com/products/prc-ec5-assembly-punch) do actually exist, but at that point it was too late.  
 
 ## Housing and wheels
 
-![][image15]
+![first layers for the battery housing on the 3D printer](/images/blog/cimmerDown/prusaxl.png)
 
 I printed that out of PETG on a [Prusa XL printer](https://www.prusa3d.com/product/original-prusa-xl-5-toolhead-3d-printer/), which the [Mines Maker Society](https://oreconnect.mines.edu/MMS/club_signup) was very gracious to let me use. The first iteration used a hinged design, which would eventually break when I hit a bump. I then re-printed a design that used bolts to secure the lid of the battery box.  
-![][image16]
 
-Furthermore, I worked with my floor-mate and friend Ari to cast the wheels out of urethane. I made the mold with draft angles, thoroughly applied [petroleum jelly](https://www.amazon.com/petroleum-jelly/s?k=petroleum+jelly) as a [mold release](https://en.wikipedia.org/wiki/Release_agent), and even added holes in the back of the mold to push the wheel out with. Regardless, the wheels still managed to get stuck in the mold and required extensive convincing to come out. Perhaps there's some secret knowledge on how to properly do this. Perhaps I just needed to drop some money on some actual mold release.
+:carousel{:images='["/images/blog/cimmerDown/mold-1.png","/images/blog/cimmerDown/mold-2.png","/images/blog/cimmerDown/mold-3.png","/images/blog/cimmerDown/mold-4.png","/images/blog/cimmerDown/mold-5.png","/images/blog/cimmerDown/mold-6.png","/images/blog/cimmerDown/mold-7.png"]'}
+
+Furthermore, I worked with my floor-mate and friend Ari to cast the wheels out of urethane. The first version only had one hole, but the urethane didn't flow fast enough, so I made a second version utilizing 3 much larger holes. I made the mold with draft angles, thoroughly applied [petroleum jelly](https://www.amazon.com/petroleum-jelly/s?k=petroleum+jelly) as a [mold release](https://en.wikipedia.org/wiki/Release_agent), and even added holes in the back of the mold to push the wheel out with. Regardless, the wheels still managed to get stuck in the mold and required extensive convincing to come out. Perhaps there's some secret knowledge on how to properly do this. Perhaps I just needed to drop some money on some actual mold release.
 
 With all of these hubs, I washed all the petroleum jelly off of them, cut off the excess urethane, and added some captive nuts (yay). I only had two molds at the time, so I had to make the wheels in two separate batches.
 
-![][image17]\[youtube of riding the board in the dorm\]
+![integration hell](/images/blog/cimmerDown/integration-hell.png)
 
+![nasty evil wires](/images/blog/cimmerDown/nasty-wires.png)
+
+<iframe width="336" height="598" src="https://www.youtube.com/embed/R-uUsVI5GFM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 At this point, all we had left was [integration hell](https://innoroo.com/blog/2018/03/19/integration-hell-glossary/). As was custom, I put some [stoner metal](https://open.spotify.com/album/031668YzIc2Lxmb8FiR8d9?si=qDHYz-0KSbGVAv2h__gizQ) on my speaker, and Diego and I spent somewhere around 6 hours, from 6 p.m. to midnight, integrating the systems and getting the wiring and code finished. As you can see in the video, the board was at this point controlled by a wired analog joystick, held on with some braided cable protector. When we were riding it around the halls of our dorm at midnight, there was a slight mishap when someone (purposefully left unnamed) fell off of it and ripped the joystick out with them. The code at this point was very bare-bones and had no safety system, simply reading the [ADC](https://en.wikipedia.org/wiki/Analog-to-digital_converter) that was connected to the joystick. When it got disconnected, the [resistance](https://en.wikipedia.org/wiki/Electrical_resistance_and_conductance) spiked to infinity, and the current dropped to zero, causing the board to enter rocket mode in the reverse direction. Thankfully, I was able to stop it with my foot before it crashed through a wall into someone's room, but we learned our lesson and decided that testing it outside would be the play from here on out. We also decided that it was probably a good time to go to bed, as it was almost 1:00 AM.
 
 The next day, I added a system to the code to check if the remote was connected every cycle. It would reconfigure the ADC joystick input as an output and then apply a charge to it. Then, after a couple microseconds, it would configure as an input and read if it still had a charge. If it was connected through the joystick, then it would be pulled low through the potentiometer, but if it was disconnected, it would stay high, as it didn't have any ground to discharge to. 
 
 At this point, the board was technically done, but as I would learn over the next couple of weeks, it still had many glaring issues.
 
-\[image of sheared 22 AWG wire\]
+![dupont connectors](/images/blog/cimmerDown/dupont.png)
 
 Firstly, I would tear the wires every time I had to stop hard and jump off (which was a lot because I was still relatively new). I re-soldered the wires once, then added a quick-disconnect point with some dupont connectors, but I was aware that this was mega-jank and began thinking about making a remote for the board. 
 
-\[image of toasted SPARK\]
+:carousel{:images='["/images/blog/cimmerDown/toast-1.png","/images/blog/cimmerDown/toast-2.png"]'}
 
 Secondly,  one of the contacts for the spark ESCs melted. The connector was not attached tight enough, so I suspect it began arcing, which got the spark hot enough to melt the solder holding the pad on. I posted on Chief Delphi asking for support and got a bit of clarification, which was nice. 
 
-\[drawing of the new part\]
+![drawing of sprocket cover](/images/blog/cimmerDown/sprocketcover.svg)
 
 Thirdly, I hit a pothole in the [CTLM parking lot](https://maps.app.goo.gl/DXnfx788MpaVPMh26) at the Colorado School of Mines, and it exploded the housing for the power-transmission assembly. Expecting the same thing to happen again, I made the call to switch to a slimmer version of the assembly covers that would be much more structurally sound if they were to come in contact with asphalt. 
 
-\[images of fixing lipo charging cells\]
+:carousel{:images='["/images/blog/cimmerDown/battery-fix-1.png","/images/blog/cimmerDown/battery-fix-2.png"]'}
 
 Fourthly, though this is less a fault of the design and more of myself, I forgot to fully tighten the bolts that hold the batteries in. The batteries fell out, resulting in the charging wires for two of them being torn off entirely. I didn't take a picture of them after the incident (reasonable), but I do have some pictures of soldering those back together. It was pretty scary working with leads that were ready to dump 500 amps into each other at a moment's notice, but God's providence ordained that I would be successful. I wrapped all the lipos with a bunch of electrical tape, so it should take longer for the wires to get ground off if the lid ever falls off in the future. 
 
 ## Protofund showcase
 
-\[protofund video https://youtu.be/mgAZs0NNvIY\]![][image18]
+![protofund showcase poster, with specs](/images/blog/cimmerDown/poster-longboard.png)
 
-After fixing all these mishaps, however, Diego and I attended the Protofund project showcase. We had a blast demo-ing the project and sharing our progress on it with faculty, including the department head for computer science and the provost for the school. In a funny turn of events, I tore my pants minutes before the presentation, so I had to borrow some shop pants from the metal shop, which were far too big for me. Although pretty embarrassing, it served as a wake-up call about the weight I had gained in the first semester and gave me some urgency to start making healthier choices. 
+<iframe width="616" height="355" src="https://www.youtube.com/embed/mgAZs0NNvIY" title="CIMmer down: Electric longboard" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+After fixing all these mishaps, however, Diego and I attended the Protofund project showcase. We had a blast demo-ing the project and sharing our progress on it with faculty, including the department head for computer science and the provost for the school. In a funny turn of events, I tore my pants minutes before the presentation, so I had to borrow some shop pants from the metal shop, which were far too big for me. Although pretty embarrassing, it served as a wake-up call about the weight I had gained in the first semester and gave me some urgency to start making healthier choices with food and physical activity. 
+
+![electronics workbench](/images/blog/cimmerDown/electronics.png)
 
 With the fall semester wrapping up, I went home for winter break. Unlike my peers, however, I brought home most of my tools and component boxes, as I would be spending that time making an RF-based remote. Specifically, I went with an [NRF24l01 module](https://www.amazon.com/HiLetgo-NRF24L01-Wireless-Transceiver-Module/dp/B00LX47OCY). When choosing what communication protocol and hardware to use, I was optimizing very heavily for low energy consumption, which is why I landed with the NRF and the [Arduino Pro Mini](https://www.arduino.cc/en/Main/ArduinoBoardProMini), an ATmega328P-based MCU from the AVR family. One neat thing about this pair is that both of them run on 3.3V, so the voltage only has to be stepped down to 3.3V once, not once to 5V and once to 3.3V, like on the Arduino Nano or similar boards.
 
+![soldered perfboard for the skateboard](/images/blog/cimmerDown/soldering-2.png)
+
 However, the NRF24l01 board is a notoriously fickle piece of technology. I spent over two weeks trying to get them to work how I expected, but in the process, it seemed like I was killing them left and right. With a couple of them, I attempted to desolder the pin header, and destroyed the board in the process. With more, I accidentally shorted the board, instantly frying it. Beyond that, the board seemed to only work when it had a 10 microfarad capacitor across it's power leads, and was being powered by a source that could supply more current than the [USB-Serial adapter](https://www.amazon.com/WWZMDiB-FT232RL-Converter-Adapter-Breakout/dp/B0BJKCSZZW) that I was using to program the remote. I wish I could have known this at the start, because I spent those two weeks in a constant ping-pong between utter despair, confusion, and euphoria. 
 
-\[image of soldered board\]
+:carousel{:images='["/images/blog/cimmerDown/remote-1.png","/images/blog/cimmerDown/remote-4.png","/images/blog/cimmerDown/remote-3.png","/images/blog/cimmerDown/remote-2.png"]'}
 
 Even so, developing my own remote from scratch gave me an opportunity to get really hands-on with RF electronics, and learn a lot more about electronics in general. I made a voltage divider for measuring the battery voltage with the arduino ADCs, and by doing so built better intuition of resistance, and voltage drop. By messing with capacitors for smoothing out current to the NRF, I learned about the differences between ceramic and electrolytic capacitors, and their different use cases. 
 
@@ -190,15 +210,15 @@ Even so, developing my own remote from scratch gave me an opportunity to get rea
 
 Without a Protofund Showcase coming up, I was much less motivated to work on CIMmer down during the second semester. It broke about 3 different times, and after each, I would let it sit for a while, lacking the motivation to get it done. 
 
-\[image of modified truck clamp\] 
+![modified truck clamp](/images/blog/cimmerDown/modifiedClamp.png)
 
 One of the first issues I faced was that the clamps for the trucks were sliding, and no amount of [CA glue](https://en.wikipedia.org/wiki/Cyanoacrylate) or [JB-weld](https://www.jbweld.com/?srsltid=AfmBOoqUgGK5hMGB9AYWSpi2ep8x5NA0plzjqoOPfhA10lzmIuytL0_D) would hold them on. To solve this, I drilled a hole through both the truck clamp and the truck, and then put a [carbon fiber](https://en.wikipedia.org/wiki/Carbon_fibers) rod into it to hold it in place. This was great, but it also resulted in the board not having enough tilt to make a U-turn without a 50-foot radius. To solve this, I 3d-printed some risers, which solved that problem, but also decreased the stability of the board significantly. 
 
-![][image19]
+:carousel{:images='["/images/blog/cimmerDown/connector-1.png","/images/blog/cimmerDown/connector-2.png"]'}
 
 Another issue occurred when I hit a massive bump in the sidewalk, and dislodged the PWM DuPont connectors in the Spark ESC. That would have been bad enough, as it prevented me from riding the board, but providence would have it such that the PWM wire would vibrate and contact the ground-pin, [shorting](https://en.wikipedia.org/wiki/Short_circuit) the [MCU](https://en.wikipedia.org/wiki/Microcontroller), and killing the board. To fix this, I soldered the wires directly to the board of the Spark, and re-soldered an entirely new control board for the control box, which took about three hours. 
 
-\[get picture\]
+![](/images/blog/cimmerDown/fuseandwires.png)
 
 Finally, I replaced the smaller gauge wire with thicker stuff, and added a switch and breaker. Up until this point, I had been manually disconnecting and reconnecting some EC5 connectors to turn the board on and off, so adding this was a great comfort feature. I didn't notice any immediate performance gains from increasing the gauge of the wire, but they don't seem to start melting anymore, so that's pretty cool. 
 
@@ -215,9 +235,12 @@ There were at points the idea of turning this board into an actual project for F
 - Test longevity of CIMs  
 - Improve control box ventilation
 
-Perhaps when these get done, I could do some interest surveys, and see if there's actually a market for this. Until then, I'm just grateful for the opportunity to have a project to work on. I'm a project-based learner primarily, so having projects like this helps me grasp concepts much more deeply than through a class, and it also gives my brain a sense of purpose and direction, which is good for keeping me on task, and not spiraling into laziness. Either way, the BOM and CAD are on github. A full build guide is not fleshed out, and it likely won't be until all the design revisions are finalized, but you're welcome to reach out to me if you want to know how to build this in the meantime. 
+Perhaps when these get done, I could do some interest surveys, and see if there's actually a market for this. Until then, I'm just grateful for the opportunity to have a project to work on. I'm a project-based learner primarily, so having projects like this helps me grasp concepts much more deeply than through a class, and it also gives my brain a sense of purpose and direction, which is good for keeping me on task, and not spiraling into laziness. Either way, the BOM and CAD are on [github](https://github.com/bakedPotatoLord/CIMmerDown). A full build guide is not fleshed out, and it likely won't be until all the design revisions are finalized, but you're welcome to reach out to me if you want to know how to build this in the meantime. 
 
+<blockquote >
 “There are no solutions. There are only trade-offs.”  
-― Thomas Sowell, economist
+  <footer>— Thomas Sowell, Economist</footer>
+</blockquote>
+
 
 Thanks for reading\!
