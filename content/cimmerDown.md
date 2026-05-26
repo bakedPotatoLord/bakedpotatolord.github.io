@@ -4,7 +4,7 @@ titleUrl: "cimmerDown"
 description: "E-skateboard project I built in my first semester of college."
 coverImg:  "/images/blog/sem-1-mines/cimmerDown.png"
 coverImgAlt: "demonstrating the project at a showcase"
-inProgress: "true"
+inProgress: "false"
 keywords: "electric longboard,esk8,electric skateboard,FRC,FIRST Robotics,CIM motor,brushed motor,REV Spark ESC,Arduino Nano,Arduino Pro Mini,NRF24L01,RF remote,longboard project,engineering project,college project,Protofund,Colorado School of Mines,CAD,3D printing,PETG,TPU,urethane casting,custom wheels,battery pack,LiPo battery,lithium ion battery,Molicel P42A,EC5 connector,XT90,PWM,ADC,microcontroller,AVR,waterjet cutting,machining,manual mill,lathe,prototyping,embedded systems,electronics,robotics,makerspace,rapid prototyping,custom drivetrain,chain drive,voltage sag,integration hell,PCB design,skateboarding,DIY electronics,student engineering,hardware engineering,firmware,product development,mechatronics,maker project,engineering blog,dorm engineering,RC electronics,battery management,control systems,longboard remote,machining aluminum,Prusa XL,Mines Maker Society"
 datePublished: 1779832883298
 dateEdited: 1779832883298
