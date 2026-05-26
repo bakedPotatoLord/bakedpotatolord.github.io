@@ -3,11 +3,11 @@ title: "CIMmer Down: Protofund Electric Longboard"
 titleUrl: "cimmerDown"
 description: "E-skateboard project I built in my first semester of college."
 coverImg:  "/images/blog/sem-1-mines/cimmerDown.png"
-coverImgAlt: "me demo-ing the project"
+coverImgAlt: "demonstrating the project at a showcase"
 inProgress: "true"
-keywords: ""
-datePublished: 1767928869456
-dateEdited: 1767928869456
+keywords: "electric longboard,esk8,electric skateboard,FRC,FIRST Robotics,CIM motor,brushed motor,REV Spark ESC,Arduino Nano,Arduino Pro Mini,NRF24L01,RF remote,longboard project,engineering project,college project,Protofund,Colorado School of Mines,CAD,3D printing,PETG,TPU,urethane casting,custom wheels,battery pack,LiPo battery,lithium ion battery,Molicel P42A,EC5 connector,XT90,PWM,ADC,microcontroller,AVR,waterjet cutting,machining,manual mill,lathe,prototyping,embedded systems,electronics,robotics,makerspace,rapid prototyping,custom drivetrain,chain drive,voltage sag,integration hell,PCB design,skateboarding,DIY electronics,student engineering,hardware engineering,firmware,product development,mechatronics,maker project,engineering blog,dorm engineering,RC electronics,battery management,control systems,longboard remote,machining aluminum,Prusa XL,Mines Maker Society"
+datePublished: 1779832883298
+dateEdited: 1779832883298
 ---
 
 ## Prologue: how I got into Skating
@@ -22,7 +22,7 @@ Anyway, when my friend left, he gave me some skateboard [trucks](https://en.wiki
 
 I practiced it a bit but never progressed past simply using the board as a means of transportation. I also used my bike much more often, as it was much quicker and more efficient as a mode of transportation between classes at the [community college](https://ccaurora.edu/), which was my primary use case. Once I got my license. I practically stopped using all other modes of transportation entirely. I would occasionally take the board and scooter to the skate park, but those trips were few and far between. 
 
-\[image/vid of michael\]
+![michael skateboarding](/images/blog/cimmerDown/michael.png)
 
 Even so, my friend in Washington was going all-in on skating. He found himself in need of reliable transportation to get a job, but at the same time strapped for cash (hence, why he needed a job). So, as any sane person would do, he chose to make an electric longboard. I don't know his exact build, but I knew that it was functional for him until he had enough to buy a car and that he looked really cool when he was riding it.
 
@@ -149,7 +149,7 @@ The battery connected through [EC5 connectors](https://www.reddit.com/r/rccars/c
 
 ## Housing and wheels
 
-![first layers for the battery housing on the 3D printer](/images/blog/cimmerDown/prusaxl.png)
+![first layers for the battery housing on the 3D printer](/images/blog/cimmerDown/prusa-xl.png)
 
 I printed that out of PETG on a [Prusa XL printer](https://www.prusa3d.com/product/original-prusa-xl-5-toolhead-3d-printer/), which the [Mines Maker Society](https://oreconnect.mines.edu/MMS/club_signup) was very gracious to let me use. The first iteration used a hinged design, which would eventually break when I hit a bump. I then re-printed a design that used bolts to secure the lid of the battery box.  
 
