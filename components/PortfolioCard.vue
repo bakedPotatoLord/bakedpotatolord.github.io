@@ -24,7 +24,9 @@ defineProps<Props>()
     <p>{{projectDescription}}</p>
     <div class="tools">
       <div class="tool" v-for=" [k,tool] of tools?.entries() || []" v-bind:key="k">
-        <NuxtImg :src="getToolUrl(tool)" width="30px" :="getToolAlt(tool)"/>
+        <a :href="getToolLink(tool)">
+          <NuxtImg :src="getToolImage(tool)" width="30px" :alt="getToolAlt(tool)"/>
+        </a>
       </div>
     </div>
     <div class="buttons">
@@ -85,6 +87,11 @@ defineProps<Props>()
         display:flex;
         align-items: center;
         justify-content: center;
+
+        a{
+          height:30px;
+          display:block;
+        }
       }
     }
     .buttons{

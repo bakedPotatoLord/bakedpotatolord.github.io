@@ -1,51 +1,37 @@
 
-export enum tool {
-  Vue,
-  Nuxt,
-  TypeScript,
-  Vite,
-  Bun,
-  Java,
-  Onshape,
-  Vcarve,
-  WPILib,
-  rasPi,
-  GSheets,
-}
-
-const toolMap = new Map<tool, string>([
-  [tool.Nuxt, "/images/icons/nuxt-icon.svg"],
-  [tool.Vue, "/images/icons/vue.webp"],
-  [tool.TypeScript, "/images/icons/typescript.png"],
-  [tool.Vite, "/images/icons/vite.svg"],
-  [tool.Bun, "/images/icons/bun.png"],
-  [tool.Java, "/images/icons/java.png"],
-  [tool.Onshape, "/images/icons/onshape-logo.svg"],
-  [tool.Vcarve, "/images/icons/vcarve.svg"],
-  [tool.WPILib, "/images/icons/wpi.png"],
-  [tool.rasPi, "/images/icons/raspberry-pi-icon.png"],
-  [tool.GSheets, "/images/icons/sheetsLogo.png"],
-])
-
-const altMap = new Map<tool, string>([
-  [tool.Nuxt, "Nuxt.js"],
-  [tool.Vue, "Vue.js"],
-  [tool.TypeScript, "TypeScript"],
-  [tool.Vite, "Vite"],
-  [tool.Bun, "Bun"],
-  [tool.Java, "Java"],
-  [tool.Onshape, "Onshape"],
-  [tool.Vcarve, "Vcarve"],
-  [tool.WPILib, "WPILib"],
-  [tool.rasPi, "Raspberry Pi"],
-  [tool.GSheets, "Google Sheets"],
-])
+const toolLib : [string,string,string,string][] = [
+  ["Vue", "/images/icons/vue.webp","Vue.js","https://vuejs.org/"],
+  ["Nuxt", "/images/icons/nuxt-icon.svg","Nuxt.js","https://nuxt.com/"],
+  ["TypeScript", "/images/icons/typescript.png","TypeScript","https://www.typescriptlang.org/"],
+  ["Vite", "/images/icons/vite.svg","Vite","https://vitejs.dev/"],
+  ["Bun", "/images/icons/bun.png","Bun","https://bun.sh/"],
+  ["Java", "/images/icons/java.png","Java","https://www.java.com/"],
+  ["Onshape", "/images/icons/onshape-logo.svg","Onshape","https://www.onshape.com/"],
+  ["Vcarve", "/images/icons/vcarve.svg","Vcarve","https://vcarve.com/"],
+  ["WPILib", "/images/icons/wpi.png","WPILib","https://www.wpilib.org/"],
+  ["rasPi", "/images/icons/raspberry-pi-icon.png","Raspberry Pi","https://www.raspberrypi.org/"],
+  ["GSheets", "/images/icons/sheetsLogo.png","Google Sheets","https://docs.google.com/spreadsheets/"],
+  ["Milling", "/images/icons/milling.svg","Milling","https://en.wikipedia.org/wiki/Milling"],
+  ["Electronics", "/images/icons/electronics.svg","Electronics","https://en.wikipedia.org/wiki/Electronics"],
+  ["Kicad", "/images/icons/kicad.png","KiCad","https://www.kicad.org/"],
+] as const
 
 
-export const getToolUrl = (tool: tool) => {
+export type tool  = typeof toolLib[number][0]
+
+
+const toolMap = new Map<tool, string>(toolLib.map(tool => [tool[0] as tool,tool[1]]))
+const altMap = new Map<tool, string>(toolLib.map(tool => [tool[0],tool[2]]))
+const linkMap = new Map<tool, string>(toolLib.map(tool => [tool[0],tool[3]]))
+
+export const getToolImage = (tool: tool) => {
   return toolMap.get(tool) 
 }
 
 export const getToolAlt = (tool: tool) => {
   return altMap.get(tool) || "unlabeled tool"
+}
+
+export const getToolLink = (tool: tool) => {
+  return linkMap.get(tool) 
 }
