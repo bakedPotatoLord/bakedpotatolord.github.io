@@ -24,7 +24,7 @@ defineProps<BlogCard>()
 
 <style scoped lang="scss">
 .blogItem {
-  max-width: 400px;
+  max-width: 600px;
   min-width: 200px;
   background-color: rgb(64, 61, 64);
   border-radius: 10px;
@@ -34,8 +34,9 @@ defineProps<BlogCard>()
   
 
   .title {
-    margin-top: 0.5rem;
+    margin-top: 0.1ch;
     font: 400 1.5rem;
+    height: 4ch;
   }
 
   .image {

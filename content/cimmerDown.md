@@ -1,5 +1,5 @@
 ---
-title: "CIMmer Down: Protofund Electric Longboard"
+title: "CIMmer Down: Electric Longboard"
 titleUrl: "cimmerDown"
 description: "E-skateboard project I built in my first semester of college."
 coverImg:  "/images/blog/sem-1-mines/cimmerDown.png"

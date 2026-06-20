@@ -3,7 +3,7 @@
 const dev = import.meta.dev;
 
 const { data: content, status } = useAsyncData(async () =>
-  queryContent().where(dev  ? {} : { inProgress: { $ne: "true" } }).limit(5).sort({ datePublished: -1 }).find()
+  queryContent().where(dev  ? {} : { inProgress: { $ne: "true" } }).limit(6).sort({ datePublished: -1 }).find()
 )
 
 </script>
@@ -42,9 +42,8 @@ const { data: content, status } = useAsyncData(async () =>
 
   .blogItems {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-    gap:3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px , 1fr));
+    gap:1rem;
 
     .blogItemOuter {
       min-width: 200px;
