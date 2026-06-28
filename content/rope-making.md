@@ -19,11 +19,11 @@ So, as one does, I turned to CAD. I designed around the 8mm OD 22mm ID skate bea
 Here's a couple drawings of the final design I came up with.
 
 ![exploded view of the rope maker](/images/blog/rope-making/ExplodedView.png)
-![exploded view of the rope maker](/images/blog/rope-making/closed.png)
+![closed view of the rope maker](/images/blog/rope-making/closed.png)
 
 You may notice this off the bat, but the shafts are held in place by press-on retention rings, not actual clip-on ones. This would end up biting me in the butt pretty bad, as the axles would on many occasions come flying out of the machine when too much tension was put on them. Unfortunately, I didnt' realize this until I was nearly done with the build.
 
-\[shafts\]
+:carousel{:images='["/images/blog/rope-making/interstageShaft.png", "/images/blog/rope-making/outputShaft.png"]'} 
 
 I delegated the task of making the D shafts for the design to my roommate, Diego. He got them done with time to test before the workshop, so I’m grateful for that. 
 
