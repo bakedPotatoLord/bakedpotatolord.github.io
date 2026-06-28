@@ -62,6 +62,10 @@ body {
   color: #fff;
 }
 
+.content{
+  line-height: 180%;
+}
+
 a:-webkit-any-link{
   color:white;
   text-decoration: none;
