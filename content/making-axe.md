@@ -42,5 +42,11 @@ With the handle now home, I strung it up and applied some sealing oil to it. Fin
 
 I love restoring broken and useless things. Perhaps it’s because I don’t like the consumerist culture of instantly buying a new \<whatever\> the second the current one doesn't work as it should, but it’s also at least partially because it’s such a great reminder of the restoration of my life through the gospel. As the prophet Ezekiel gives utterance from God,
 
- **26** And I will give you a new heart, and a new spirit I will put within you. And I will remove the heart of stone from your flesh and give you a heart of flesh.   
-— Ezekiel 36:26
+<blockquote cite="https://www.huxley.net/bnw/four.html">
+  <p>
+    And I will give you a new heart, and a new spirit I will put within you. And I will remove the heart of stone from your flesh and give you a heart of flesh. 
+  </p>
+  — Ezekiel 36:26
+</blockquote>
+
+    
