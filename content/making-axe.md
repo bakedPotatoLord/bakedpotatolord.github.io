@@ -1,16 +1,36 @@
 ---
 title: "Restoring a Garage-Sale Axe"
 titleUrl: "making-axe"
-description: "the process of restoring a rusted, rotten axe"
+description: "The process of restoring a rusted, rotten axe"
 coverImg:  "/images/blog/making-axe/cover.jpg"
-coverImgAlt: "demonstrating the project at a showcase"
+coverImgAlt: "a shiny but aged-looking axehead attached to a brand new handle"
 inProgress: "false"
-keywords: ""
+keywords: "axe restoration, axe restoration project, DIY axe restoration, garage sale find, restoring a rusty axe, axe handle, making an axe handle, woodworking, ash wood, ash axe handle, hand tools, vintage axe, rust removal, white vinegar rust removal, bench grinder, wire wheel, makerspace, Solid State Depot, Urban Forest Mill, bandsaw, belt sander, wood rasp, chisel, sanding, wood finishing, finishing oil, paracord grip, tool restoration, blacksmithing, homestead tools, sustainable craftsmanship, upcycling, DIY woodworking, handmade tools, Christian reflection, Ezekiel 36:26"
 datePublished: 1782617813841
 dateEdited: 1782617813841
+images: [
+  "/images/blog/making-axe/cover.jpg",
+  "/images/blog/making-axe/initial-head.jpg",
+  "/images/blog/making-axe/clean-head.jpg",
+  "/images/blog/making-axe/eye-1.jpg",
+  "/images/blog/making-axe/eye-2.jpg",
+  "/images/blog/making-axe/eye-3.jpg",
+  "/images/blog/making-axe/eye-4.jpg",
+  "/images/blog/making-axe/eye-5.jpg",
+  "/images/blog/making-axe/eye-6.jpg",
+  "/images/blog/making-axe/handle-1.jpg",
+  "/images/blog/making-axe/handle-2.jpg",
+  "/images/blog/making-axe/handle-3.jpg",
+  "/images/blog/making-axe/handle-4.jpg",
+  "/images/blog/making-axe/fin-1.jpg",
+  "/images/blog/making-axe/fin-2.jpg",
+  "/images/blog/making-axe/oil-1.jpg",
+  "/images/blog/making-axe/oil-2.jpg",
+  "/images/blog/making-axe/oil-3.jpg",
+  "/images/blog/making-axe/oil-4.jpg",
+  "/images/blog/making-axe/finished.jpg"
+]
 ---
-
-Making an axe
 
 In the summer of 2026, I was at a garage sale in my parent’s neighborhood when a rusty bit of metal caught my eye. Upon further inspection, I found it was a rusty axe with a splintered and rotten handle. The axehead was wedged on by about 10 rusty nails and screws of all shapes and sizes. Quite unfortunately, I didn’t think to snap a picture of it, but I hope this description will suffice. I attempted to pay the owner of the axe for it, but they gave me a pitiful look and refused to take my money. 
 
