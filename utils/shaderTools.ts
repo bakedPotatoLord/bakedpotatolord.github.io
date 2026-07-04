@@ -22,4 +22,17 @@ export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string
 
 
   gl.useProgram(shaderProgram);
+  return shaderProgram
+}
+
+export function imageBuffer(uri:string): Promise<{image:HTMLImageElement,width:number,height:number}> {
+  let image = new Image()
+  image.src = uri
+  return new Promise(res=>{
+    image.onload = () => {
+      const height = image.naturalHeight
+      const width = image.naturalWidth
+      res({image,width,height})
+    }
+  })
 }

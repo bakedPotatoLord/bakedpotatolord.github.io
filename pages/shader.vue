@@ -2,6 +2,9 @@
 <script setup lang="ts">
 import { shaderLoop, shaderSetup } from '~/utils/shaders/firstTest/shader';
 
+const canvas = ref<HTMLCanvasElement | null>(null)
+const runShader = ref(true)
+
 onMounted( () => {
   let gl = canvas.value?.getContext("webgl2",{ antialias: true })
 
@@ -9,14 +12,27 @@ onMounted( () => {
     console.error("no gl context")
     return
   }
+
+  let width = window.innerWidth * 0.9
+  gl.canvas.width = width
+  gl.canvas.height = width
+
+  window.addEventListener("resize", resizeCanvas)
   
   shaderSetup(gl)
   mainLoop()
 })
 
-const canvas = ref<HTMLCanvasElement | null>(null)
+onUnmounted(()=>{
+  window.removeEventListener("resize", resizeCanvas)
+})
 
-const runShader = ref(true)
+function resizeCanvas() {
+  if(canvas.value){
+    canvas.value.width = window.innerWidth * 0.9
+    canvas.value.height = window.innerWidth * 0.9
+  }
+}
 
 
 function mainLoop() {
@@ -45,8 +61,7 @@ function mainLoop() {
   .shaderCanvas{
     margin-top: 1rem;
     margin-bottom: 1rem;
-    width:95%;
-    aspect-ratio: 1;
+
     border: none;
   }
 }
