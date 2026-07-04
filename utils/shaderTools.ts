@@ -36,3 +36,11 @@ export function imageBuffer(uri:string): Promise<{image:HTMLImageElement,width:n
     }
   })
 }
+
+export const fullScreenQuad = new Float32Array([
+  //position vex2, uv vec2
+  -1.0,-1.0,     0.0, 0.0,
+  1.0, -1.0,     1.0, 0.0,
+  -1.0, 1.0,     0.0, 1.0,
+  1.0, 1.0,     1.0, 1.0,
+])
