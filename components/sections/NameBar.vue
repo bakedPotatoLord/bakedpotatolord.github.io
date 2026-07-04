@@ -35,7 +35,7 @@ onUnmounted(()=>{
     <div class="maintext">
       <div class="textContainer">
         <h1>
-          C<span class="potato">🥔</span>de&nbsp; P<span class="potato">🥔</span>tato
+           P<span class="potato">🥔</span>tato&nbsp; L<span class="potato">🥔</span>rd
         </h1>
         <h2>
           The <span ref="a" class="adjective">{{ adjective }} </span> Developer
