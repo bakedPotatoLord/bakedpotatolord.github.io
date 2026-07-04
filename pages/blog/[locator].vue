@@ -17,6 +17,13 @@ function parseDate(date: Date) {
 const publishedDate = computed(() => parseDate(new Date(content.value?.datePublished)))
 const editedDate = computed(() => parseDate(new Date(content.value?.datePublished)))
 
+useSeoMeta({
+  title: computed(() => content.value?.title),
+  description: computed(() => content.value?.description),
+  ogTitle: computed(() => content.value?.title),
+  ogImage: computed(() => content.value?.coverImg),
+  ogDescription: computed(() => content.value?.description),
+})
 
 </script>
 
