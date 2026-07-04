@@ -47,7 +47,7 @@ function mainLoop() {
     margin-bottom: 1rem;
     width:95%;
     aspect-ratio: 1;
-    border: 2px dashed black;
+    border: none;
   }
 }
 </style>
