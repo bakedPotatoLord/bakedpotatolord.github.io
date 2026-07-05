@@ -15,26 +15,54 @@ let texture: WebGLTexture
 
 const startTime = Date.now()
 
-export function defineUniforms() : UniformInput[] {
+export function getDefaultUniforms() : UniformInput[] {
   
   return [
     {
       glslname:"u_posFactor",
-      displayname:"position factor",
+      displayname:"Wave Factor",
       hint: "the width of the wave, higher numbers = larger columns",
       type:"float",
-      vecsize:2,
       step:undefined,
+      invert:true,
+      vals:[1,2],
     },
     {
       glslname:"u_amplitude",
-      displayname:"amplitude",
+      displayname:"Amplitude",
       type:"float",
-      vecsize:2,
-      step:undefined,
+      step:1,
+      invert:true,
       min:0,
+      max:1e13,
+      vals:[0,80],
+    },
+    {
+      glslname:"u_timeOffset",
+      displayname:"Time offset",
+      hint:"per-axis time- waveform offsets in Radians",
+      type:"float",
+      step:1,
+      invert:true,
+      min:0,
+      max:2*Math.PI,
+      vals:[0,0],
+    },
+    {
+      glslname:"u_timeMultiplier",
+      displayname:"Time Multiplier",
+      hint:"Have you ever wanted to control the speed of time? Now you can! Now with not one but two axes! ",
+      type:"float",
+      step:1,
+      invert:false,
+      min:0,
+      vals:[0,2],
     }
   ]
+}
+
+export function setUniform(uniform: UniformInput) {
+  handleUniform(gl, program, uniform)
 }
 
 export async function shaderSetup(glc: WebGL2RenderingContext) {

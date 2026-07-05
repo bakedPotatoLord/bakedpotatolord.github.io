@@ -3,11 +3,12 @@ export interface UniformInput {
   glslname:string
   displayname:string
   hint?: string
-  type: "float" | "int" | "uint"
-  vecsize?: 1 | 2 | 3 | 4
+  type: "float" | "int" 
+  invert?: boolean
   min?: number
   max?: number
   step?: number
+  vals: [number] | [number,number] | [number,number,number] | [number,number,number,number]
 }
 
 export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string) {
@@ -56,4 +57,43 @@ export const fullScreenQuad = new Float32Array([
   1.0, 1.0,     1.0, 1.0,
 ])
 
+function abbreviategltype(str:string){
+  switch(str){
+    case "float":
+      return "f"
+    case "int":
+      return "i"
+    default:
+      return "f"
+  }
+}
 
+
+
+export function handleUniform(gl:WebGL2RenderingContext, program:WebGLProgram, uniform:UniformInput){
+  let {
+    glslname,
+    vals,
+    type,
+  } = uniform
+
+  const size= vals.length
+  const typeAbbr = abbreviategltype(type)
+
+  let location = gl.getUniformLocation(program, glslname)
+  if (location === null) return
+
+  if(uniform.invert){
+    vals = vals.map(v=>v==0?0:1/v) as typeof vals
+  }
+
+  if(size === 1){
+    gl[`uniform${size}${typeAbbr}`](location, ...vals)
+  }else if(size === 2){
+    gl[`uniform${size}${typeAbbr}`](location, ...vals)
+  }else if(size === 3){
+    gl[`uniform${size}${typeAbbr}`](location, ...vals)
+  }else if(size === 4){
+    gl[`uniform${size}${typeAbbr}`](location, ...vals)
+  }
+}

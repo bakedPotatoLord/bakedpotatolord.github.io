@@ -1,2 +1,2 @@
 import * as firstTest from "./firstTest/shader"
-export default {firstTest}
+export default {WavyMountain:firstTest}

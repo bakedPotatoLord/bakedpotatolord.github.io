@@ -14,12 +14,9 @@ function getShader(){
 }
 
 
-
 const canvas = ref<HTMLCanvasElement | null>(null)
 const runShader = ref(true)
-
 let uniforms = ref<UniformInput[]>([])
-
 let gl: WebGL2RenderingContext|undefined|null;
 
 onMounted( () => {
@@ -49,7 +46,11 @@ function shaderSwitch(){
     //call new shader setup
     getShader().shaderSetup(gl)
     //reset uniforms
-    uniforms.value = getShader().defineUniforms();
+    uniforms.value = getShader().getDefaultUniforms();
+    //set uniforms
+    uniforms.value.forEach(uniform => {
+      getShader().setUniform(uniform)
+    });
   }
 }
 
@@ -67,12 +68,22 @@ function mainLoop() {
   if(runShader.value) requestAnimationFrame(mainLoop);
 }
 
+function validateUniformVals(uniform:UniformInput){
+  if(uniform.min !== undefined ){
+    uniform.vals = uniform.vals.map(v=>Math.max(uniform.min ?? -Infinity,v)) as typeof uniform.vals
+  }
+  if(uniform.max !== undefined ){
+    uniform.vals = uniform.vals.map(v=>Math.min(uniform.max ?? Infinity,v)) as typeof uniform.vals
+  }
+}
+
 </script>
 
 <template>
-<div class="choseShader">
-  <select name="shaders" id="" v-model="selectedShader">
-    <option :value="i" v-for="[k,i] of Object.keys(allShaders).map((k,i)=>[k,i])" v-bind:key="k">{{ k }}</option>
+<div class="chooseShader">
+  <label for="shaders">Chose shader: </label>
+  <select name="shaders" class="shaderSelect" v-model="selectedShader">
+    <option class="shaderOption" :value="i" v-for="[k,i] of Object.keys(allShaders).map((k,i)=>[k,i])" v-bind:key="k">{{ k }}</option>
   </select>
 </div>
 <div class="container" >
@@ -80,12 +91,49 @@ function mainLoop() {
 
 </div>
 <div class="uniforms">
+  <h2>Uniforms (Settings)</h2>
+  <div class="uniformInputs">
 
+    <div v-for="[i,uniform] of uniforms.entries()" class="uniform" :title="uniform.hint">
+      <label for="">{{ uniform.displayname }}</label>
+      <br>
+      <div class="inputs" >
+        <input 
+          v-for="defi in uniform.vals.keys()"
+          type="number"  
+          v-model="uniform.vals[defi]" 
+          @change="validateUniformVals(uniform);getShader().setUniform(uniform)"
+          :step="uniform.step"
+          :min="uniform.min"
+          :max="uniform.max"
+          :key="defi"
+        >
+      </div>
+  </div>
+  </div>
 </div>
 
 </template>
 
 <style scoped lang="scss">
+
+.chooseShader{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left:5%;
+  padding-right:5%;
+  label{
+    padding-right: 0.5rem;
+  }
+  .shaderSelect{
+    padding: 0.5rem;
+    border-radius: 1rem;
+    .shaderOption{
+      padding: 0.5rem;
+    }
+  }
+}
 
 .container{
   display: flex;
@@ -96,6 +144,30 @@ function mainLoop() {
     margin-bottom: 1rem;
 
     border: none;
+  }
+}
+
+.uniforms{
+  padding-left:5%;
+  padding-right:5%;
+  .uniformInputs{
+    display: flex ;
+    flex-direction: row;
+    gap:2rem;
+    flex-wrap: wrap;
+  }
+  .uniform{
+    margin-bottom: 1rem;
+    .inputs{
+      display:flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: left;
+      input{
+        margin-right: 0.5rem;
+        width:5rem
+      }
+    }
   }
 }
 </style>
