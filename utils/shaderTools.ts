@@ -1,4 +1,15 @@
 
+export interface UniformInput {
+  glslname:string
+  displayname:string
+  hint?: string
+  type: "float" | "int" | "uint"
+  vecsize?: 1 | 2 | 3 | 4
+  min?: number
+  max?: number
+  step?: number
+}
+
 export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string) {
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
   const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
@@ -44,3 +55,5 @@ export const fullScreenQuad = new Float32Array([
   -1.0, 1.0,     0.0, 1.0,
   1.0, 1.0,     1.0, 1.0,
 ])
+
+

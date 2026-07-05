@@ -1,6 +1,7 @@
 import vs from './triangle.vert.glsl?raw'
 import fs from './triangle.frag.glsl?raw'
 import imageurl from "~/assets/img/sunset.jpg?url"
+import {type UniformInput} from "~/utils/shaderTools"
 
 let gl: WebGL2RenderingContext;
 
@@ -14,25 +15,38 @@ let texture: WebGLTexture
 
 const startTime = Date.now()
 
+export function defineUniforms() : UniformInput[] {
+  
+  return [
+    {
+      glslname:"u_posFactor",
+      displayname:"position factor",
+      hint: "the width of the wave, higher numbers = larger columns",
+      type:"float",
+      vecsize:2,
+      step:undefined,
+    },
+    {
+      glslname:"u_amplitude",
+      displayname:"amplitude",
+      type:"float",
+      vecsize:2,
+      step:undefined,
+      min:0,
+    }
+  ]
+}
+
 export async function shaderSetup(glc: WebGL2RenderingContext) {
   gl = glc
   cw = gl.canvas.width
   ch = gl.canvas.height
 
-  console.log(cw, ch)
   gl.viewport(0,0,cw,ch)
 
   program = compileProgram(gl, vs, fs) ?? <never>null;
-
   
-  let pointArray = new Float32Array([
-
-    //position vex2, uv vec2
-    -1.0,-1.0,     0.0, 0.0,
-    1.0, -1.0,     1.0, 0.0,
-    -1.0, 1.0,     0.0, 1.0,
-    1.0, 1.0,     1.0, 1.0,
-  ])
+  let pointArray = fullScreenQuad
 
   pointsVAO = gl.createVertexArray() ?? <never>null;
   gl.bindVertexArray(pointsVAO);
@@ -63,8 +77,8 @@ export async function shaderSetup(glc: WebGL2RenderingContext) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
   
-  
 }
+
 
 export function shaderLoop() {
   // Shader code goes here
@@ -88,3 +102,8 @@ export function shaderLoop() {
   gl.bindVertexArray(null);
 }
 
+export function destroy() {
+  gl.deleteTexture(texture)
+  gl.deleteProgram(program)
+  gl.deleteVertexArray(pointsVAO)
+}

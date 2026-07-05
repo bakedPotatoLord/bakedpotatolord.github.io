@@ -1,12 +1,29 @@
 
 <script setup lang="ts">
-import { shaderLoop, shaderSetup } from '~/utils/shaders/firstTest/shader';
+
+
+
+const {default: allShaders} = (await import("~/utils/shaders"))
+
+
+let selectedShader= ref(0)
+let lastShader:null|number = null
+
+function getShader(){
+  return Object.values(allShaders)[selectedShader.value]
+}
+
+
 
 const canvas = ref<HTMLCanvasElement | null>(null)
 const runShader = ref(true)
 
+let uniforms = ref<UniformInput[]>([])
+
+let gl: WebGL2RenderingContext|undefined|null;
+
 onMounted( () => {
-  let gl = canvas.value?.getContext("webgl2",{ antialias: true })
+  gl = canvas.value?.getContext("webgl2",{ antialias: true })
 
   if(!gl){
     console.error("no gl context")
@@ -19,13 +36,22 @@ onMounted( () => {
 
   window.addEventListener("resize", resizeCanvas)
   
-  shaderSetup(gl)
+  shaderSwitch()
   mainLoop()
 })
 
 onUnmounted(()=>{
   window.removeEventListener("resize", resizeCanvas)
 })
+
+function shaderSwitch(){
+  if(gl){
+    //call new shader setup
+    getShader().shaderSetup(gl)
+    //reset uniforms
+    uniforms.value = getShader().defineUniforms();
+  }
+}
 
 function resizeCanvas() {
   if(canvas.value){
@@ -36,7 +62,7 @@ function resizeCanvas() {
 
 
 function mainLoop() {
-  shaderLoop()
+  getShader().shaderLoop()
 
   if(runShader.value) requestAnimationFrame(mainLoop);
 }
@@ -44,9 +70,16 @@ function mainLoop() {
 </script>
 
 <template>
-
+<div class="choseShader">
+  <select name="shaders" id="" v-model="selectedShader">
+    <option :value="i" v-for="[k,i] of Object.keys(allShaders).map((k,i)=>[k,i])" v-bind:key="k">{{ k }}</option>
+  </select>
+</div>
 <div class="container" >
   <canvas class="shaderCanvas" ref="canvas"></canvas>
+
+</div>
+<div class="uniforms">
 
 </div>
 
