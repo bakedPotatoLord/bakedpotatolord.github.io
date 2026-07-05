@@ -1,10 +1,15 @@
 
 <script setup lang="ts">
+import allShaders from "~/utils/shaders"
 
 
-
-const {default: allShaders} = (await import("~/utils/shaders"))
-
+useSeoMeta({
+  title: "Shader Playground",
+  description: "Shader Playground",
+  ogTitle: "Shader Playground",
+  ogDescription: "Shader Playground",
+  ogImage: "/images/shaderStill.png",
+})
 
 let selectedShader= ref(0)
 let lastShader:null|number = null
