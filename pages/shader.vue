@@ -59,6 +59,9 @@ function resizeCanvas() {
     canvas.value.width = window.innerWidth * 0.9
     canvas.value.height = window.innerWidth * 0.9
   }
+  if(gl){
+    gl.viewport(0,0,canvas.value?.width ?? 0,canvas.value?.height ?? 0)
+  }
 }
 
 
