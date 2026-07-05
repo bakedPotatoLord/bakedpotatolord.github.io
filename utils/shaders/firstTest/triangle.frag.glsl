@@ -18,7 +18,7 @@ float PI = radians(180.0);
 void main(){
 
   vec2 center = vec2(0.0);
-  vec2 myPos = gl_FragCoord.xy;
+  vec2 myPos = v_uv * 777.0;
   vec2 uv = v_uv;
 
   uv += (sin(myPos*u_posFactor+ (u_time*u_timeMultiplier)+ u_timeOffset)) * u_amplitude;
