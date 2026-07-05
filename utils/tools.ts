@@ -3,6 +3,8 @@ const toolLib : [string,string,string,string][] = [
   ["Vue", "/images/icons/vue.webp","Vue.js","https://vuejs.org/"],
   ["Nuxt", "/images/icons/nuxt-icon.svg","Nuxt.js","https://nuxt.com/"],
   ["TypeScript", "/images/icons/typescript.png","TypeScript","https://www.typescriptlang.org/"],
+  ["JavaScript", "/images/icons/javascript.png","JavaScript","https://developer.mozilla.org/en-US/docs/Web/JavaScript"],
+  ["NPM", "/images/icons/npm.png","NPM","https://www.npmjs.com/"],
   ["Vite", "/images/icons/vite.svg","Vite","https://vitejs.dev/"],
   ["Bun", "/images/icons/bun.png","Bun","https://bun.sh/"],
   ["Java", "/images/icons/java.png","Java","https://www.java.com/"],
@@ -16,9 +18,7 @@ const toolLib : [string,string,string,string][] = [
   ["Kicad", "/images/icons/kicad.png","KiCad","https://www.kicad.org/"],
 ] as const
 
-
 export type tool  = typeof toolLib[number][0]
-
 
 const toolMap = new Map<tool, string>(toolLib.map(tool => [tool[0] as tool,tool[1]]))
 const altMap = new Map<tool, string>(toolLib.map(tool => [tool[0],tool[2]]))
