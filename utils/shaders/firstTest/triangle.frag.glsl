@@ -21,7 +21,7 @@ void main(){
   vec2 myPos = v_uv * 777.0;
   vec2 uv = v_uv;
 
-  uv += (sin(myPos*u_posFactor+ (u_time*u_timeMultiplier)+ u_timeOffset)) * u_amplitude;
+  uv += (sin(mod(myPos*u_posFactor+ (u_time*u_timeMultiplier)+ u_timeOffset,2.0*PI))) * u_amplitude;
   
   fragColor = texture(u_texture, uv);
 }
