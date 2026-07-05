@@ -1,2 +1,3 @@
-import * as firstTest from "./firstTest/shader"
-export default {WavyMountain:firstTest}
+import * as WavyMountain from "./firstTest/shader"
+import * as Circles from "./circles/shader"
+export default {WavyMountain,Circles}
