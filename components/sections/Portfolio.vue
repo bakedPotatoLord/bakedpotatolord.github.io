@@ -7,7 +7,7 @@ import PortfolioCard from "~/components/PortfolioCard.vue";
     <SectionTitle title="Portfolio"/>
     <div class="cardHolder">
       <PortfolioCard 
-      projectName="CIMmer Down- Electric Longboard"
+      projectName="CIMmer Down - Electric Longboard"
       projectDescription="With funding from the Labriola Protofund, I lead a team to design and build a custom electric longboard featuring CAD-designed drivetrain components, urethane-cast wheels, embedded control electronics, and RF communication using extensive iterative prototyping"
       projectImage="/images/protofund_cover.png"
       :tools="['Onshape','GSheets','Milling','Electronics','Kicad']"
@@ -15,12 +15,12 @@ import PortfolioCard from "~/components/PortfolioCard.vue";
       projectGithub="https://github.com/bakedPotatoLord/CIMmerDown/"
       /> 
       <PortfolioCard 
-      projectName="Robo Lobo Bellos — Robotics Team Website"
-      projectDescription="I developed a website for my robotics team, the Robo-Lobo-Bellos. It increased awareness of our team, and attracted sponsors. I cooperated with teammates to acquire  media."
-      projectImage="/images/lobobellos.png"
-      :tools="['Nuxt', 'Vue', 'TypeScript', 'Bun']"
-      projectLink="https://lobobellos.github.io"
-      projectGithub="https://github.com/LoboBellos/lobobellos.github.io"
+      projectName="Helical Operation - Kiri:Moto CAM"
+      projectDescription="as part of an internship with Kiri:Moto, I developed the helical operation, a CAM tool for interior/exterior threadmilling, as well as cutting cylindrical faces and holes."
+      projectImage="/images/helical.png"
+      :tools="[ 'JavaScript', 'NPM', 'Milling','Onshape' ]"
+      projectLink="https://grid.space/kiri"
+      projectGithub="https://github.com/gridspace/grid-apps"
       /> 
       <PortfolioCard
       projectName="Jimmi - FIRST Competitive Robot"
