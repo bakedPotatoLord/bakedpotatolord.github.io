@@ -1,13 +1,11 @@
 #version 300 es
 precision mediump float;
 
-uniform sampler2D u_texture;
 uniform float u_time;
 
-uniform vec2 u_posFactor;
-uniform vec2 u_amplitude;
-uniform vec2 u_timeMultiplier;
-uniform vec2 u_timeOffset;
+uniform vec2 u_pointPos;
+uniform float u_pointSize;
+uniform vec4 u_pointColor;
 
 in vec2 v_uv;
 
@@ -16,12 +14,14 @@ out vec4 fragColor;
 float PI = radians(180.0);
 
 void main(){
+  vec2 dist = u_pointPos - v_uv;
 
-  vec2 center = vec2(0.0);
-  vec2 myPos = v_uv * 777.0;
-  vec2 uv = v_uv;
+  float distsq = dot(dist,dist);
 
-  uv += (sin(myPos*u_posFactor+ (u_time*u_timeMultiplier)+ u_timeOffset)) * u_amplitude;
+  if(distsq > u_pointSize *  u_pointSize){
+    discard;
+  }else{
+    fragColor = u_pointColor;
+  }
   
-  fragColor = texture(u_texture, uv);
 }

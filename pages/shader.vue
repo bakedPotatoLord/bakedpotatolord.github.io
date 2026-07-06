@@ -11,7 +11,7 @@ useSeoMeta({
   ogImage: "/images/shaderStill.png",
 })
 
-let selectedShader= ref(0)
+let selectedShader= ref(1)
 let lastShader:null|number = null
 
 function getShader(){
@@ -25,7 +25,7 @@ let uniforms = ref<UniformInput[]>([])
 let gl: WebGL2RenderingContext|undefined|null;
 
 onMounted( () => {
-  gl = canvas.value?.getContext("webgl2",{ antialias: true })
+  gl = canvas.value?.getContext("webgl2",{ antialias: true ,preserveDrawingBuffer: true})
 
   if(!gl){
     console.error("no gl context")
