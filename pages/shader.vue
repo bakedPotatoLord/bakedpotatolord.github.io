@@ -12,10 +12,17 @@ useSeoMeta({
 })
 
 let selectedShader= ref(1)
-let lastShader:null|number = null
+let lastShader:number|null = null
+
+let draw = ref(true)
 
 function getShader(){
   return Object.values(allShaders)[selectedShader.value]
+}
+
+function getLastShader(){
+  if(lastShader === null) return null as never
+  return Object.values(allShaders)[lastShader]
 }
 
 
@@ -56,6 +63,14 @@ function shaderSwitch(){
     uniforms.value.forEach(uniform => {
       getShader().setUniform(uniform)
     });
+
+    // if has last shader, delete it
+    if(lastShader !== null){
+      getLastShader().destroy()
+    }
+
+    //set last shader
+    lastShader = selectedShader.value
   }
 }
 
@@ -90,7 +105,7 @@ function validateUniformVals(uniform:UniformInput){
 <template>
 <div class="chooseShader">
   <label for="shaders">Chose shader: </label>
-  <select name="shaders" class="shaderSelect" v-model="selectedShader">
+  <select name="shaders" class="shaderSelect" v-model="selectedShader" @change="shaderSwitch">
     <option class="shaderOption" :value="i" v-for="[k,i] of Object.keys(allShaders).map((k,i)=>[k,i])" v-bind:key="k">{{ k }}</option>
   </select>
 </div>
