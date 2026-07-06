@@ -1,0 +1,40 @@
+
+.background {
+  background: none;
+  .divider {
+    position: relative;
+  }
+
+  .pagewrapper {
+    padding-top:3rem;
+  }
+}
+
+
+body {
+  background: rgb(27, 13, 37);
+  background: linear-gradient(-45deg,
+      rgb(27, 13, 37) 0%,
+      rgba(27, 13, 37  , 1) 100%);
+  margin: 0px;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 300;
+  color: #fff;
+}
+
+.content{
+  line-height: 180%;
+}
+
+a:-webkit-any-link{
+  color:white;
+  text-decoration: none;
+}
+
+.buttonStyle{
+  background-color: #39125c;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
