@@ -37,8 +37,9 @@ export async function shaderSetup(glc: WebGL2RenderingContext) {
   gl = glc
   cw = gl.canvas.width
   ch = gl.canvas.height
-
   gl.viewport(0,0,cw,ch)
+
+  circles = []
 
   pointProgram = compileProgram(gl, vs, fs) ?? <never>null;
   copyProgram = compileProgram(gl, copyvs, copyfs) ?? <never>null;
@@ -95,18 +96,20 @@ export function shaderLoop() {
 
   
   let time = (Date.now()- startTime)/1000;
-  let newCirc = new Circle(1.0, 1.0, false)
+  let newCirc = new Circle(1.0, 1.0, true)
   newCirc.findMaxRadius(circles)
   circles.push(newCirc)
   let {r, x, y} = newCirc
   
+  // const color:[number, number, number] = newCirc.surfaceColor ? [1.0, 1.0, 1.0] : [0.0, 0.0, 0.0]
+  const color:[number, number, number] = [Math.random(), Math.random(), Math.random()]
   
   gl.useProgram(pointProgram);
   //set uniforms
   gl.uniform1f(gl.getUniformLocation(pointProgram, "u_time"), time);
   gl.uniform2f(gl.getUniformLocation(pointProgram, "u_pointPos"), x,y);
   gl.uniform1f(gl.getUniformLocation(pointProgram, "u_pointSize"), r); // uv coordinates of the point
-  gl.uniform4f(gl.getUniformLocation(pointProgram, "u_pointColor"), 0.0, Math.random(), Math.random(), 1.0);
+  gl.uniform4f(gl.getUniformLocation(pointProgram, "u_pointColor"), ...color, 1.0);
   //draw to framebuffer
   gl.bindVertexArray(quadVAO);
   gl.bindFramebuffer(gl.FRAMEBUFFER, frameBuffer);
