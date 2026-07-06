@@ -30,8 +30,8 @@ defineProps<Props>()
       </div>
     </div>
     <div class="buttons">
-      <a v-if="projectLink !== undefined" :href="projectLink" target="_blank">Launch Project</a>
-      <a v-if="projectGithub !== undefined" :href="projectGithub" target="_blank">View on Github</a>
+      <a v-if="projectLink !== undefined" :href="projectLink" target="_blank" class="buttonStyle">Launch Project</a>
+      <a v-if="projectGithub !== undefined" :href="projectGithub" target="_blank" class="buttonStyle">View on Github</a>
     </div>
   </div>
 </div>
@@ -98,13 +98,6 @@ defineProps<Props>()
       display:flex;
       flex-direction: row;
       flex-wrap:wrap;
-      a{
-        background-color: #39125c;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 10px;
-        margin-right: 10px;
-      }
     }
   }
 }
