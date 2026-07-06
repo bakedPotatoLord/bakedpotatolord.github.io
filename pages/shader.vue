@@ -11,18 +11,21 @@ useSeoMeta({
   ogImage: "/images/shaderStill.png",
 })
 
-let selectedShader= ref(1)
-let lastShader:number|null = null
+let selectedShader= ref<keyof typeof allShaders>(Object.keys(allShaders)[0] as keyof typeof allShaders)
+let lastShader: keyof typeof allShaders|null = null
 
-let draw = ref(true)
+let {shader} = useRoute().query
+if(shader && typeof shader === "string" && shader in allShaders){
+  selectedShader.value = shader as keyof typeof allShaders
+}
 
 function getShader(){
-  return Object.values(allShaders)[selectedShader.value]
+  return allShaders[selectedShader.value]
 }
 
 function getLastShader(){
   if(lastShader === null) return null as never
-  return Object.values(allShaders)[lastShader]
+  return allShaders[lastShader]
 }
 
 
@@ -106,7 +109,7 @@ function validateUniformVals(uniform:UniformInput){
 <div class="chooseShader">
   <label for="shaders">Chose shader: </label>
   <select name="shaders" class="shaderSelect" v-model="selectedShader" @change="shaderSwitch">
-    <option class="shaderOption" :value="i" v-for="[k,i] of Object.keys(allShaders).map((k,i)=>[k,i])" v-bind:key="k">{{ k }}</option>
+    <option class="shaderOption" :value="k" v-for="k of Object.keys(allShaders)" v-bind:key="k">{{ k }}</option>
   </select>
 </div>
 <div class="container" >

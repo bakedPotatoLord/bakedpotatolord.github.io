@@ -11,6 +11,11 @@ export interface UniformInput {
   vals: [number] | [number,number] | [number,number,number] | [number,number,number,number]
 }
 
+export interface ShaderInfo {
+  description: string
+  image: string
+}
+
 export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string) {
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
   const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);

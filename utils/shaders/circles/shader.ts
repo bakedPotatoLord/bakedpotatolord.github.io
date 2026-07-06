@@ -104,3 +104,10 @@ export function destroy() {
   gl.deleteProgram(program)
   gl.deleteVertexArray(pointsVAO)
 }
+
+export function getInfo(): ShaderInfo{
+  return {
+    description:"A series of circles that appear inside of each other. this is originally from a scratch project from like 2016",
+    image:"/images/shaders/circles.png"
+  }
+}

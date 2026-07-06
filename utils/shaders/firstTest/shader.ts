@@ -1,7 +1,7 @@
 import vs from './triangle.vert.glsl?raw'
 import fs from './triangle.frag.glsl?raw'
 import imageurl from "~/assets/img/sunset.jpg?url"
-import {type UniformInput} from "~/utils/shaderTools"
+import {type ShaderInfo, type UniformInput} from "~/utils/shaderTools"
 
 let gl: WebGL2RenderingContext;
 
@@ -134,4 +134,11 @@ export function destroy() {
   gl.deleteTexture(texture)
   gl.deleteProgram(program)
   gl.deleteVertexArray(pointsVAO)
+}
+
+export function getInfo(): ShaderInfo{
+  return {
+    description:"A simple 2d wave effect applied to an image of a sunset over a mountain range in boulder",
+    image:"/images/shaders/wavyMountain.png"
+  }
 }
