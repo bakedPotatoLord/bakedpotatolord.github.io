@@ -15,8 +15,8 @@ function getShader(){
     <div class="description">
       <h2>{{ k }}</h2>
       <p>{{ v.description }}</p>
-      <a :href="`/shader?shader=${k}`">
-        <button class="buttonStyle">Launch</button>
+      <a :href="`/shader?shader=${k}`" class="buttonStyle">
+        Launch
       </a>
     </div>
     <div class="image">
