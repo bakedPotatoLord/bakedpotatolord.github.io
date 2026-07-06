@@ -18,17 +18,11 @@ useServerSeoMeta({
   ogTitle: 'BakedPotatoLord | Josiah Hamm',
   description: 'My portfolio and blog',
   ogDescription: 'My portfolio and blog',
-  ogUrl: 'https://bakedpotatolord.com',
-  ogImage: 'https://bakedpotatolord.com/images/bakedpotatolord.png',
-
+  ogUrl: 'https://www.potatolord.win',
+  ogImage: 'https://www.potatolord.win/images/bakedpotatolord.png',
 })
 
 useHead({
-  meta:[
-    {
-      name:"google-site-verification", content: "itA05HY6ZVwXH-Taj-j_DCaTOS9cFJ9ir12MKpaQbbk",
-    }
-  ],
   htmlAttrs: {
     lang: 'en',
   },
