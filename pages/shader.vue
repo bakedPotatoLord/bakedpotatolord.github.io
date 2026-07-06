@@ -35,7 +35,7 @@ let uniforms = ref<UniformInput[]>([])
 let gl: WebGL2RenderingContext|undefined|null;
 
 onMounted( () => {
-  gl = canvas.value?.getContext("webgl2",{ antialias: true ,preserveDrawingBuffer: true})
+  gl = canvas.value?.getContext("webgl2",{ antialias: true })
 
   if(!gl){
     console.error("no gl context")
@@ -114,7 +114,7 @@ function validateUniformVals(uniform:UniformInput){
 </div>
 <div class="container" >
   <canvas class="shaderCanvas" ref="canvas"></canvas>
-  <div class="uniforms">
+  <div class="uniforms" v-if="uniforms.length > 0">
     <h2>Uniforms (Settings)</h2>
     <div class="uniformInputs">
   
