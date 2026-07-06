@@ -35,6 +35,7 @@ function getShader(){
   flex-wrap: wrap;
   padding-left: 5%;
   padding-right: 5%;
+  padding-bottom: 3rem;
   gap:1rem;
   justify-content: center;
   .shaderCard{
