@@ -16,7 +16,7 @@ export interface ShaderInfo {
   image: string
 }
 
-export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string) {
+export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string, beforeLink?: (program:WebGLProgram) => void) {
   const vertexShader = gl.createShader(gl.VERTEX_SHADER);
   const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
   if (!vertexShader || !fragmentShader) return;
@@ -30,13 +30,14 @@ export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string
 
   gl.attachShader(shaderProgram, vertexShader);
   gl.attachShader(shaderProgram, fragmentShader);
+  beforeLink?.(shaderProgram)
   gl.linkProgram(shaderProgram);
 
   if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
 		console.log(gl.getShaderInfoLog(vertexShader));
 		console.log(gl.getShaderInfoLog(fragmentShader));
+    console.log(gl.getProgramInfoLog(shaderProgram));
 	}
-
 
   gl.useProgram(shaderProgram);
   return shaderProgram
