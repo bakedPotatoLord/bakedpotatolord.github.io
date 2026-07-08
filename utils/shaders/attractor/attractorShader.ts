@@ -25,7 +25,41 @@ const startTime = Date.now()
 const numPoints = 2**18;
 
 export function getDefaultUniforms() : UniformInput[] {
-  return [ ]
+  return [
+    {
+      glslname:"u_numPoints",
+      displayname:"Number of points",
+      hint:"https://en.wikipedia.org/wiki/Iterated_function_system",
+      type:"float",
+      step:1,
+      invert:false,
+      min:0,
+      max:100,
+      vals:[5],
+    },
+    {
+      glslname:"u_ratio",
+      displayname:"Ratio",
+      hint:"https://en.wikipedia.org/wiki/Iterated_function_system",
+      type:"float",
+      step:0.01,
+      invert:false,
+      min:0,
+      max:1,
+      vals:[0.5],
+    },
+    {
+      glslname:"u_scale",
+      displayname:"Viewport Scale",
+      hint:"changes how the points are mapped to the screen. does not affect the IFS",
+      type:"float",
+      step:0.01,
+      invert:false,
+      min:1e-10,
+      max:1e10,
+      vals:[1,1],
+    },
+   ]
 }
 
 export function setUniform(uniform: UniformInput) {
@@ -43,11 +77,10 @@ export async function shaderSetup(glc: WebGL2RenderingContext) {
     gl.transformFeedbackVaryings(p, [ 'v_position'], gl.INTERLEAVED_ATTRIBS);
   }) ?? <never>null;
 
-  let initData = new Float32Array(numPoints * 3)
-  for (let i = 0; i < numPoints; i+=3) {
+  let initData = new Float32Array(numPoints * 2)
+  for (let i = 0; i < numPoints; i+=2) {
     initData[i + 0] = Math.random() * 2 - 1
     initData[i + 1] = Math.random() * 2 - 1
-    initData[i + 2] = Math.random() * 2 - 1
   }
 
   
@@ -56,9 +89,9 @@ export async function shaderSetup(glc: WebGL2RenderingContext) {
   vao1 = gl.createVertexArray()?? null as never;
   gl.bindVertexArray(vao1);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer1);
-  gl.bufferData(gl.ARRAY_BUFFER, numPoints *3 * 4, gl.DYNAMIC_COPY);
+  gl.bufferData(gl.ARRAY_BUFFER, numPoints *2 * 4, gl.DYNAMIC_COPY);
   gl.bufferSubData(gl.ARRAY_BUFFER, 0, initData);
-  gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 12, 0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 8, 0);
   gl.enableVertexAttribArray(0);
 
   //and buffer 2
@@ -66,8 +99,8 @@ export async function shaderSetup(glc: WebGL2RenderingContext) {
   vao2 = gl.createVertexArray()?? null as never;
   gl.bindVertexArray(vao2);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer2);
-  gl.bufferData(gl.ARRAY_BUFFER, numPoints *3*4, gl.DYNAMIC_COPY);
-  gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 12, 0);
+  gl.bufferData(gl.ARRAY_BUFFER, numPoints *2*4, gl.DYNAMIC_COPY);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 8, 0);
   gl.enableVertexAttribArray(0);
 
   //clean up
@@ -88,17 +121,17 @@ export async function shaderSetup(glc: WebGL2RenderingContext) {
   buffer = buffer2
 }
 
+let frame =0;
 
-
-export function shaderLoop() {
-
+export async function shaderLoop() {
   
-  let time = (Date.now()- startTime)/1000;
   
   gl.useProgram(pointProgram);
   
   //set uniforms
-  gl.uniform1f(gl.getUniformLocation(pointProgram, "u_time"), time);
+  gl.uniform1f(gl.getUniformLocation(pointProgram, "u_frame"), frame);
+  frame++
+  frame %= Number.MAX_SAFE_INTEGER
 
   //draw points to screen
   gl.bindVertexArray(vao);
@@ -131,7 +164,7 @@ export function destroy() {
 
 export function getInfo(): ShaderInfo{
   return {
-    description:"A series of circles that appear inside of each other. this is originally from a scratch project from like 2016",
-    image:"/images/shaders/circles.png"
+    description:"generates geometric patterns using an iterated function system",
+    image:"/images/shaders/attractor.png"
   }
 }
