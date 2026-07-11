@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import allShaders from "~/utils/shaders"
+import * as allShaders from "~/utils/shaders"
 
 
 useSeoMeta({
