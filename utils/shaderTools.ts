@@ -34,8 +34,11 @@ export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string
   gl.linkProgram(shaderProgram);
 
   if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-		console.log(gl.getShaderInfoLog(vertexShader));
-		console.log(gl.getShaderInfoLog(fragmentShader));
+
+    let vlog = gl.getShaderInfoLog(vertexShader)
+		if (vlog) console.log("vert shader error?",vlog);
+    let flog = gl.getShaderInfoLog(fragmentShader)
+    if (flog) console.log("frag shader error?",flog);
     console.log(gl.getProgramInfoLog(shaderProgram));
 	}
 
