@@ -1,9 +1,27 @@
 <script setup lang="ts">
 import { Analytics } from '@vercel/analytics/nuxt'
+
+let timeout:NodeJS.Timeout;
+
+const displaySphere = ref(false)
+
+onMounted(() => {
+  timeout = setTimeout(() => {
+    displaySphere.value = true
+  },45_000)
+})
+
+onBeforeUnmount(() => {
+  clearTimeout(timeout)
+})
+
 </script>
 
 <template>
   <Analytics/>
+  <Transition>
+    <Globe v-if="displaySphere" />
+  </Transition>
   <section id="intro" role="region" aria-label="Intro">
     <NameBar/>
   </section>
@@ -22,6 +40,7 @@ import { Analytics } from '@vercel/analytics/nuxt'
   <section id="contact" role="region" aria-label="Contact">
     <Contact/>
   </section>
+
 </template>
 
 <style lang="scss" scoped>
@@ -30,4 +49,19 @@ import { Analytics } from '@vercel/analytics/nuxt'
   position: relative;
 }
 
+
+
+
+</style>
+
+<style>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
