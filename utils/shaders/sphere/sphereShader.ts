@@ -141,7 +141,7 @@ export function destroy() {
 
 export function getInfo(): ShaderInfo{
   return {
-    description:"A simple 2d wave effect applied to an image of a sunset over a mountain range in boulder",
-    image:"/images/shaders/wavyMountain.png"
+    description:"A cube normalized to a sphere, and then projected into clip space, with some squares removed",
+    image:"/images/shaders/sphere.png"
   }
 }
