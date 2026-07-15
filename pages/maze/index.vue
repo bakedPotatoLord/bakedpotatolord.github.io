@@ -18,6 +18,8 @@ const c= ref<HTMLCanvasElement|null>(null)
 const state = ref<string>("")
 const mazeOptions = ref<HTMLDivElement|null>(null)
 
+const router = useRouter();
+
 let mazeExists = false
 let ctx:CanvasRenderingContext2D;
 
@@ -45,17 +47,21 @@ async function doRealtimeGenerate(width: number, heigth: number, blockSize: numb
       
       const formattedPercent = (completion*100).toFixed(2)+'%';
       state.value = (workerState==='RDFS')?('RDFSing: '+formattedPercent):('drawing: '+formattedPercent)
-      if(done && c.value && ctx && imageData){
-        console.log("done",e.data);
+      if(done ){
+
+        if( !(mazeOptions.value && c.value && ctx && imageData)) return;
+        console.log("done",e.data,mazeOptions.value);
         work.terminate()
         mazeExists = true
+        mazeOptions.value.hidden = true
+
         state.value = 'done'
         c.value.width = width*blockSize
         c.value.height = heigth*blockSize
         console.log(c,width,blockSize)
         ctx.putImageData(imageData, 0, 0)
       }else{
-        console.log("broken internals",{canvas:c.value,ctx,imageData});
+        state.value = `${workerState}: ${formattedPercent}`
       };
     };
   };
@@ -102,18 +108,24 @@ function downloadMaze(e: Event) {
 
   <form @submit="handleSubmit">
     <table>
+      <tbody>
       <tr>
         <th><label for="width">Maze Width (Cells)</label></th>
         <th><input type="number" name="width" value="20" min="0"></th>
       </tr>
-      <tr>
-        <th><label for="heigth">Maze Height (Cells)</label></th>
-        <th><input type="number" name="heigth" value="20" min="0"></th>
-      </tr>
-      <tr>
-        <th><label for="cellSize">Cell Size</label></th>
-        <th><input type="number" name="cellSize" value="20" min="5"></th>
-      </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th><label for="heigth">Maze Height (Cells)</label></th>
+          <th><input type="number" name="heigth" value="20" min="0"></th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th><label for="cellSize">Cell Size</label></th>
+          <th><input type="number" name="cellSize" value="20" min="5"></th>
+        </tr>
+      </tbody>
     </table>
 
     <div class="options">
