@@ -109,7 +109,7 @@ async function draw() {
 function handleSubmit(e: Event) {
   e.preventDefault()
   state.value = 'Generating ...'
-  if (!canvas.value || size.value) return
+  if (!canvas.value || !size.value) return
   ch = canvas.value.height = cw = canvas.value.width = size.value * blockSize
   setup()
   draw()
@@ -120,10 +120,10 @@ function handleSubmit(e: Event) {
 <template>
   <a href="../">back home</a>
   <br>
-  <form @submit="handleSubmit">
+  <form>
     <label for="size">Maze Size</label>
     <input type="number" name="size" min="5" max="100" v-model="size">
-    <input type="submit" value="Generate Maze">
+    <input type="submit" value="Generate Maze" @click="handleSubmit">
   </form>
   <p>{{ state }}</p>
   <canvas ref="canvas"></canvas>
