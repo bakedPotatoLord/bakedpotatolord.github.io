@@ -251,5 +251,6 @@ form a{
 
 canvas{
   border:none;
+  max-width: 90vw;
 }
 </style>
