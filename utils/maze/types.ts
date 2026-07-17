@@ -10,5 +10,5 @@ export type workerResponse = {
   completion: number
   state: "RDFS" | "draw"
   done: boolean
-  imageData?: ImageData
+  lines:Float32Array
 }

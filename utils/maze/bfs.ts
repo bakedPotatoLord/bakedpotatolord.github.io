@@ -1,8 +1,9 @@
+import type { Vec2 } from './helpers'
 import Node from './Node'
 
-export default function bfs(start:Node,end:Node,nodes:Map<string,Node>,blockSize:number,traceRoutes?:boolean,ctx?:CanvasRenderingContext2D){
+export default function bfs(start:Node,end:Node,nodes:Map<string,Node>,blockSize:number,ctx?:CanvasRenderingContext2D){
   nodes.forEach(el=>el.visited = false)
-  let que: Node[] =[]
+  let que: Vec2[] =[]
   start.visited = true
   start.generation = 0
   que.push(start)
@@ -13,7 +14,7 @@ export default function bfs(start:Node,end:Node,nodes:Map<string,Node>,blockSize
       if(!child.visited){
         child.generation = v.generation+1
         child.parent = v
-        if(traceRoutes){
+        if(ctx){
           ctx.strokeStyle = 'brown'
           ctx.beginPath()
           child.drawLineTo(v,ctx)

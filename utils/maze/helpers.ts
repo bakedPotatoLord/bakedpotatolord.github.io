@@ -1,73 +1,67 @@
-export const TAU = 2* Math.PI
-import HexNode from "./HexNode"
-import Node, { type nodeHash } from "./Node"
-import TriNode from "./TriNode"
+export const TAU = 2 * Math.PI
 
-export function makeSquareNodeMap(cw:number,ch:number,blockSize:number){
-  return new Map(
-    Array((cw/blockSize)*(ch/blockSize)).fill(0).map((_el,i)=>{
-      return new Node(
-        (i%(cw/blockSize)*(blockSize))+(blockSize/2),
-        (Math.floor(i/(cw/blockSize))*(blockSize))+(blockSize/2)
-      )
-    })
-    .map(el=>[el.toHash(),el])
-  )
-}
+export class Vec2 extends Array<number> {
 
-export function makeHexNodeMap(cw:number, ch:number, blockSize:number) {
-  // Calculate the distance between the center of each hexagon
-  const xDistance = blockSize ;
-  const yDistance =  blockSize ;
-
-  const centers: HexNode[] = [];
-  for (let y = yDistance ; y< ch; y += yDistance) {
-
-    let x = (((y / yDistance) % 2 === 0) ? xDistance / 2 : 0) +blockSize/2
-    while (x < cw ) {
-      centers.push(new HexNode(x, y));
-      x += xDistance;
-    }
+  constructor(x: number, y: number) {
+    super(2)
+    this[0] = x
+    this[1] = y
   }
 
-  return new Map(
-    centers.map(el => [el.toHash(), el])
-  );
+  len() {
+    return Math.hypot(this[0], this[1])
+  }
+
+  clamp(min: number | Vec2, max: number | Vec2) {
+    if (typeof min === 'number') min = vec2(min)
+    if (typeof max === 'number') max = vec2(max)
+    this[0] = this[0] < min[0] ? min[0] : this[0] > max[0] ? max[0] : this[0]
+    this[1] = this[1] < min[1] ? min[1] : this[1] > max[1] ? max[1] : this[1]
+    return this
+  }
+
+  getNeigbors4() {
+    return [
+      vec2(this[0] + 1, this[1]),
+      vec2(this[0] - 1, this[1]),
+      vec2(this[0], this[1] + 1),
+      vec2(this[0], this[1] - 1),
+    ]
+  }
+
+  within(low: Vec2, high: Vec2) {
+    return this[0] >= low[0] && this[0] <= high[0] && this[1] >= low[1] && this[1] <= high[1]
+  }
+
+  strictWithin(low: Vec2, high: Vec2) {
+    return this[0] > low[0] && this[0] < high[0] && this[1] > low[1] && this[1] < high[1]
+  }
+
+  clone() {
+    return new Vec2(this[0], this[1])
+  }
 }
 
-export function makeTriNodeMap(cw:number, blockSize:number){
-  cw /= blockSize
-  
-  let nodes:TriNode[] =[]
-  Array(cw).fill(undefined).map((_el,x)=>
-    Array(cw).fill(undefined)
-    .filter((_el,y)=>{
-
-
-      return (
-        (y<=x) && 
-        (y<= (-x)+cw )
-      )
-    })
-    .map((_el,y)=>
-      nodes.push(
-        y %2 == 0 ?
-        new TriNode((x*blockSize)+(blockSize/2),(y*blockSize)+(blockSize/2))
-        :
-        new TriNode((x*blockSize)+(blockSize/2)-10,(y*blockSize)+(blockSize/2))
-        )
-    )
-)
-
-  return new Map(
-    nodes.map(n=>[n.toHash(),n])
-  )
+export function vec2(x: number, y?: number) {
+  if (y === undefined) return new Vec2(x, x)
+  return new Vec2(x, y)
 }
 
-export const getStartingNode = (map:Map<string,Node>)=>
-  (<[nodeHash,Node]>map.entries().next().value)[1]
+export class BitField {
+  data: Uint8Array;
+  constructor(size: number) {
+    this.data = new Uint8Array((size + 7) >> 3);
+  }
 
-//assumes length > 0
-export const getEndingNode = (map:Map<string,Node>) =>
-  Array.from(map.entries())
-  .pop()?.[1] as Node;
+  get(i: number) {
+    return (this.data[i >> 3] >> (i & 7)) & 1;
+  }
+
+  set(i: number) {
+    this.data[i >> 3] |= 1 << (i & 7);
+  }
+
+  clear(i: number) {
+    this.data[i >> 3] &= ~(1 << (i & 7));
+  }
+}

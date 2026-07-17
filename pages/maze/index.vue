@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { drawGL, setupGL } from "~/utils/maze/gl";
 import { type startData, type workerResponse } from "~/utils/maze/types"
 
 useHead({
@@ -16,54 +17,62 @@ let Worker: typeof import("~/utils/maze/workerGenerate?worker").default;
 const c= ref<HTMLCanvasElement|null>(null)
 
 const state = ref<string>("")
-const mazeOptions = ref<HTMLDivElement|null>(null)
+const showMazeOptions = ref<boolean>(false)
+const drawGLEnabled = ref<boolean>(false)
 
 const router = useRouter();
 
 let mazeExists = false
-let ctx:CanvasRenderingContext2D;
 
 onMounted(async () => {
   console.log(c.value)
-  ctx = c.value?.getContext("2d")?? null as never;
   
-  if(!ctx){
-    throw new Error("no context")
-  }
   if(process.client){
     //avoid on 
     Worker = (await import( "~/utils/maze/workerGenerate?worker")).default
   }
 
-  ctx.fillStyle = "black";
+    draw()
 });
+
+function draw(){
+  if(drawGLEnabled.value){
+    drawGL()
+  }
+  requestAnimationFrame(draw)
+}
 
 async function doRealtimeGenerate(width: number, heigth: number, blockSize: number, shape: number){
     const work = new Worker();
     work.postMessage(<startData>{width, heigth, blockSize, shape})
     
     work.onmessage = (e) => {
-      const {completion, state:workerState, done, imageData} = <workerResponse>e.data
+      const {completion, state:workerState, done, lines} = <workerResponse>e.data
       
       const formattedPercent = (completion*100).toFixed(2)+'%';
       state.value = (workerState==='RDFS')?('RDFSing: '+formattedPercent):('drawing: '+formattedPercent)
       if(done ){
-
-        if( !(mazeOptions.value && c.value && ctx && imageData)) return;
-        console.log("done",e.data,mazeOptions.value);
+        if( !(c.value && lines)) return;
         work.terminate()
         mazeExists = true
-        mazeOptions.value.hidden = true
+        showMazeOptions.value = true
 
         state.value = 'done'
         c.value.width = width*blockSize
         c.value.height = heigth*blockSize
         console.log(c,width,blockSize)
-        ctx.putImageData(imageData, 0, 0)
+        
+        setupGL(c.value,lines)
+        drawGLEnabled.value = true
+
       }else{
         state.value = `${workerState}: ${formattedPercent}`
       };
     };
+
+    work.onerror = (e) => {
+      console.log(e)
+    }
   };
 
 const handleSubmit = (e: Event) => {
@@ -140,7 +149,7 @@ function downloadMaze(e: Event) {
     </div>
 
   </form>
-  <div class="mazeOptions" ref="mazeOptions" hidden>
+  <div class="mazeOptions" v-if="showMazeOptions">
     <label for="showSolution">Show Solution</label>
     <input type="checkbox" name="showSolution" id="showSolution">
     <button @click="downloadMaze">Download Maze</button>

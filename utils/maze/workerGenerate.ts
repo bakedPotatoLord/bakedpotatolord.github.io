@@ -1,6 +1,5 @@
 import bfs from "./bfs"
-import { getEndingNode, getStartingNode, makeHexNodeMap, makeSquareNodeMap, makeTriNodeMap } from "./helpers"
-import Node from './Node'
+import { BitField, Vec2, vec2 } from "./helpers"
 import rdfs from "./rdfs"
 import type { startData, workerResponse } from "./types"
 
@@ -10,45 +9,32 @@ import type { startData, workerResponse } from "./types"
 onmessage = (e: MessageEvent<startData>) => {
   const { width, heigth, blockSize, shape } = e.data
 
-  realtimeGenerate(width, heigth, blockSize, shape)
+  try {
+    // Your worker logic that might throw an error
+    realtimeGenerate(vec2(width, heigth))
+  } catch (error:any) {
+    // Send the error message and stack trace back to the main thread
+    self.postMessage({
+      type: 'ERROR',
+      message: error.message,
+      stack: error.stack
+    });
+  }
 }
 
-async function realtimeGenerate(width: number, heigth: number, blockSizeP: number, shape: number) {
+async function realtimeGenerate(mazeSize:Vec2) {
+  const [numW, numH] = mazeSize
 
-  // declare graph algorithm vars
-  let nodes: Map<string, Node>
-  let startingNode: Node
-  let endingNode: Node
+  const horis = new Array(numH -1)
+  .fill(undefined)
+  .map((el, i) => new BitField(numW));
 
-  let imageData: ImageData
-  const c = new OffscreenCanvas(0, 0)
-  const ctx = <CanvasRenderingContext2D> <unknown>c.getContext('2d')
-
-  //set up
-  const numH = heigth
-  const numW = width
-  const blockSize = blockSizeP
-  let ch = c.height = heigth * blockSize
-  let cw = c.width = width * blockSize
-  if (shape == 4) {
-    nodes = makeSquareNodeMap(cw, ch, blockSize)
-  } else if (shape == 6) {
-    nodes = makeHexNodeMap(cw, ch, blockSize)
-    ch = c.height = (heigth) * blockSize * (Math.sqrt(3) / 2)
-  } else {
-    nodes = makeTriNodeMap(cw, blockSize)
-    ch = c.height = (heigth) * blockSize * (Math.sqrt(3) / 2)
-  }
-
-  //create start and end nodes
-  startingNode = getStartingNode(nodes)
-  startingNode.isStartingNode = true
-  endingNode = getEndingNode(nodes)
-  endingNode.isEndingNode = true
+  const vert = new Array(numW -1)
+  .fill(undefined)
+  .map((el, i) => new BitField(numH));
 
   //do the grunt work
-  for (const completion of rdfs(nodes, startingNode, blockSize)) {
-
+  for (const completion of rdfs(horis, vert, vec2(0, 0), vec2(numW - 1, numH - 1), mazeSize)) {
     postMessage(<workerResponse>{
       completion,
       state: 'RDFS',
@@ -56,101 +42,49 @@ async function realtimeGenerate(width: number, heigth: number, blockSizeP: numbe
     })
   }
 
-  //draw rect border
-  ctx.fillStyle = 'white'
-  ctx.clearRect(0, 0, cw, ch)
-  ctx.strokeStyle = 'black'
-  ctx.lineWidth = 2
-  ctx.fillRect(0, 0, cw, ch)
-  ctx.beginPath
-  ctx.rect(1, 1, cw - 1, ch - 1)
-  ctx.stroke()
-  //draw all node
-  let i = 0
-  const count = nodes.size
-  for (const node of nodes.values()) {
-    node.draw(ctx, blockSize)
-    i++;
 
-    postMessage(<workerResponse>{
-      completion: i / count,
-      state: 'draw',
-      done: false
-    })
-  }
-  //use breadth-first search because depth first will find "a" solutoion, but not "the" solutoin  
-  bfs(startingNode, endingNode, nodes, blockSize, false)
+ 
+  //use breadth-first search because depth first will find "a" solution, but not "the" solutoin  
+  // bfs(startingNode, endingNode, nodes, blockSize)
 
+  //flattened array of [x1,y1,x2,y2]
+  const lines:number[] = []
 
-  if (startingNode.type == 6) {
-    ctx.save()
-    drawHexBorder('x')
-    if (numH % 2 == 0) {
-      ctx.translate(0, (ch) - blockSize - 1)
-    } else {
-      ctx.translate(-blockSize / 2, (ch) - blockSize - 1)
+  // create array of lines, pass as float32Array to main thread
+  for(const [i,bField] of horis.entries()){
+    const yStart = 1/(numH-0) * i
+    const yEnd = 1/(numH-0) * (i+1)
+    for(let j = 0; j < numW;j++){
+      if(bField.get(j)){
+        const xVal = 1/numW * j
+        lines.push(xVal,yStart,xVal,yEnd)
+      }
     }
-    drawHexBorder('x', true)
-    ctx.restore()
-
-    ctx.save()
-    drawHexBorder('y')
-    ctx.translate(cw - blockSize, 0)
-    drawHexBorder('y', true)
-    ctx.restore()
   }
+
+  for(const [i,bField] of vert.entries()){
+    const xStart = 1/(numW-0) * i
+    const xEnd = 1/(numW-0) * (i+1)
+    for(let j = 0; j < numW;j++){
+      if(bField.get(j)){
+        const yVal = 1/numH * j
+        lines.push(xStart,yVal,xEnd,yVal)
+      }
+    }
+  }
+
+  console.log(lines)
+
+  const typedLines = new Float32Array(lines)
 
   postMessage(<workerResponse>{
     completion: 1,
     state: 'draw',
     done: true,
-    imageData: ctx.getImageData(0, 0, cw, ch)
+    lines: typedLines
   })
   return;
 
 
-  function drawHexBorder(axis: 'x' | 'y', flip?: boolean) {
-
-    let wallLength = (blockSize / 2) * (1 / Math.cos(Math.PI / 6))
-    let xDist = blockSize / 2
-    let yDist = blockSize / (2 * Math.sqrt(3))
-
-    let x = blockSize / 2
-    let y = blockSize / 4
-    ctx.beginPath()
-    ctx.moveTo(x, y)
-    if (axis == 'x') {
-      x = 0
-      y = blockSize / 2
-      ctx.moveTo(x, y)
-      let i = flip ? 1 : 0
-      while (x < cw + blockSize) {
-        ctx.lineTo(x, y)
-        x += xDist
-        y += (i % 2 == 0) ? -yDist : yDist
-        i++
-      }
-    } else {
-      let i = flip ? 2 : 0
-      while (y < ch - yDist * 4) {
-        if (i % 4 == 0) {
-          x += -xDist
-          y += yDist
-        } else if (i % 4 == 1) {
-          x += 0
-          y += wallLength
-        } else if (i % 4 == 2) {
-          x += xDist
-          y += yDist
-        } else if (i % 4 == 3) {
-          x += 0
-          y += wallLength
-        }
-        ctx.lineTo(x, y)
-        i++
-      }
-    }
-    ctx.stroke()
-  }
 }
 
