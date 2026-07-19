@@ -1,5 +1,4 @@
 import { BitField, vec2, Vec2 } from './helpers';
-import type Node from './Node';
 /**
  * @description randomized depth first search
  * @author Josiah Hamm / @bakedPotatoLord
@@ -12,7 +11,6 @@ export default  function* rdfs(horisontal:BitField[],vertical:BitField[],start:V
   horisontal.forEach(el=>el.data.fill(0xFF))
   vertical.forEach(el=>el.data.fill(0xFF))
 
-
   const visited = new BitField(numCells);
   let i = 0;
 
@@ -23,16 +21,15 @@ export default  function* rdfs(horisontal:BitField[],vertical:BitField[],start:V
   setVisited(start)
   let que = [start]
   while(que.length > 0){
-    i++
-    yield (i/numCells)
-    //pick from bottom of stack
-    let current = que.shift() as Vec2;
+    
+    //pick from top of stack
+    let current = que.pop() as Vec2;
     // 
     let unvisited = current
       .getNeigbors4()
       .filter(v=>v.within(vec2(0,0),vec2(mazeSize[0]-1,mazeSize[1]-1)) && !getVisited(v))
     // only add nodes to stack if they can grow
-    if(unvisited.length){ //type coersion go brrr
+    if(unvisited.length){
       // add current to top of stack
       que.push(current)
       // chose random Node from unvisited
@@ -58,9 +55,12 @@ export default  function* rdfs(horisontal:BitField[],vertical:BitField[],start:V
           vertical[chosen[0]].clear(current[1])
         }
       }
+
       setVisited(chosen)
-      // add chosen to the bottom of stack (This is the DEPTH FIRST part)
-      que.unshift(chosen)
+      i++
+      yield {completion:(i/numCells),cell:chosen}
+      // add chosen to the top of stack (This is the DEPTH FIRST part)
+      que.push(chosen)
     } 
   }
   return;
