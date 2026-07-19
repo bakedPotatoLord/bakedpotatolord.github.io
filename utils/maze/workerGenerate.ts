@@ -69,7 +69,6 @@ async function realtimeGenerate(mazeSize:Vec2) {
       cy = (cy + 0.5)* scale
       nx = (nx + 0.5)* scale
       ny = (ny + 0.5)* scale
-      lines.push(cx,cy,nx,ny)
       solution.set([cx,cy,nx,ny],i*4)
     }
   }else{
