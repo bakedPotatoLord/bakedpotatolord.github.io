@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { getEndingNode, getStartingNode, makeSquareNodeMap } from '~/utils/maze/helpers';
-import Node from '~/utils/maze/Node';
+import { drawGL, setGL, setupGL } from '~/utils/maze/gl';
+import { BitField, bitfieldsToLines, err, Vec2, vec2 } from '~/utils/maze/helpers';
+import rdfs from '~/utils/maze/rdfs';
+import type { StartData } from '~/utils/maze/types';
 
 useHead({
   title: 'Maze Creation Visualizer',
@@ -12,154 +14,119 @@ useHead({
   ]
 })
 
+const router = useRouter()
 
 const canvas = ref<HTMLCanvasElement | undefined>(undefined);
 const state = ref('')
-const size = ref(20)
 
-let cw = 200
-let ch = 200
-const blockSize = 20
 
 // initialize helper variables
-let form = ref<HTMLFormElement | null>(null)
-let nodes: Map<string, Node>
-let startingNode: Node
-let que: Node[] = []
-let drawingCompleted = true
+const mazeData = ref<StartData>({
+  width: 20,
+  height: 20,
+  blockSize: 20,
+  shape: 4
+})
 
-let ctx: CanvasRenderingContext2D
+let gl: WebGL2RenderingContext;
+let horis: BitField[];
+let vert: BitField[];
+let start: Vec2;
+let end: Vec2;
+let mazeSize: Vec2;
+let drawingCompleted = false;
 
 onMounted(() => {
   if (!canvas.value) return
-  ctx = canvas.value.getContext('2d') ?? null as never
-  canvas.value.width = cw
-  canvas.value.height = ch
-  console.log(ctx)
-
-  ctx.fillStyle = 'white'
-  ctx.fillRect(0, 0, cw, ch)
+  gl = canvas.value.getContext('webgl2') ?? err("no webgl2")
 
 })
 
-
-// create canvas vars
-
 function setup() {
-  nodes = makeSquareNodeMap(cw, ch, blockSize)
+  if(!canvas.value) return
+  const numW = mazeData.value.width;
+  const numH = mazeData.value.height;
+  mazeSize = vec2(numW, numH)
 
-  nodes.forEach(n => {
-    n.visited = false
-    n.wallsTo = n.getTouchingNodes(nodes, blockSize)
-  })
-  //get starting node
-  startingNode = getStartingNode(nodes)
-  startingNode.isStartingNode = true
-  //get ending node
-  getEndingNode(nodes).isEndingNode = true
-  //setup que
-  startingNode.visited = true
-  que = [startingNode]
+  canvas.value.width = numW * mazeData.value.blockSize;
+  canvas.value.height = numH * mazeData.value.blockSize;
+
+  start = vec2(0, 0);
+  end = vec2(numW-1, numH-1);
+
+  horis = new Array(numH-1)
+  .fill(undefined)
+  .map(() => new BitField(numW));
+
+  vert = new Array(numW-1)
+  .fill(undefined)
+  .map(() => new BitField(numH));
+  
 }
 
 async function draw() {
-  if (!que.length) throw new Error('que is empty');
-  let current = que.shift() as Node
-  let unvisited = current
-    .getTouchingNodes(nodes, blockSize)
-    .filter((el) => !el.visited)
-
-  if (unvisited.length > 0) {
-    que.push(current)
-    let chosen = unvisited[Math.floor(Math.random() * unvisited.length)];
-    current.wallsTo = current.wallsTo.filter((el) =>
-      el != chosen
-    )
-    chosen.wallsTo = chosen.wallsTo.filter((el) =>
-      el != current
-    )
-    chosen.visited = true
-    que.unshift(chosen)
-
-    ctx.clearRect(0, 0, cw, ch)
-    ctx.fillStyle = 'white'
-    ctx.fillRect(0, 0, cw, ch)
-
-    ctx.strokeStyle = 'red'
-    ctx.lineWidth = 4
-    ctx.beginPath()
-    ctx.moveTo(current.x, current.y)
-    ctx.lineTo(chosen.x, chosen.y)
-    ctx.stroke()
-
-    ctx.lineWidth = 0.5
-    nodes.forEach(n => n.draw(ctx, blockSize))
+  if(!canvas.value) return
+  for(let completion of rdfs(horis,vert,start,end,vec2(mazeData.value.width,mazeData.value.height))) {
+    
+  let lines = new Float32Array(bitfieldsToLines(horis,vert,mazeSize))
+    setupGL(canvas.value, lines, new Float32Array([]));
+    drawGL(false);
+    console.log("draw")
+    await new Promise(res => setTimeout(res, 5))
+    // requestAnimationFrame(draw)
   }
 
-  if (que.length > 0) {
-    await new Promise(res => setTimeout(res, 5))
-
-    draw()
-  } else {
     drawingCompleted = true
     state.value = 'Generation Complete'
-  }
 }
 
 function handleSubmit(e: Event) {
   e.preventDefault()
   state.value = 'Generating ...'
-  if (!canvas.value || !size.value) return
-  ch = canvas.value.height = cw = canvas.value.width = size.value * blockSize
+  if (!canvas.value ) return
+
+  setGL(canvas.value)
   setup()
-  draw()
+  requestAnimationFrame(draw)
 }
 </script>
 
 
 <template>
-  <a href="../">back home</a>
-  <br>
-  <form>
-    <label for="size">Maze Size</label>
-    <input type="number" name="size" min="5" max="100" v-model="size">
-    <input type="submit" value="Generate Maze" @click="handleSubmit">
-  </form>
-  <p>{{ state }}</p>
-  <canvas ref="canvas"></canvas>
-
+  <div class="container">
+    <a class="buttonStyle" @click="router.push('/maze') ">Back to Maze Generator</a>
+    <br>
+    <form @submit="handleSubmit">
+      <label for="size">Maze Size</label>
+      <input type="number" name="size" min="5" max="200" v-model="mazeData.width", @change="mazeData.height = mazeData.width">
+      <input type="submit" value="Generate Maze" >
+    </form>
+    <p>{{ state }}</p>
+    <canvas ref="canvas"></canvas>
+  </div>
 </template>
 
-
-
-<style>
+<style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
-body {
-  margin: 10px;
-  background-color: rgb(38, 38, 38);
-}
-
-p,
-input,
-label,
-button,
-a {
+* {
   font-family: 'Open Sans', sans-serif;
 
 }
 
+.container{
+  margin-left:5%;
+  margin-right: 5%;
 
-p,
-a,
-label {
-  color: wheat;
+  canvas{
+    max-width: 100%;
+  }
 }
 
 form {
   margin-bottom: 10px;
   margin-top: 10px;
-  background-color: rgb(81, 73, 83);
+  background-color: rgb(64,64,64);
   width: max-content;
   padding: 1%;
   border-radius: 5px;
