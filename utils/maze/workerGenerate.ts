@@ -1,5 +1,5 @@
 import bfs from "./bfs"
-import { BitField, Vec2, vec2 } from "./helpers"
+import { BitField, bitfieldsToLines, Vec2, vec2 } from "./helpers"
 import rdfs from "./rdfs"
 import type { StartData, WorkerResponse } from "./types"
 
@@ -37,7 +37,7 @@ async function realtimeGenerate(mazeSize:Vec2) {
   .map(() => new BitField(numH));
 
   //do the grunt work
-  for (const completion of rdfs(horis, vert, start, end, mazeSize)) {
+  for (const {completion} of rdfs(horis, vert, start, end, mazeSize)) {
     postMessage(<WorkerResponse>{
       completion,
       state: 'RDFS',
@@ -75,44 +75,8 @@ async function realtimeGenerate(mazeSize:Vec2) {
     solution = new Float32Array(0)
   }
 
-
   // create array of lines, pass as float32Array to main thread
-
-  //for horisontal, y is constant, x varies
-  for(const [i,bField] of horis.entries()){
-    //each value in the horis array is a horisontal row with a different y val
-    const yVal = 1/(numH) * (i+1)
-    for(let j = 0; j < numW;j++){
-      if(bField.get(j)){
-        const xStart = 1/(numW) * (j+0)
-        const xEnd = 1/(numW) * (j+1)
-        lines.push(xStart,yVal,xEnd,yVal)
-      }
-    }
-  }
-  
-  // //for vertical, x is constant, y varies
-  for(const [i,bField] of vert.entries()){
-    //each value in the vert array is a vertical row with a different x val
-    const xVal = 1/(numW) * (i+1)
-    for(let j = 0; j < numH;j++){
-      if(bField.get(j)){
-        const yStart = 1/(numH) * (j+0)
-        const yEnd = 1/(numH) * (j+1)
-        lines.push(xVal,yStart,xVal,yEnd)
-      }
-    }
-  }
-
-  //make a nice border
-  lines.push(0,0,0,1)
-  lines.push(1,0,1,1)
-  lines.push(0,0,1,0)
-  lines.push(0,1,1,1)
-
-  // console.log(lines)
-
-  const typedLines = new Float32Array(lines)
+  const typedLines = new Float32Array(bitfieldsToLines(horis,vert,mazeSize))
 
   postMessage(<WorkerResponse>{
     completion: 1,

@@ -1,5 +1,6 @@
 import vs from './shaders/line.vert.glsl?raw'
 import fs from './shaders/line.frag.glsl?raw'
+import { err } from './helpers'
 
 let gl: WebGL2RenderingContext
 
@@ -11,7 +12,7 @@ let solutionLength: number
 
 let uniforLoc: Record<string, WebGLUniformLocation> = {}
 
-export function setCanvas(canvas: HTMLCanvasElement) {
+export function setGL(canvas: HTMLCanvasElement) {
   gl = canvas.getContext('webgl2', {
     preserveDrawingBuffer: true
   }) ?? err("no webgl2")
@@ -56,9 +57,7 @@ export function setupGL(canvas: HTMLCanvasElement, lines: Float32Array, solution
   uniforLoc["u_color"] = gl.getUniformLocation(program, "u_color") ?? undefined as never
 }
 
-function err(s: string): never {
-  throw new Error(s)
-}
+
 
 
 export function drawGL(showSolution: boolean) {
