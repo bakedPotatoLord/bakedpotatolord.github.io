@@ -8,13 +8,13 @@ import type Node from './Node';
 export default  function* rdfs(horisontal:BitField[],vertical:BitField[],start:Vec2,end:Vec2,mazeSize:Vec2){
   const numCells = mazeSize[0] * mazeSize[1]
 
-  horisontal.forEach(el=>el.data.fill(255))
-  vertical.forEach(el=>el.data.fill(255))
+  //fill all bits with 1s , 0xFF = 255
+  horisontal.forEach(el=>el.data.fill(0xFF))
+  vertical.forEach(el=>el.data.fill(0xFF))
 
-  console.log(horisontal,vertical)
 
-  const visited = new BitField(numCells)
-  let i = 0
+  const visited = new BitField(numCells);
+  let i = 0;
 
   const setVisited = (v:Vec2) => { visited.set(v[0] + v[1] * mazeSize[0]) };
   const getVisited = (v:Vec2) =>  visited.get(v[0] + v[1] * mazeSize[0]) ;
@@ -37,8 +37,8 @@ export default  function* rdfs(horisontal:BitField[],vertical:BitField[],start:V
       que.push(current)
       // chose random Node from unvisited
       let chosen = unvisited[Math.floor(Math.random()*unvisited.length)];
-      // remove walls
 
+      // remove walls
       if(current[0] == chosen[0]){
         //same x, horisontal wall
         if(current[1] < chosen[1]){
@@ -58,14 +58,10 @@ export default  function* rdfs(horisontal:BitField[],vertical:BitField[],start:V
           vertical[chosen[0]].clear(current[1])
         }
       }
-      
-
       setVisited(chosen)
       // add chosen to the bottom of stack (This is the DEPTH FIRST part)
       que.unshift(chosen)
     } 
   }
-  console.log(horisontal,vertical)
-
   return;
 }

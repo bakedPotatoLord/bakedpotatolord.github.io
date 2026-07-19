@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { drawGL, setupGL } from "~/utils/maze/gl";
-import { type startData, type workerResponse } from "~/utils/maze/types"
+import { drawGL, setupGL, getMaxViewportDims, setCanvas } from "~/utils/maze/gl";
+import { type StartData, type WorkerResponse } from "~/utils/maze/types"
 
 useHead({
   title: 'maze solver',
@@ -12,6 +12,7 @@ useHead({
   ]
 })
 
+
 let Worker: typeof import("~/utils/maze/workerGenerate?worker").default;
 
 const c= ref<HTMLCanvasElement|null>(null)
@@ -20,34 +21,50 @@ const state = ref<string>("")
 const showMazeOptions = ref<boolean>(false)
 const drawGLEnabled = ref<boolean>(false)
 
+const mazeData = ref<StartData>({
+  width: 20,
+  height: 20,
+  blockSize: 20,
+  shape: 4
+})
+const lastMazeData: StartData = {
+  width: 20,
+  height: 20,
+  blockSize: 20,
+  shape: 4
+}
+
 const router = useRouter();
 
 let mazeExists = false
 
+let viewPortDims = {width: 0, height: 0}
+
 onMounted(async () => {
-  console.log(c.value)
-  
+
+  setCanvas(c.value!)
+  let dims = getMaxViewportDims()
+  console.log("max viewport dims:", dims)
+
+  viewPortDims.width = dims[0];
+  viewPortDims.height = dims[1];
+
   if(process.client){
-    //avoid on 
+    //avoid making webworker if in SSR mode
     Worker = (await import( "~/utils/maze/workerGenerate?worker")).default
   }
 
-    draw()
 });
 
-function draw(){
-  if(drawGLEnabled.value){
-    drawGL()
-  }
-  requestAnimationFrame(draw)
-}
 
-async function doRealtimeGenerate(width: number, heigth: number, blockSize: number, shape: number){
+
+async function doRealtimeGenerate(mazeData:StartData){
+  const {width, height, blockSize, shape} = mazeData
     const work = new Worker();
-    work.postMessage(<startData>{width, heigth, blockSize, shape})
+    work.postMessage({width, height, blockSize, shape})
     
     work.onmessage = (e) => {
-      const {completion, state:workerState, done, lines} = <workerResponse>e.data
+      const {completion, state:workerState, done, lines, solution} = e.data as WorkerResponse
       
       const formattedPercent = (completion*100).toFixed(2)+'%';
       state.value = (workerState==='RDFS')?('RDFSing: '+formattedPercent):('drawing: '+formattedPercent)
@@ -59,11 +76,10 @@ async function doRealtimeGenerate(width: number, heigth: number, blockSize: numb
 
         state.value = 'done'
         c.value.width = width*blockSize
-        c.value.height = heigth*blockSize
-        console.log(c,width,blockSize)
+        c.value.height = height*blockSize
         
-        setupGL(c.value,lines)
-        drawGLEnabled.value = true
+        setupGL(c.value,lines,solution)
+        drawGL()
 
       }else{
         state.value = `${workerState}: ${formattedPercent}`
@@ -82,10 +98,7 @@ const handleSubmit = (e: Event) => {
     requestAnimationFrame(() => {
       try {
         doRealtimeGenerate(
-          parseFloat(data.get('width')?.toString()?? '20'),
-          parseFloat(data.get('heigth')?.toString() ?? '20'),
-          parseFloat(data.get('cellSize')?.toString() ?? '10'),
-          parseFloat(data.get('shape')?.toString() ?? '0'),
+          mazeData.value
         )
       } catch (err:any) {
         if (err[0]) alert(err[1])
@@ -94,6 +107,18 @@ const handleSubmit = (e: Event) => {
       }
     })
   }
+
+function validateChange(){
+  let {width, height, blockSize} = mazeData.value
+  if(width*blockSize>viewPortDims.width || height*blockSize>viewPortDims.height){
+    alert('maze too big for your renderer')
+    mazeData.value = lastMazeData
+  }else{
+    lastMazeData.width = width
+    lastMazeData.height = height
+    lastMazeData.blockSize = blockSize
+  }
+}
 
         
 //form submission button
@@ -120,19 +145,19 @@ function downloadMaze(e: Event) {
       <tbody>
       <tr>
         <th><label for="width">Maze Width (Cells)</label></th>
-        <th><input type="number" name="width" value="20" min="0"></th>
+        <th><input type="number" name="width"  min="0" v-model="mazeData.width" @input="validateChange"></th>
       </tr>
       </tbody>
       <tbody>
         <tr>
           <th><label for="heigth">Maze Height (Cells)</label></th>
-          <th><input type="number" name="heigth" value="20" min="0"></th>
+          <th><input type="number" name="heigth"  min="0" v-model="mazeData.height" @input="validateChange"></th>
         </tr>
       </tbody>
       <tbody>
         <tr>
           <th><label for="cellSize">Cell Size</label></th>
-          <th><input type="number" name="cellSize" value="20" min="5"></th>
+          <th><input type="number" name="cellSize"  min="5" v-model="mazeData.blockSize" @input="validateChange"></th>
         </tr>
       </tbody>
     </table>
@@ -140,7 +165,7 @@ function downloadMaze(e: Event) {
     <div class="options">
       <a href="./visualize/">Visualize Maze Generation</a><br>
       <label for="shape">Cell Shape</label>
-      <select name="shape" id="">
+      <select name="shape" id="" v-model="mazeData.shape" @input="validateChange">
         <option value="4" selected>Square</option>
         <option value="6">Hexagon</option>
         <!--  <option value="3">Triangle</option> -->

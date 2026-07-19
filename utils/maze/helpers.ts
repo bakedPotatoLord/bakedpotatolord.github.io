@@ -40,6 +40,10 @@ export class Vec2 extends Array<number> {
   clone() {
     return new Vec2(this[0], this[1])
   }
+
+  equals(other: Vec2) {
+    return this[0] === other[0] && this[1] === other[1]
+  }
 }
 
 export function vec2(x: number, y?: number) {
