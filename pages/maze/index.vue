@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { drawGL, setupGL, getMaxViewportDims, setCanvas } from "~/utils/maze/gl";
+import { drawGL, setupGL, getMaxViewportDims, setGL } from "~/utils/maze/gl";
 import { type StartData, type WorkerResponse } from "~/utils/maze/types"
 
 useHead({
@@ -37,8 +37,8 @@ let mazeExists = false
 let viewPortDims = { width: 0, height: 0 }
 
 onMounted(async () => {
-
-  setCanvas(c.value!)
+  if(!c.value) throw new Error("no canvas")
+  setGL(c.value)
   let dims = getMaxViewportDims()
   console.log("max viewport dims:", dims)
 
