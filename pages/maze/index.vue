@@ -37,7 +37,7 @@ let mazeExists = false
 let viewPortDims = { width: 0, height: 0 }
 
 onMounted(async () => {
-  if(!c.value) throw new Error("no canvas")
+  if (!c.value) throw new Error("no canvas")
   setGL(c.value)
   let dims = getMaxViewportDims()
   console.log("max viewport dims:", dims)
@@ -85,9 +85,8 @@ async function doRealtimeGenerate(mazeData: StartData) {
   }
 };
 
-const handleSubmit = (e: Event) => {
+const handleGenerate = (e: Event) => {
   e.preventDefault()
-  let data = (new FormData(<HTMLFormElement>e.target))
   state.value = 'generating ...'
   requestAnimationFrame(() => {
     try {
@@ -132,7 +131,7 @@ function downloadMaze(e: Event) {
 </script>
 
 <template>
-  <form @submit="handleSubmit" class="inputForm">
+  <div class="inputs">
     <table>
       <tbody>
         <tr>
@@ -152,25 +151,31 @@ function downloadMaze(e: Event) {
           <th><input type="number" name="cellSize" min="5" v-model="mazeData.blockSize" @input="validateChange"></th>
         </tr>
       </tbody>
+      <tbody>
+        <tr>
+          <th><label for="shape">Cell Shape</label></th>
+          <th>
+            <select name="shape" id="" v-model="mazeData.shape" @input="validateChange">
+              <option value="4" selected>Square</option>
+              <option value="6">Hexagon</option>
+              <!--  <option value="3">Triangle</option> -->
+            </select>
+          </th>
+        </tr>
+      </tbody>
     </table>
     <div class="options">
-      <a class="visLink buttonStyle" @click="router.push('/maze/visualize')">Visualize Maze Generation</a><br>
-      <label for="shape">Cell Shape</label>
-      <select name="shape" id="" v-model="mazeData.shape" @input="validateChange">
-        <option value="4" selected>Square</option>
-        <option value="6">Hexagon</option>
-        <!--  <option value="3">Triangle</option> -->
-      </select>
-      <input  class = "buttonStyle" type="submit" value="Generate Maze">
+      <button class="visLink mazeButtonStyle" @click="router.push('/maze/visualize')">Visualize Maze Generation</button>
+      <button class="mazeButtonStyle" @click="handleGenerate">Generate Maze</button>
     </div>
-  </form>
+  </div>
   <div class="mazeOptions" v-if="showMazeOptions">
     <label for="showSolution">Show Solution</label>
     <input type="checkbox" name="showSolution" id="showSolution" v-model="showSolution" @change="drawGL(showSolution)">
-    <button @click="downloadMaze">Download Maze</button>
+    <button @click="downloadMaze" class="mazeButtonStyle">Download Maze</button>
   </div>
   <div class="stateContainer">
-    <p id="state">{{ state ?? "" }}</p>
+    <p id="state">{{ state }}</p>
   </div>
   <div class="canvases">
     <canvas ref="c"></canvas>
@@ -184,7 +189,7 @@ function downloadMaze(e: Event) {
   font-family: 'Open Sans', sans-serif;
 }
 
-.inputForm {
+.inputs {
   background-color: rgb(64, 61, 64);
   border-radius: 20px;
   text-align: center;
@@ -193,6 +198,7 @@ function downloadMaze(e: Event) {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
+
   table {
     padding: 5%;
     margin-left: auto;
@@ -202,21 +208,20 @@ function downloadMaze(e: Event) {
       label {
         font-weight: bold;
       }
+      input,
+      select {
+        border: 2px groove rgb(118, 118, 118);
+        border-radius: 0.4rem;
+        background-color: grey;
+        color: whitesmoke;
+        font-weight: bold;
+      }
     }
   }
 }
 
-input,
-select {
-  border: 2px groove rgb(118, 118, 118);
-  border-radius: 0.4rem;
-  background-color: grey;
-  color: whitesmoke;
-  font-weight: bold;
-}
-
 .mazeOptions {
-  background-color: rgb(64, 61, 64);
+  background-color: rgb(64, 64, 64);
   border-radius: 20px;
   text-align: center;
   padding-bottom: 1%;
@@ -226,27 +231,12 @@ select {
   margin-right: auto;
   margin-top: 10px;
   color: whitesmoke;
-  .visLink {
-   margin-bottom: 10rem;
-  }
-}
 
-input[type=submit],
-.mazeOptions button,
-.visLink {
-  border: none;
-  padding: 4px;
-  border-radius: 4px;
-  margin: 5px;
-  background-color: rgb(35, 37, 41);
-  color: aliceblue;
-  font-weight: bold;
-  transition: ease-in-out;
-  transition-duration: 250ms;
 }
 
 .stateContainer {
   text-align: center;
+
   #state {
     font-size: small;
   }
@@ -254,10 +244,10 @@ input[type=submit],
 
 .canvases {
   text-align: center;
+
   canvas {
     border: none;
     max-width: 90vw;
   }
 }
-
 </style>
