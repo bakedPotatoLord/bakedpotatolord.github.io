@@ -43,6 +43,7 @@ export default defineNuxtConfig({
   sitemap: {
     strictNuxtContentPaths: true,
     excludeAppSources: true,
+    xsl: false,
     sitemaps:{
       pages: {
         urls: ['/','/blog',],
