@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     for (const post of posts) {
         feed.item({
             title: post.title ?? '-',
-            url: `${siteUrl}/${post.titleUrl}`,
+            url: `${siteUrl}/blog/${post.titleUrl}`,
             date: new Date(post.datePublished),
             description: post.description,
             author: post.author ?? "Josiah Hamm",
