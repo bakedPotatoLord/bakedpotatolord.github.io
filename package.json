@@ -13,6 +13,7 @@
     "@nuxt/image": "^2.0.0",
     "@nuxtjs/sitemap": "^7.6.0",
     "@types/node": "^18.17.0",
+    "@types/rss": "^0.0.32",
     "@types/three": "^0.154.0",
     "nuxt": "^3.6.5",
     "three": "^0.154.0"
@@ -28,6 +29,7 @@
     "ipx": "^3.1.1",
     "rehype-katex": "7.0.0",
     "remark-math": "latest",
+    "rss": "^1.2.2",
     "sass": "^1.64.1"
   },
   "overrides": {},

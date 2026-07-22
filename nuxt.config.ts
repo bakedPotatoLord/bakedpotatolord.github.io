@@ -1,7 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ["@nuxt/image", "@nuxtjs/sitemap",'@nuxt/content',],
+  modules: [
+    "@nuxt/image", 
+    "@nuxtjs/sitemap",
+    '@nuxt/content',
+  ],
 
   components: {
     global: true,
@@ -19,7 +23,11 @@ export default defineNuxtConfig({
       cssMinify: true,
     },
   },
-  appConfig: {
+
+  runtimeConfig:{
+    public: {
+      siteUrl: 'https://www.potatolord.win',
+    }
   },
 
   vue: {
@@ -28,7 +36,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: 'https://bakedpotatolord.vercel.app',
+    url: 'www.potatolord.win',
     name: 'BakedPotatoLord'
   },
   
@@ -79,6 +87,12 @@ export default defineNuxtConfig({
     '/': { ssr: true, sitemap: { lastmod: new Date("8-18-2024")} },
     "/blog/**/*": { ssr: false },
     "/blog": { ssr: false, sitemap: { lastmod: new Date("8-18-2024")} },
+  },
+
+  nitro: {
+    prerender: {
+      routes: ['/rss.xml']
+    },
   },
 
   compatibilityDate: '2024-07-04'
