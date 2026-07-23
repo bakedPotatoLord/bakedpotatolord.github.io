@@ -2,6 +2,7 @@
 
 interface Props {
   title?: string
+  justify?: string
 }
 
 defineProps<Props>();
@@ -10,7 +11,7 @@ defineProps<Props>();
 
 
 <template>
-  <div class="secTitleWrapper">
+  <div :class="`secTitleWrapper justify-${justify ? justify : 'left'}`">
     <h2 class="sectionTitle">{{ title }}</h2>
   </div>
 </template>
@@ -19,7 +20,7 @@ defineProps<Props>();
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 .secTitleWrapper{
-justify-content: left;
+  display: flex;
   .sectionTitle {
     padding: 0.5rem;
     margin:0;
@@ -31,5 +32,15 @@ justify-content: left;
       text-shadow: white 0px 0px 10px;
     }
   }
+}
+.justify-center {
+  justify-content: center;
+}
+
+.justify-left{  
+  justify-content: left;
+}
+.justify-right{
+  justify-content: right;
 }
 </style>
