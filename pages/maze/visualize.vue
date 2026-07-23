@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { drawGL, setGL, setupGL, setupLinesGL } from '~/utils/maze/gl';
+import { drawGL, setGL, setupGL, setupLinesGL, setupPointsGL } from '~/utils/maze/gl';
 import { BitField, bitfieldsToLines, err, Vec2, vec2 } from '~/utils/maze/helpers';
 import rdfs from '~/utils/maze/rdfs';
 import type { StartData } from '~/utils/maze/types';
@@ -23,12 +23,16 @@ let activelyDrawing = false
 
 
 // initialize helper variables
-const mazeData = ref<StartData>({
+const mazeData:StartData ={
   width: 20,
   height: 20,
   blockSize: 20,
-  shape: 4
-})
+  shape: 4,
+  bgColor: "#FFFFFF",
+  fgColor: "#000000",
+  solnColor: "#FF0000",
+  drawEnds: true,
+}
 
 let horis: BitField[];
 let vert: BitField[];
@@ -44,12 +48,12 @@ onMounted(() => {
 
 function setup() {
   if(!canvas.value) return
-  const { width:numW, height:numH, blockSize } = mazeData.value
+  const { width:numW, height:numH, blockSize } = mazeData
   mazeSize = vec2(numW, numH)
   viewPort = vec2(numW * blockSize, numH * blockSize)
 
-  canvas.value.width = numW * mazeData.value.blockSize;
-  canvas.value.height = numH * mazeData.value.blockSize;
+  canvas.value.width = numW * mazeData.blockSize;
+  canvas.value.height = numH * mazeData.blockSize;
 
   start = vec2(0, 0);
   end = vec2(numW-1, numH-1);
@@ -66,11 +70,15 @@ function setup() {
 
 async function draw() {
   if(!canvas.value) return
-  for(let {cell} of rdfs(horis,vert,start,end,vec2(mazeData.value.width,mazeData.value.height))) {
+  for(let {cell} of rdfs(horis,vert,start,end,vec2(mazeData.width,mazeData.height))) {
     let lines = new Float32Array(bitfieldsToLines(horis,vert,mazeSize))
+    const px = (cell[0]+0.5) / mazeData.width
+    const py = (cell[1]+0.5) / mazeData.height
+    const point = new Float32Array([px, py, 0, 1, 0])
     setupGL(viewPort);
     setupLinesGL(lines)
-    drawGL(false,false);
+    setupPointsGL(point, mazeData.blockSize-2)
+    drawGL(false, mazeData);
     await new Promise(res => setTimeout(res, slowdown.value))
   }
 
