@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import SectionTitle from "~/components/SectionTitle.vue";
 import allShaders from "~/utils/shaders"
 
 
@@ -7,9 +8,24 @@ function getShader(){
   .map(([k,v])=>[k,v.getInfo()] as [string,ShaderInfo]);
 }
 
+useSeoMeta({
+  title: "Shader Portfolio",
+  description: "A portfolio of computer generated graphics written by Josiah Hamm",
+  ogTitle: "Shader Playground",
+  ogDescription: "A portfolio of computer generated graphics written by Josiah Hamm",
+  ogImage: "/images/shaders/attractor.png",
+  
+})
+
 </script>
 
 <template>
+<div class="header">
+  <SectionTitle title="Shaders"  justify="center"/>
+  <p class="description">Beginning in the summer of 2026, I began developing a portfolio of shaders, designed to demonstrate my competency with graphics programming,
+    and hopefully land me a job developing graphics for EDM concerts. These programs are displayed in order of their creation, and include both 2d and 3d graphics.  
+  </p>
+</div>
 <div class="cardContainer">
   <div class="shaderCard" v-for="[k,v] of getShader()" :key="k">
     <div class="description">
@@ -28,7 +44,24 @@ function getShader(){
 
 </template>
 
-<style>
+<style lang="scss" scoped>
+.header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 3rem;
+  gap:1rem;
+  text-align: center;
+
+  .description{
+    max-width: 30rem;
+    
+  }
+}
+
 .cardContainer{
   display: flex;
   flex-direction: row;
