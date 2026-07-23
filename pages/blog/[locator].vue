@@ -23,6 +23,7 @@ useSeoMeta({
   ogTitle: computed(() => content.value?.title),
   ogImage: computed(() => content.value?.coverImg),
   ogDescription: computed(() => content.value?.description),
+  ogType:"article",
 })
 
 </script>
