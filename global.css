@@ -38,3 +38,15 @@ a:-webkit-any-link{
   border-radius: 10px;
   margin-right: 10px;
 }
+
+.mazeButtonStyle {
+  border: none;
+  padding: 4px;
+  border-radius: 4px;
+  margin: 5px;
+  background-color: rgb(35, 37, 41);
+  color: aliceblue;
+  font-weight: bold;
+  transition: ease-in-out;
+  transition-duration: 250ms;
+}

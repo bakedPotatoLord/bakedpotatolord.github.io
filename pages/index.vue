@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { Analytics } from '@vercel/analytics/nuxt'
 
-let timeout:NodeJS.Timeout;
+let timeout: NodeJS.Timeout;
 
 const displaySphere = ref(false)
 
 onMounted(() => {
   timeout = setTimeout(() => {
     displaySphere.value = true
-  },45_000)
+  }, 45_000)
 })
 
 onBeforeUnmount(() => {
@@ -18,12 +18,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <Analytics/>
+  <Analytics />
   <Transition>
     <Globe v-if="displaySphere" />
   </Transition>
   <section id="intro" role="region" aria-label="Intro">
-    <NameBar/>
+    <NameBar />
   </section>
   <DiagonalDivider id="diagonalDivider" />
   <section id="about" role="region" aria-label="About">
@@ -38,20 +38,14 @@ onBeforeUnmount(() => {
     <Blog />
   </section>
   <section id="contact" role="region" aria-label="Contact">
-    <Contact/>
+    <Contact />
   </section>
-
 </template>
 
 <style lang="scss" scoped>
-
 #diagonalDivider {
   position: relative;
 }
-
-
-
-
 </style>
 
 <style>
