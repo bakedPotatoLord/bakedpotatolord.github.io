@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { drawGL, setupGL, getMaxViewportDims, setGL } from "~/utils/maze/gl";
+import { drawGL, setupGL, getMaxViewportDims, setGL, setupLinesGL, setupSolutionGL, setupPointsGL } from "~/utils/maze/gl";
+import { vec2 } from "~/utils/maze/helpers";
 import { type StartData, type WorkerResponse } from "~/utils/maze/types"
 
 useHead({
@@ -22,14 +23,14 @@ const mazeData = ref<StartData>({
   width: 20,
   height: 20,
   blockSize: 20,
-  shape: 4
+  shape: 4,
+  bgColor: "#FFFFFF",
+  fgColor: "#000000",
+  solnColor: "#FF0000",
+  drawEnds: true,
+
 })
-const lastMazeData: StartData = {
-  width: 20,
-  height: 20,
-  blockSize: 20,
-  shape: 4
-}
+const lastMazeData: StartData = Object.assign({}, mazeData.value)
 
 const router = useRouter();
 
@@ -40,7 +41,6 @@ onMounted(async () => {
   if (!c.value) throw new Error("no canvas")
   setGL(c.value)
   let dims = getMaxViewportDims()
-  console.log("max viewport dims:", dims)
 
   viewPortDims.width = dims[0];
   viewPortDims.height = dims[1];
@@ -54,6 +54,15 @@ onMounted(async () => {
 
 async function doRealtimeGenerate(mazeData: StartData) {
   const { width, height, blockSize, shape } = mazeData
+  const viewport = vec2(width * blockSize, height * blockSize)
+
+  const px =(1/width)*0.5
+  const py =(1/height)*0.5
+  const points = new Float32Array([
+    //x, y, r,g,b
+    px,py,0,1,0,
+    1-px,1-py, 1,0,0,
+  ])
   const work = new Worker();
   work.postMessage({ width, height, blockSize, shape })
 
@@ -72,8 +81,11 @@ async function doRealtimeGenerate(mazeData: StartData) {
       c.value.width = width * blockSize
       c.value.height = height * blockSize
 
-      setupGL(c.value, lines, solution)
-      drawGL(showSolution.value)
+      setupGL(viewport);
+      setupLinesGL(lines);
+      setupSolutionGL(solution);
+      setupPointsGL(points,blockSize-2);
+      drawGL(showSolution.value,true)
 
     } else {
       state.value = `${workerState}: ${formattedPercent}`
@@ -131,7 +143,11 @@ function downloadMaze(e: Event) {
 </script>
 
 <template>
+  <div class="title">
+    <SectionTitle title="Maze Generator" justify="center"/>
+  </div>
   <div class="inputs">
+    <h2 class="optionsTitle">Maze Options</h2>
     <table>
       <tbody>
         <tr>
@@ -153,11 +169,29 @@ function downloadMaze(e: Event) {
       </tbody>
       <tbody>
         <tr>
+          <th><label for="bgColor">Background Color</label></th>
+          <th><input type="color" name="bgColor"  v-model="mazeData.bgColor" @input="validateChange"></th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th><label for="fgColor">Line Color</label></th>
+          <th><input type="color" name="fgColor"  v-model="mazeData.fgColor" @input="validateChange"></th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th><label for="solnColor">Solution Color</label></th>
+          <th><input type="color" name="solnColor"  v-model="mazeData.solnColor" @input="validateChange"></th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
           <th><label for="shape">Cell Shape</label></th>
           <th>
             <select name="shape" id="" v-model="mazeData.shape" @input="validateChange">
               <option value="4" selected>Square</option>
-              <option value="6">Hexagon</option>
+              <!-- <option value="6">Hexagon</option> -->
               <!--  <option value="3">Triangle</option> -->
             </select>
           </th>
@@ -165,13 +199,13 @@ function downloadMaze(e: Event) {
       </tbody>
     </table>
     <div class="options">
-      <button class="visLink mazeButtonStyle" @click="router.push('/maze/visualize')">Visualize Maze Generation</button>
       <button class="mazeButtonStyle" @click="handleGenerate">Generate Maze</button>
+      <button class="visLink mazeButtonStyle" @click="router.push('/maze/visualize')">Visualize Maze Generation</button>
     </div>
   </div>
   <div class="mazeOptions" v-if="showMazeOptions">
     <label for="showSolution">Show Solution</label>
-    <input type="checkbox" name="showSolution" id="showSolution" v-model="showSolution" @change="drawGL(showSolution)">
+    <input type="checkbox" name="showSolution" id="showSolution" v-model="showSolution" @change="drawGL(showSolution,true)">
     <button @click="downloadMaze" class="mazeButtonStyle">Download Maze</button>
   </div>
   <div class="stateContainer">
@@ -199,8 +233,12 @@ function downloadMaze(e: Event) {
   margin-right: auto;
   margin-top: 10px;
 
+  .optionsTitle {
+    margin: 0px;
+  }
+
   table {
-    padding: 5%;
+    padding: 1rem;
     margin-left: auto;
     margin-right: auto;
     th {

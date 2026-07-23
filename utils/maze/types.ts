@@ -4,6 +4,10 @@ export type StartData = {
   height: number
   blockSize: number
   shape: number
+  bgColor: string
+  fgColor: string
+  solnColor: string
+  drawEnds: boolean
 }
 
 export type WorkerResponse = {
