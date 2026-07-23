@@ -14,12 +14,17 @@
 import "./global.css";
 
 useServerSeoMeta({
-  title: 'BakedPotatoLord | Josiah Hamm',
-  ogTitle: 'BakedPotatoLord | Josiah Hamm',
+  title: 'PotatoLord | Josiah Hamm',
+  ogTitle: 'PotatoLord | Josiah Hamm',
   description: 'My portfolio and blog',
   ogDescription: 'My portfolio and blog',
   ogUrl: 'https://www.potatolord.win',
   ogImage: 'https://www.potatolord.win/images/bakedpotatolord.png',
+  author: 'Josiah Hamm',
+  robots: {
+    all: true
+  },
+  ogType: "website",
 })
 
 useHead({
