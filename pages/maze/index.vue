@@ -35,6 +35,7 @@ const lastMazeData: StartData = Object.assign({}, mazeData.value)
 const router = useRouter();
 
 let mazeExists = false
+let generating = false
 let viewPortDims = { width: 0, height: 0 }
 
 onMounted(async () => {
@@ -53,6 +54,8 @@ onMounted(async () => {
 });
 
 async function doRealtimeGenerate(mazeData: StartData) {
+  if(generating) return
+  generating = true
   const { width, height, blockSize, shape } = mazeData
   const viewport = vec2(width * blockSize, height * blockSize)
 
@@ -85,7 +88,9 @@ async function doRealtimeGenerate(mazeData: StartData) {
       setupLinesGL(lines);
       setupSolutionGL(solution);
       setupPointsGL(points,blockSize-2);
-      drawGL(showSolution.value,true)
+      drawGL(showSolution.value,mazeData)
+
+      generating = false
 
     } else {
       state.value = `${workerState}: ${formattedPercent}`
@@ -94,6 +99,7 @@ async function doRealtimeGenerate(mazeData: StartData) {
 
   work.onerror = (e) => {
     console.log(e)
+    generating = false;
   }
 };
 
@@ -187,6 +193,12 @@ function downloadMaze(e: Event) {
       </tbody>
       <tbody>
         <tr>
+          <th><label for="drawEnds">Draw Maze Ends</label></th>
+          <th><input type="checkbox" name="solnColor"  v-model="mazeData.drawEnds" @input="validateChange"></th>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
           <th><label for="shape">Cell Shape</label></th>
           <th>
             <select name="shape" id="" v-model="mazeData.shape" @input="validateChange">
@@ -205,7 +217,7 @@ function downloadMaze(e: Event) {
   </div>
   <div class="mazeOptions" v-if="showMazeOptions">
     <label for="showSolution">Show Solution</label>
-    <input type="checkbox" name="showSolution" id="showSolution" v-model="showSolution" @change="drawGL(showSolution,true)">
+    <input type="checkbox" name="showSolution" id="showSolution" v-model="showSolution" @change="drawGL(showSolution, mazeData)">
     <button @click="downloadMaze" class="mazeButtonStyle">Download Maze</button>
   </div>
   <div class="stateContainer">

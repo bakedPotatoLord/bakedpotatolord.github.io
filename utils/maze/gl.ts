@@ -2,7 +2,8 @@ import linesvs from './shaders/line.vert.glsl?raw'
 import linesfs from './shaders/line.frag.glsl?raw'
 import pointsvs from './shaders/point.vert.glsl?raw'
 import pointsfs from './shaders/point.frag.glsl?raw'
-import { err, makeQuad, Vec2 } from './helpers'
+import { err, makeQuad, parsehex, parsehexFloat, Vec2 } from './helpers'
+import type { StartData } from './types'
 
 let gl: WebGL2RenderingContext
 let linesProgram: WebGLProgram
@@ -30,20 +31,16 @@ export function getMaxViewportDims() {
 }
 
 export function setupGL(viewport:Vec2) {
+  //set viewport and compile programs
   gl.viewport(0, 0, viewport[0], viewport[1])
   linesProgram = compileProgram(gl, linesvs, linesfs) ?? err("no lines program")
-  
-
   pointsProgram = compileProgram(gl, pointsvs, pointsfs) ?? err("no points program")
   
-
+  //setup uniforms for both programs
   gl.useProgram(linesProgram)
-
   uniforLoc["u_color"] = gl.getUniformLocation(linesProgram, "u_color") ?? undefined as never
-
   gl.useProgram(pointsProgram)
   uniforLoc["u_pointSize"] = gl.getUniformLocation(pointsProgram, "u_pointSize") ?? undefined as never
-
 }
 
 export function setupLinesGL(lines: Float32Array) {
@@ -83,7 +80,6 @@ export function setupPointsGL(points: Float32Array, pointS: number) {
   pointsLength = points.length / 5
   pointSize = pointS;
 
-  console.log({points})
   const pointsBuffer = gl.createBuffer() ?? err("no buffer")
   gl.bindBuffer(gl.ARRAY_BUFFER, pointsBuffer)
   gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW)
@@ -98,28 +94,32 @@ export function setupPointsGL(points: Float32Array, pointS: number) {
   gl.bindBuffer(gl.ARRAY_BUFFER, null)
   gl.bindVertexArray(null)
 
-  console.log("setup points")
-  
-
 }
 
-export function drawGL(showSolution: boolean,showPoints: boolean) {
-  gl.clearColor(1.0, 1.0, 1.0, 1.0)
+export function drawGL(showSolution: boolean, mazeData:StartData) {
+  
+  //set up maze colors
+  const {fgColor, bgColor, solnColor, drawEnds} = mazeData
+
+  const fg = parsehexFloat(fgColor)
+  const bg = parsehexFloat(bgColor)
+  const soln = parsehexFloat(solnColor)
+
+  gl.clearColor(bg[0], bg[1], bg[2], 1.0)
   gl.clear(gl.COLOR_BUFFER_BIT)
 
   gl.useProgram(linesProgram)
-  gl.uniform4f(uniforLoc.u_color, 0.0, 0.0, 0.0, 1.0)
+  gl.uniform4f(uniforLoc.u_color, ...fg, 1.0)
   gl.bindVertexArray(linesVAO)
   gl.drawArrays(gl.LINES, 0, linesLength * 0.5)
 
   if (showSolution) {
-    gl.uniform4f(uniforLoc.u_color, 1.0, 0.5, 0.5, 1.0)
+    gl.uniform4f(uniforLoc.u_color, ...soln, 1.0)
     gl.bindVertexArray(solutionVAO)
     gl.drawArrays(gl.LINES, 0, solutionLength * 0.5)
   }
 
-  if(showPoints) {
-    console.log("draw points")
+  if(drawEnds) {
     gl.useProgram(pointsProgram);
     //pass uniform
     gl.uniform1f(uniforLoc.u_pointSize, pointSize ?? 20.0);
