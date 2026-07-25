@@ -150,81 +150,87 @@ function downloadMaze(e: Event) {
 
 <template>
   <div class="title">
-    <SectionTitle title="Maze Generator" justify="center"/>
+    <SectionTitle title="Maze Generator" justify="left"/>
+    <a class="buttonStyle" @click="router.push('/maze') ">Visualize Maze Generator</a>
   </div>
-  <div class="inputs">
-    <h2 class="optionsTitle">Maze Options</h2>
-    <table>
-      <tbody>
-        <tr>
-          <th><label for="width">Maze Width (Cells)</label></th>
-          <th><input type="number" name="width" min="0" v-model="mazeData.width" @input="validateChange"></th>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <th><label for="heigth">Maze Height (Cells)</label></th>
-          <th><input type="number" name="heigth" min="0" v-model="mazeData.height" @input="validateChange"></th>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <th><label for="cellSize">Cell Size</label></th>
-          <th><input type="number" name="cellSize" min="5" v-model="mazeData.blockSize" @input="validateChange"></th>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <th><label for="bgColor">Background Color</label></th>
-          <th><input type="color" name="bgColor"  v-model="mazeData.bgColor" @input="validateChange"></th>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <th><label for="fgColor">Line Color</label></th>
-          <th><input type="color" name="fgColor"  v-model="mazeData.fgColor" @input="validateChange"></th>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <th><label for="solnColor">Solution Color</label></th>
-          <th><input type="color" name="solnColor"  v-model="mazeData.solnColor" @input="validateChange"></th>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <th><label for="drawEnds">Draw Maze Ends</label></th>
-          <th><input type="checkbox" name="solnColor"  v-model="mazeData.drawEnds" @input="validateChange"></th>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <th><label for="shape">Cell Shape</label></th>
-          <th>
-            <select name="shape" id="" v-model="mazeData.shape" @input="validateChange">
-              <option value="4" selected>Square</option>
-              <!-- <option value="6">Hexagon</option> -->
-              <!--  <option value="3">Triangle</option> -->
-            </select>
-          </th>
-        </tr>
-      </tbody>
-    </table>
-    <div class="options">
-      <button class="mazeButtonStyle" @click="handleGenerate">Generate Maze</button>
-      <button class="visLink mazeButtonStyle" @click="router.push('/maze/visualize')">Visualize Maze Generation</button>
+  <div class="container">
+    <div class="fullInput">
+      <div class="inputs">
+        <h2 class="optionsTitle">Maze Options</h2>
+        <table>
+          <tbody>
+            <tr>
+              <th><label for="width">Maze Width (Cells)</label></th>
+              <th><input type="number" name="width" min="0" v-model="mazeData.width" @input="validateChange"></th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th><label for="heigth">Maze Height (Cells)</label></th>
+              <th><input type="number" name="heigth" min="0" v-model="mazeData.height" @input="validateChange"></th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th><label for="cellSize">Cell Size</label></th>
+              <th><input type="number" name="cellSize" min="5" v-model="mazeData.blockSize" @input="validateChange"></th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th><label for="bgColor">Background Color</label></th>
+              <th><input type="color" name="bgColor"  v-model="mazeData.bgColor" @input="validateChange"></th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th><label for="fgColor">Line Color</label></th>
+              <th><input type="color" name="fgColor"  v-model="mazeData.fgColor" @input="validateChange"></th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th><label for="solnColor">Solution Color</label></th>
+              <th><input type="color" name="solnColor"  v-model="mazeData.solnColor" @input="validateChange"></th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th><label for="drawEnds">Draw Maze Ends</label></th>
+              <th><input type="checkbox" name="solnColor"  v-model="mazeData.drawEnds" @input="validateChange"></th>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th><label for="shape">Cell Shape</label></th>
+              <th>
+                <select name="shape" id="" v-model="mazeData.shape" @input="validateChange">
+                  <option value="4" selected>Square</option>
+                  <!-- <option value="6">Hexagon</option> -->
+                  <!--  <option value="3">Triangle</option> -->
+                </select>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <div class="options">
+          <button class="mazeButtonStyle" @click="handleGenerate">Generate Maze</button>
+        </div>
+      </div>
+
+      <div class="mazeOptions" v-if="showMazeOptions">
+        <label for="showSolution">Show Solution</label>
+        <input type="checkbox" name="showSolution" id="showSolution" v-model="showSolution" @change="drawGL(showSolution, mazeData)">
+        <button @click="downloadMaze" class="mazeButtonStyle">Download Maze</button>
+      </div>
+      <div class="stateContainer">
+        <p id="state">{{ state }}</p>
+      </div>
+
     </div>
-  </div>
-  <div class="mazeOptions" v-if="showMazeOptions">
-    <label for="showSolution">Show Solution</label>
-    <input type="checkbox" name="showSolution" id="showSolution" v-model="showSolution" @change="drawGL(showSolution, mazeData)">
-    <button @click="downloadMaze" class="mazeButtonStyle">Download Maze</button>
-  </div>
-  <div class="stateContainer">
-    <p id="state">{{ state }}</p>
-  </div>
-  <div class="canvases">
-    <canvas ref="c"></canvas>
+    <div class="canvases">
+      <canvas ref="c"></canvas>
+    </div>
   </div>
 </template>
 
@@ -235,69 +241,88 @@ function downloadMaze(e: Event) {
   font-family: 'Open Sans', sans-serif;
 }
 
-.inputs {
-  background-color: rgb(64, 61, 64);
-  border-radius: 20px;
-  text-align: center;
-  padding-bottom: 2%;
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-
-  .optionsTitle {
-    margin: 0px;
+.title{
+  padding-left:5%;
+  a{
+    margin-left:0.5rem;
   }
+}
 
-  table {
-    padding: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    th {
-      text-align: left;
-      label {
-        font-weight: bold;
+.container{
+  padding-left: 5%;
+  padding-right:5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:2rem;
+  flex-wrap: wrap;
+  .fullInput{
+    .inputs {
+      background-color: rgb(64, 61, 64);
+      border-radius: 20px;
+      text-align: center;
+      padding-bottom: 2%;
+      width:min(90vw, 18rem);
+
+      margin-top: 10px;
+    
+      .optionsTitle {
+        margin: 0px;
       }
-      input,
-      select {
-        border: 2px groove rgb(118, 118, 118);
-        border-radius: 0.4rem;
-        background-color: grey;
-        color: whitesmoke;
-        font-weight: bold;
+    
+      table {
+        padding: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        th {
+          text-align: left;
+          label {
+            font-weight: bold;
+          }
+          input,
+          select {
+            border: 2px groove rgb(118, 118, 118);
+            border-radius: 0.4rem;
+            background-color: grey;
+            color: whitesmoke;
+            font-weight: bold;
+          }
+        }
       }
+    }
+    .mazeOptions {
+      background-color: rgb(64, 64, 64);
+      border-radius: 20px;
+      text-align: center;
+      padding-bottom: 1%;
+      padding-top: 1%;
+      width: 75%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+      color: whitesmoke;
+    
+    }
+    .stateContainer {
+      text-align: center;
+    
+      #state {
+        font-size: small;
+      }
+    }
+
+  }
+  .canvases {
+    text-align: center;
+  
+    canvas {
+      border: none;
+      max-width: 90vw;
     }
   }
 }
 
-.mazeOptions {
-  background-color: rgb(64, 64, 64);
-  border-radius: 20px;
-  text-align: center;
-  padding-bottom: 1%;
-  padding-top: 1%;
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  color: whitesmoke;
 
-}
 
-.stateContainer {
-  text-align: center;
 
-  #state {
-    font-size: small;
-  }
-}
-
-.canvases {
-  text-align: center;
-
-  canvas {
-    border: none;
-    max-width: 90vw;
-  }
-}
 </style>
