@@ -18,8 +18,8 @@ onMounted(() => {
   }
 
   let width = window.innerWidth * 0.1;
-  gl.canvas.width = width;
-  gl.canvas.height = width;
+  canvas.value.width = width;
+  canvas.value.height = width;
 
   window.addEventListener("resize", resizeCanvas)
   globeShader.shaderSetup(gl)
@@ -32,8 +32,8 @@ onUnmounted(() => {
 
 function resizeCanvas() {
   if (canvas.value) {
-    canvas.value.width = window.innerWidth * 0.9
-    canvas.value.height = window.innerWidth * 0.9
+    canvas.value.width = window.innerWidth * 0.1
+    canvas.value.height = window.innerWidth * 0.1
   }
   if (gl) {
     gl.viewport(0, 0, canvas.value?.width ?? 0, canvas.value?.height ?? 0)
