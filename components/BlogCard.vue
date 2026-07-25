@@ -27,7 +27,7 @@ defineProps<BlogCard>()
 .blogItem {
   max-width: 600px;
   min-width: 200px;
-  width:31rem;
+  width:min( 90vw, 31rem);
   background-color: rgb(64, 61, 64);
   border-radius: 10px;
   padding: 2%;

@@ -14,10 +14,8 @@ const { data: content, status } = useAsyncData(async () =>
 
     <div class="blogItems" v-if="status === 'success'">
       <div v-for="post of content" class="blogItemOuter">
-        <a :href="'/blog/' + post.titleUrl">
           <BlogCard :title="post.title" :image="post.coverImg" :imageAlt="post.coverImgAlt"
-            :description="post.description" />
-        </a>
+            :description="post.description"  @click="$router.push('/blog/' + post.titleUrl)" class="blogItem"/>
       </div>
     </div>
     <div class="container">
@@ -41,12 +39,19 @@ const { data: content, status } = useAsyncData(async () =>
   }
 
   .blogItems {
+    align-self: center;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px , 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(90vw, 500px) , 1fr));
     gap:1rem;
-
+    
     .blogItemOuter {
+      display:flex;
+      justify-content: center;
       min-width: 200px;
+
+      .blogItem{
+        cursor: pointer;
+      }
     }
   }
 
