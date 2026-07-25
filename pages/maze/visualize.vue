@@ -21,6 +21,8 @@ const slowdown = ref(5);
 const state = ref('')
 let activelyDrawing = false
 
+let shouldKill = false
+
 
 // initialize helper variables
 const mazeData:StartData ={
@@ -43,7 +45,11 @@ let viewPort: Vec2;
 
 onMounted(() => {
   if (!canvas.value) return
+  shouldKill = false
+})
 
+onUnmounted(() => {
+  shouldKill = true
 })
 
 function setup() {
@@ -71,6 +77,7 @@ function setup() {
 async function draw() {
   if(!canvas.value) return
   for(let {cell} of rdfs(horis,vert,start,end,vec2(mazeData.width,mazeData.height))) {
+    if(shouldKill) return
     let lines = new Float32Array(bitfieldsToLines(horis,vert,mazeSize))
     const px = (cell[0]+0.5) / mazeData.width
     const py = (cell[1]+0.5) / mazeData.height
@@ -102,6 +109,7 @@ function handleSubmit(e: Event) {
 
 <template>
   <div class="container">
+    <SectionTitle title="Maze Visualizer" justify="center"/>
     <a class="buttonStyle" @click="router.push('/maze') ">Back to Maze Generator</a>
     <br>
     <div class="inputs">
