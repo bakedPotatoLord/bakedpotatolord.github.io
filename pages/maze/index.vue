@@ -37,6 +37,7 @@ const router = useRouter();
 let mazeExists = false
 let generating = false
 let viewPortDims = { width: 0, height: 0 }
+let activeWorker: Worker|undefined
 
 onMounted(async () => {
   if (!c.value) throw new Error("no canvas")
@@ -53,6 +54,10 @@ onMounted(async () => {
 
 });
 
+onUnmounted(() => {
+  activeWorker?.terminate()
+})
+
 async function doRealtimeGenerate(mazeData: StartData) {
   if(generating) return
   generating = true
@@ -66,17 +71,17 @@ async function doRealtimeGenerate(mazeData: StartData) {
     px,py,0,1,0,
     1-px,1-py, 1,0,0,
   ])
-  const work = new Worker();
-  work.postMessage({ width, height, blockSize, shape })
+  activeWorker = new Worker();
+  activeWorker.postMessage(<StartData>{...mazeData});
 
-  work.onmessage = (e) => {
+  activeWorker.onmessage = (e) => {
     const { completion, state: workerState, done, lines, solution } = e.data as WorkerResponse
 
     const formattedPercent = (completion * 100).toFixed(2) + '%';
     state.value = (workerState === 'RDFS') ? ('RDFSing: ' + formattedPercent) : ('drawing: ' + formattedPercent)
     if (done) {
       if (!(c.value && lines)) return;
-      work.terminate()
+      activeWorker?.terminate()
       mazeExists = true
       showMazeOptions.value = true
 
@@ -97,7 +102,7 @@ async function doRealtimeGenerate(mazeData: StartData) {
     };
   };
 
-  work.onerror = (e) => {
+  activeWorker.onerror = (e) => {
     console.log(e)
     generating = false;
   }
