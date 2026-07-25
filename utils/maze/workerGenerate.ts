@@ -3,12 +3,8 @@ import { BitField, bitfieldsToLines, Vec2, vec2 } from "./helpers"
 import rdfs from "./rdfs"
 import type { StartData, WorkerResponse } from "./types"
 
-
-
-
 onmessage = (e: MessageEvent<StartData>) => {
   const { width, height, blockSize, shape } = e.data
-
   try {
     // Your worker logic that might throw an error
     realtimeGenerate(vec2(width, height))
@@ -44,13 +40,9 @@ async function realtimeGenerate(mazeSize:Vec2) {
       done: false
     })
   }
+  const lines = new Float32Array(bitfieldsToLines(horis,vert,mazeSize))
 
-
-  //flattened array of [x1,y1,x2,y2]
-  const lines:number[] = []
-  let solution:Float32Array;
- 
-  //use breadth-first search because depth first will find "a" solution, but not "the" solutoin  
+  //use breadth-first search because depth first will find "a" solution, but not "the" solution  
   let out = bfs(horis,vert,start,end,mazeSize,(completion) => {
     postMessage(<WorkerResponse>{
       completion,
@@ -58,17 +50,19 @@ async function realtimeGenerate(mazeSize:Vec2) {
       done: false
     })
   })
-
+  
+  let solution:Float32Array;
   if(out){
-    let scale = 1/(numW)
+    let scaleW = 1/(numW)
+    let scaleH = 1/(numH)
     solution= new Float32Array((out.length-1)*4)
     for(let i= 0; i < out.length-1; i++){
       let [cx, cy] = out[i]
       let [nx, ny] = out[i+1]
-      cx = (cx + 0.5)* scale
-      cy = (cy + 0.5)* scale
-      nx = (nx + 0.5)* scale
-      ny = (ny + 0.5)* scale
+      cx = (cx + 0.5)* scaleW
+      cy = (cy + 0.5)* scaleH
+      nx = (nx + 0.5)* scaleW
+      ny = (ny + 0.5)* scaleH
       solution.set([cx,cy,nx,ny],i*4)
     }
   }else{
@@ -76,17 +70,13 @@ async function realtimeGenerate(mazeSize:Vec2) {
   }
 
   // create array of lines, pass as float32Array to main thread
-  const typedLines = new Float32Array(bitfieldsToLines(horis,vert,mazeSize))
-
+  
   postMessage(<WorkerResponse>{
     completion: 1,
     state: 'DRAW',
     done: true,
-    lines: typedLines,
+    lines,
     solution
   })
-  return;
-
-
 }
 
