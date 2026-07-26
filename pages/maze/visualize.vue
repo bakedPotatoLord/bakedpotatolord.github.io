@@ -5,13 +5,17 @@ import rdfs from '~/utils/maze/rdfs';
 import type { StartData } from '~/utils/maze/types';
 
 useHead({
-  title: 'Maze Creation Visualizer',
-  meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-  ],
   link: [
     { rel: 'icon', type: 'image/png', href: '/images/mazeIcon.png' }
   ]
+})
+
+useSeoMeta({
+
+  title: 'Maze Creation Visualizer',
+  ogTitle: 'Maze Creation Visualizer',
+  ogDescription: 'Maze Creation Visualizer',
+
 })
 
 const router = useRouter()
@@ -108,23 +112,30 @@ function handleSubmit(e: Event) {
 
 
 <template>
-  <div class="container">
-    <SectionTitle title="Maze Visualizer" justify="center"/>
+  <div class="title">
+    <SectionTitle title="Maze Visualizer" justify="left"/>
     <a class="buttonStyle" @click="router.push('/maze') ">Back to Maze Generator</a>
+  </div>
+
+  <div class="container">
     <br>
-    <div class="inputs">
-      <div class="inputGroup">
-        <label for="size">Maze Size</label>
-        <input type="number" name="size" min="5" max="200" v-model="mazeData.width" @change="mazeData.height = mazeData.width">
+    <div class="io">
+      <div class="inputs">
+        <div class="inputGroup">
+          <label for="size">Maze Size</label>
+          <input type="number" name="size" min="5" max="200" v-model="mazeData.width" @change="mazeData.height = mazeData.width">
+        </div>
+        <div class="inputGroup">
+          <label for="size">Frame Rate Slowdown</label>
+          <input type="number" name="size" min="1" max="1-" v-model="slowdown" >
+        </div>
+        <button class="mazeButtonStyle" @click="handleSubmit" >Start Visualization</button>
       </div>
-      <div class="inputGroup">
-        <label for="size">Frame Rate Slowdown</label>
-        <input type="number" name="size" min="1" max="1-" v-model="slowdown" >
-      </div>
-      <button class="mazeButtonStyle" @click="handleSubmit" >Start Visualization</button>
+      <p>{{ state }}</p>
     </div>
-    <p>{{ state }}</p>
-    <canvas ref="canvas"></canvas>
+    <div class="canvasContainer">
+      <canvas ref="canvas"></canvas>
+    </div>
   </div>
 </template>
 
@@ -136,35 +147,53 @@ function handleSubmit(e: Event) {
 
 }
 
-.container{
-  margin-left:5%;
-  margin-right: 5%;
-
-  canvas{
-    max-width: 100%;
+.title{
+  padding-left:5%;
+  a{
+    margin-left:0.5rem;
   }
 }
 
-.inputs {
-  margin-bottom: 10px;
-  margin-top: 10px;
-  background-color: rgb(64,64,64);
-  width:max-content;
-  padding: 1%;
-  border-radius: 5px;
-  .inputGroup{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    gap:1rem;
-    input{
-      width: 6ch;
-    }
-    label{
-      text-wrap:nowrap;
-      width: max-content;
+.container{
+  margin-left:5%;
+  margin-right: 5%;
+  display:flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  gap:3rem;
+
+  .io{
+    .inputs {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      background-color: rgb(64,64,64);
+      width:max-content;
+      padding: 1%;
+      border-radius: 5px;
+      .inputGroup{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        gap:1rem;
+        input{
+          width: 6ch;
+        }
+        label{
+          text-wrap:nowrap;
+          width: max-content;
+        }
+      }
     }
   }
+  .canvasContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    canvas{
+      width: min(90vw, 100%);
+    }
+  }
+
 }
 </style>
