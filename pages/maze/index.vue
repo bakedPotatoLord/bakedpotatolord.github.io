@@ -4,13 +4,15 @@ import { vec2 } from "~/utils/maze/helpers";
 import { type StartData, type WorkerResponse } from "~/utils/maze/types"
 
 useHead({
-  title: 'maze solver',
-  meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-  ],
   link: [
     { rel: 'icon', type: 'image/png', href: '/images/mazeIcon.png' }
   ]
+})
+
+useSeoMeta({
+  title: 'Maze Solver',
+  ogTitle: 'Maze Solver',
+  ogDescription: "A maze Generator and Solver written in TS and webgl",
 })
 
 let Worker: typeof import("~/utils/maze/workerGenerate?worker").default;
