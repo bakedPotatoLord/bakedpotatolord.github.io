@@ -156,7 +156,7 @@ function downloadMaze(e: Event) {
 <template>
   <div class="title">
     <SectionTitle title="Maze Generator" justify="left"/>
-    <a class="buttonStyle" @click="router.push('/maze') ">Visualize Maze Generator</a>
+    <a class="buttonStyle" @click="router.push('/maze/visualize') ">Visualize Maze Generator</a>
   </div>
   <div class="container">
     <div class="fullInput">
