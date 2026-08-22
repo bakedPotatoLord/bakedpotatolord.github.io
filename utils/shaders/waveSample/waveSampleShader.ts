@@ -65,8 +65,8 @@ export function setUniform(uniform: UniformInput) {
   handleUniform(gl, program, uniform)
 }
 
-export async function shaderSetup(glc: WebGL2RenderingContext) {
-  gl = glc
+export async function shaderSetup(p:{glc: WebGL2RenderingContext}) {
+  gl = p.glc
   cw = gl.canvas.width
   ch = gl.canvas.height
 

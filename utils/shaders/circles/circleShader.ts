@@ -33,8 +33,8 @@ export function setUniform(uniform: UniformInput) {
   handleUniform(gl, pointProgram, uniform)
 }
 
-export async function shaderSetup(glc: WebGL2RenderingContext) {
-  gl = glc
+export async function shaderSetup( p:{glc: WebGL2RenderingContext}) {
+  gl = p.glc
   cw = gl.canvas.width
   ch = gl.canvas.height
   gl.viewport(0,0,cw,ch)
@@ -137,6 +137,7 @@ export function destroy() {
 export function getInfo(): ShaderInfo{
   return {
     description:"A series of circles that appear inside of each other. this is originally from a scratch project from like 2016",
-    image:"/images/shaders/circles.png"
+    image:"/images/shaders/circles.png",
+    type:"webGL2",
   }
 }

@@ -38,8 +38,8 @@ export function setUniform(uniform: UniformInput) {
   handleUniform(gl, program, uniform)
 }
 
-export async function shaderSetup(glc: WebGL2RenderingContext) {
-  gl = glc
+export async function shaderSetup(p:{glc: WebGL2RenderingContext}) {
+  gl = p.glc
   cw = gl.canvas.width
   ch = gl.canvas.height
 
@@ -142,6 +142,7 @@ export function destroy() {
 export function getInfo(): ShaderInfo{
   return {
     description:"A cube normalized to a sphere, and then projected into clip space, with some squares removed",
-    image:"/images/shaders/sphere.png"
+    image:"/images/shaders/sphere.png",
+    type:"webGL2",
   }
 }

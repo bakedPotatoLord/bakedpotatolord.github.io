@@ -1,5 +1,6 @@
 
 <script setup lang="ts">
+import { err } from "~/utils/maze/helpers"
 import allShaders from "~/utils/shaders"
 
 
@@ -29,23 +30,52 @@ function getLastShader(){
 }
 
 
-const canvas = ref<HTMLCanvasElement | null>(null)
+const glcanvas = ref<HTMLCanvasElement | null>(null)
+const gpucanvas = ref<HTMLCanvasElement | null>(null)
 const runShader = ref(true)
-let uniforms = ref<UniformInput[]>([])
+const uniforms = ref<UniformInput[]>([])
+const webgl = ref(true)
+
 let gl: WebGL2RenderingContext|undefined|null;
+let gpuContext: GPUCanvasContext|null = null
+let gpuDevice: GPUDevice|null = null
 
-onMounted( () => {
-  gl = canvas.value?.getContext("webgl2",{ antialias: true })
 
-  if(!gl){
-    console.error("no gl context")
-    return
+onMounted( async () => {
+  const shaderInfo = getShader().getInfo();
+  if(shaderInfo.type === "webGL2" || shaderInfo.type === "webGL1"){
+    //get openGL context
+    gl = glcanvas.value?.getContext("webgl2",{ antialias: true })
+    if(!gl){
+      console.error("no gl context")
+      return
+    }
+  }else if (shaderInfo.type === "webGPU"){
+    //get webgpu context
+    if (!navigator.gpu) {
+      alert("WebGPU is not supported on this browser.");
+      return;
+    }
+    // 3. Request Adapter and Device
+    const adapter = await navigator.gpu.requestAdapter();
+    if (!adapter) {
+      alert("No GPU adapter found.");
+      return;
+    }
+    const device = await adapter.requestDevice();
+  
+    // 4. Configure Canvas Context
+    gpuContext = gpucanvas.value?.getContext("webgpu") ?? err("no webgpu context");
+    const canvasFormat = navigator.gpu.getPreferredCanvasFormat();
+    
+    gpuContext.configure({
+      device: device,
+      format: canvasFormat,
+      alphaMode: "opaque"
+    });
   }
 
-  let width = window.innerWidth * 0.9
-  gl.canvas.width = width
-  gl.canvas.height = width
-
+  resizeCanvas()
   window.addEventListener("resize", resizeCanvas)
   
   shaderSwitch()
@@ -57,33 +87,36 @@ onUnmounted(()=>{
 })
 
 function shaderSwitch(){
-  if(gl){
+  if(webgl &&gl){
     //call new shader setup
-    getShader().shaderSetup(gl)
-    //reset uniforms
-    uniforms.value = getShader().getDefaultUniforms();
-    //set uniforms
-    uniforms.value.forEach(uniform => {
-      getShader().setUniform(uniform)
-    });
-
-    // if has last shader, delete it
-    if(lastShader !== null){
-      getLastShader().destroy()
-    }
-
-    //set last shader
-    lastShader = selectedShader.value
+    getShader().shaderSetup({glc:gl})
+  }else if(gpuDevice && gpuContext){
+    getShader().shaderSetup({gpuDevice,gpuContext})
   }
+  //reset uniforms
+  uniforms.value = getShader().getDefaultUniforms();
+  //set uniforms
+  uniforms.value.forEach(uniform => {
+    getShader().setUniform(uniform)
+  });
+  // if has last shader, delete it
+  if(lastShader !== null){
+    getLastShader().destroy()
+  }
+
+  //set last shader
+  lastShader = selectedShader.value
 }
 
 function resizeCanvas() {
-  if(canvas.value){
-    canvas.value.width = window.innerWidth * 0.9
-    canvas.value.height = window.innerWidth * 0.9
-  }
-  if(gl){
-    gl.viewport(0,0,canvas.value?.width ?? 0,canvas.value?.height ?? 0)
+  for(const canvas of [glcanvas.value,gpucanvas.value]){
+    if(canvas){
+      canvas.width = window.innerWidth * 0.9
+      canvas.height = window.innerWidth * 0.9
+      if(gl){
+        gl.viewport(0,0,canvas.width,canvas.height)
+      }
+    }
   }
 }
 
@@ -113,7 +146,10 @@ function validateUniformVals(uniform:UniformInput){
   </select>
 </div>
 <div class="container" >
-  <canvas class="shaderCanvas" ref="canvas"></canvas>
+  <canvas class="webglCanvas" ref="glcanvas" :hidden="!webgl"></canvas>
+  <canvas class="webgpuCanvas" ref="gpucanvas" :hidden="webgl"></canvas>
+
+  
   <div class="uniforms" v-if="uniforms.length > 0">
     <h2>Uniforms (Settings)</h2>
     <div class="uniformInputs">
@@ -172,7 +208,7 @@ function validateUniformVals(uniform:UniformInput){
   @media (min-width: 1200px) {
     flex-wrap: nowrap;
   }
-  .shaderCanvas{
+  .webgpuCanvas, .webglCanvas{
     margin-top: 1rem;
     margin-bottom: 1rem;
     max-width: 60rem;
