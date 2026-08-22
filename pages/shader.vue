@@ -44,6 +44,7 @@ let gpuDevice: GPUDevice|null = null
 onMounted( async () => {
   const shaderInfo = getShader().getInfo();
   if(shaderInfo.type === "webGL2" || shaderInfo.type === "webGL1"){
+    webgl.value = true
     //get openGL context
     gl = glcanvas.value?.getContext("webgl2",{ antialias: true })
     if(!gl){
@@ -51,6 +52,7 @@ onMounted( async () => {
       return
     }
   }else if (shaderInfo.type === "webGPU"){
+    webgl.value = false
     //get webgpu context
     if (!navigator.gpu) {
       alert("WebGPU is not supported on this browser.");
@@ -62,17 +64,19 @@ onMounted( async () => {
       alert("No GPU adapter found.");
       return;
     }
-    const device = await adapter.requestDevice();
+    gpuDevice = await adapter.requestDevice();
   
     // 4. Configure Canvas Context
     gpuContext = gpucanvas.value?.getContext("webgpu") ?? err("no webgpu context");
     const canvasFormat = navigator.gpu.getPreferredCanvasFormat();
     
     gpuContext.configure({
-      device: device,
+      device: gpuDevice,
       format: canvasFormat,
       alphaMode: "opaque"
     });
+
+    console.log("gpu context configured", gpuContext, gpuDevice)
   }
 
   resizeCanvas()
