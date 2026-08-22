@@ -133,7 +133,7 @@ function validateUniformVals(uniform:UniformInput){
             :key="defi"
           >
         </div>
-    </div>
+      </div>
     </div>
   </div>
 </div>
