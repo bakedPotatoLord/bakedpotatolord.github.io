@@ -112,13 +112,14 @@ function shaderSwitch() {
 }
 
 function resizeCanvas() {
+  const width = window.innerWidth * 0.9
+  if (gl && glcanvas.value) {
+    gl.viewport(0, 0, glcanvas.value.width , glcanvas.value.height )
+  }
   for (const canvas of [glcanvas.value, gpucanvas.value]) {
     if (canvas) {
-      canvas.width = window.innerWidth * 0.9
-      canvas.height = window.innerWidth * 0.9
-      if (gl) {
-        gl.viewport(0, 0, canvas.width, canvas.height)
-      }
+      canvas.width = width
+      canvas.height = width
     }
   }
 }

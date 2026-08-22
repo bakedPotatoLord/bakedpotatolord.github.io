@@ -12,4 +12,5 @@ export default{ Attractor, Circles, Fractal, Sphere, WavyMountain} as Record<str
   shaderLoop: () => void
   destroy: () => void
   getInfo: () => ShaderInfo
+  handleMouseEvent?: (e: MouseEvent) => void
 }>

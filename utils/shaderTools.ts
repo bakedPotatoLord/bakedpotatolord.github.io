@@ -1,6 +1,8 @@
+import { err } from "./maze/helpers"
 
-export interface UniformInput {
-  glslname:string
+export type UniformInput ={
+  glslname?: string
+  wgslOffset?: number
   displayname:string
   hint?: string
   type: "float" | "int" 
@@ -9,7 +11,10 @@ export interface UniformInput {
   max?: number
   step?: number
   vals: [number] | [number,number] | [number,number,number] | [number,number,number,number]
-}
+} & (
+ | {glslname: string  } 
+ | {wgslOffset: number} 
+)
 
 export interface ShaderInfo {
   description: string
@@ -86,6 +91,8 @@ export function handleUniform(gl:WebGL2RenderingContext, program:WebGLProgram, u
     vals,
     type,
   } = uniform
+
+  if(!glslname) err("no glslname")
 
   const size= vals.length
   const typeAbbr = abbreviategltype(type)
