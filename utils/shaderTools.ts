@@ -14,6 +14,7 @@ export interface UniformInput {
 export interface ShaderInfo {
   description: string
   image: string
+  type: "webGL1" | "webGL2" | "webGPU"
 }
 
 export function compileProgram(gl: WebGLRenderingContext, vs: string, fs: string, beforeLink?: (program:WebGLProgram) => void) {

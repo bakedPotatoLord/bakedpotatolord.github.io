@@ -139,6 +139,7 @@ export function destroy() {
 export function getInfo(): ShaderInfo{
   return {
     description:"A simple 2d wave effect applied to an image of a sunset over a mountain range in boulder",
-    image:"/images/shaders/wavyMountain.png"
+    image:"/images/shaders/wavyMountain.png",
+    type:"webGL2",
   }
 }

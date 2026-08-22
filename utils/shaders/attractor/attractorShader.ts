@@ -165,6 +165,7 @@ export function destroy() {
 export function getInfo(): ShaderInfo{
   return {
     description:"generates geometric patterns using an iterated function system",
-    image:"/images/shaders/attractor.png"
+    image:"/images/shaders/attractor.png",
+    type:"webGL2",
   }
 }
