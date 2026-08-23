@@ -32,7 +32,7 @@ export function getDefaultUniforms(): UniformInput[] {
       invert:false,
       min:0.00001,
       max:2,
-      vals:[0.03],
+      vals:[1],
     },
     {
       wgslOffset:3,
@@ -48,8 +48,32 @@ export function getDefaultUniforms(): UniformInput[] {
   ]
 }
 
-export function handleMouseEvent() {
+let startx: number,starty:number,startOffsetx: number,startOffsety:number,moving: boolean;
+
+export function handleMouseEvent(e: MouseEvent,type:MouseEventType,) {
   
+  e.preventDefault()
+  // console.log(e,type)
+  switch (type) {
+    case MouseEventType.down:
+      startx = e.offsetX
+      starty = e.offsetY
+      moving = true
+      break;
+    case MouseEventType.move:
+      if(!moving) break
+      let movex = (e.offsetX - startx) * 1e-5
+      let movey = (e.offsetY - starty) * 1e-5
+      
+      uniformBufferValues[0] -= movex
+      uniformBufferValues[1] += movey
+      uniformsDirty = true
+      
+      break;
+    case MouseEventType.up:
+      moving = false
+      break;
+  }
 }
 
 export function setUniform(uniform: UniformInput) {

@@ -79,6 +79,17 @@ onMounted(async () => {
   resizeCanvas()
   window.addEventListener("resize", resizeCanvas)
 
+  //add canvas event listeners
+  glcanvas.value?.addEventListener("mousedown", (e)=>mouseEventHandler(e, 0))
+  glcanvas.value?.addEventListener("mouseup", (e)=>mouseEventHandler(e, 1))
+  glcanvas.value?.addEventListener("mousemove", (e)=>mouseEventHandler(e, 2))
+  glcanvas.value?.addEventListener("wheel", (e)=>mouseEventHandler(e, 3))
+  
+  gpucanvas.value?.addEventListener("mousedown", (e)=>mouseEventHandler(e, 0))
+  gpucanvas.value?.addEventListener("mouseup", (e)=>mouseEventHandler(e, 1))
+  gpucanvas.value?.addEventListener("mousemove", (e)=>mouseEventHandler(e, 2))
+  gpucanvas.value?.addEventListener("wheel", (e)=>mouseEventHandler(e, 3))
+
   shaderSwitch()
   mainLoop()
 })
@@ -86,6 +97,22 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener("resize", resizeCanvas)
 })
+
+function mouseEventHandler(e: MouseEvent,type:number) {
+  getShader()?.handleMouseEvent?.(e,type)
+}
+
+function throttle<T extends (...args: any[]) => void>(func: T, limit: number): (...args: Parameters<T>) => void {
+  let lastTime = 0;
+  
+  return function(this: any, ...args: Parameters<T>) {
+    const now = Date.now();
+    if (now - lastTime >= limit) {
+      lastTime = now;
+      func.apply(this, args);
+    }
+  };
+}
 
 function shaderSwitch() {
   const shaderInfo = getShader().getInfo();

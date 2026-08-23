@@ -114,3 +114,10 @@ export function handleUniform(gl:WebGL2RenderingContext, program:WebGLProgram, u
     gl[`uniform${size}${typeAbbr}`](location, ...vals)
   }
 }
+
+export enum MouseEventType{
+  down =0,
+  up = 1,
+  move = 2,
+  wheel = 3,
+}

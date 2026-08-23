@@ -12,8 +12,8 @@ struct UniformData {
 }
  
 
-const maxIteration = 128u;
-const countPerColor = 32u;
+const maxIteration = 32u;
+const countPerColor = 8u;
 const inverseCountPerColor = 1.0 / f32(countPerColor);
 const inverseMaxIteration = 1.0 / f32(maxIteration);
 

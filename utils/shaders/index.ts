@@ -1,3 +1,4 @@
+import type {  MouseEventType } from "~/utils/shaderTools"
 import * as WavyMountain from "./waveSample/waveSampleShader"
 import * as Circles from "./circles/circleShader"
 import * as Attractor from "./attractor/attractorShader"
@@ -12,5 +13,8 @@ export default{ Attractor, Circles, Fractal, Sphere, WavyMountain} as Record<str
   shaderLoop: () => void
   destroy: () => void
   getInfo: () => ShaderInfo
-  handleMouseEvent?: (e: MouseEvent) => void
+  handleMouseEvent?: (e: MouseEvent,type:MouseEventType) => void
 }>
+
+
+
