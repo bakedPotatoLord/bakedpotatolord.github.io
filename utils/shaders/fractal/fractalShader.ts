@@ -32,7 +32,7 @@ export function getDefaultUniforms(): UniformInput[] {
       invert:false,
       min:0.00001,
       max:2,
-      vals:[1],
+      vals:[5],
     },
     {
       wgslOffset:3,
@@ -48,7 +48,10 @@ export function getDefaultUniforms(): UniformInput[] {
   ]
 }
 
-let startx: number,starty:number,startOffsetx: number,startOffsety:number,moving: boolean;
+let lastx: number;
+let lasty:number;
+let moving = false
+let zoom = 1
 
 export function handleMouseEvent(e: MouseEvent,type:MouseEventType,) {
   
@@ -56,33 +59,45 @@ export function handleMouseEvent(e: MouseEvent,type:MouseEventType,) {
   // console.log(e,type)
   switch (type) {
     case MouseEventType.down:
-      startx = e.offsetX
-      starty = e.offsetY
+      lastx = e.offsetX
+      lasty = e.offsetY
       moving = true
       break;
     case MouseEventType.move:
       if(!moving) break
-      let movex = (e.offsetX - startx) * 1e-5
-      let movey = (e.offsetY - starty) * 1e-5
+      const scale = 0.5 ** zoom;
+      let movex = (e.offsetX - lastx) * 3e-3 * scale;
+      let movey = (e.offsetY - lasty) * 3e-3 * scale;
       
       uniformBufferValues[0] -= movex
       uniformBufferValues[1] += movey
+
+      lastx = e.offsetX
+      lasty = e.offsetY
+
       uniformsDirty = true
-      
       break;
     case MouseEventType.up:
       moving = false
+      break;
+    case MouseEventType.wheel:
+      zoom -= (e as WheelEvent).deltaY * 1e-2
+      uniformsDirty = true
       break;
   }
 }
 
 export function setUniform(uniform: UniformInput) {
   const offset = uniform.wgslOffset
-  if(offset !== undefined){
+  if(offset === 2){
+    //if zoom
+    zoom = uniform.vals[0]
+    uniformsDirty = true
+  }
+  if(offset !== undefined ){
     uniformBufferValues.set(uniform.vals, offset)
     uniformsDirty = true
   }
-  
 }
 
 export async function shaderSetup(p: { gpuDevice: GPUDevice, gpuContext: GPUCanvasContext }) {
@@ -113,10 +128,6 @@ export async function shaderSetup(p: { gpuDevice: GPUDevice, gpuContext: GPUCanv
     usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
   });
   uniformBufferValues = new Float32Array(uniformBufferSize / 4);
-  uniformBufferValues[0] = 0;
-  uniformBufferValues[1] = 0;
-  uniformBufferValues[2] = 1;
-  uniformBufferValues[3] = 1;
 
   bindGroup = device.createBindGroup({
     layout: pipeline.getBindGroupLayout(0),
@@ -143,6 +154,7 @@ export function shaderLoop() {
   });
 
   if(uniformsDirty){
+    uniformBufferValues[2] = 0.5 ** zoom; // set as log of zoom val
     device.queue.writeBuffer(uniformBuffer, 0, uniformBufferValues);
     uniformsDirty = false
   }

@@ -73,9 +73,6 @@ onMounted(async () => {
     alphaMode: "opaque"
   });
 
-  console.log("gpu context configured", gpuContext, gpuDevice)
-
-
   resizeCanvas()
   window.addEventListener("resize", resizeCanvas)
 
@@ -102,17 +99,6 @@ function mouseEventHandler(e: MouseEvent,type:number) {
   getShader()?.handleMouseEvent?.(e,type)
 }
 
-function throttle<T extends (...args: any[]) => void>(func: T, limit: number): (...args: Parameters<T>) => void {
-  let lastTime = 0;
-  
-  return function(this: any, ...args: Parameters<T>) {
-    const now = Date.now();
-    if (now - lastTime >= limit) {
-      lastTime = now;
-      func.apply(this, args);
-    }
-  };
-}
 
 function shaderSwitch() {
   const shaderInfo = getShader().getInfo();

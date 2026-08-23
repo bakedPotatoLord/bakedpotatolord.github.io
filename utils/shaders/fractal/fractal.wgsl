@@ -12,8 +12,8 @@ struct UniformData {
 }
  
 
-const maxIteration = 32u;
-const countPerColor = 8u;
+const maxIteration = 64u;
+const countPerColor = 16u;
 const inverseCountPerColor = 1.0 / f32(countPerColor);
 const inverseMaxIteration = 1.0 / f32(maxIteration);
 
@@ -75,10 +75,12 @@ fn vs_main(@builtin(vertex_index) in_vertex_index: u32) -> VertexOutput {
 
 @fragment
 fn fs_main(input:VertexOutput) -> @location(0) vec4f {
+  var pickpos = input.pos * uniforms.zoom + uniforms.origin;
 
-
-  var count = mandlebrot(input.pos * uniforms.zoom + uniforms.origin );
-
+  if( pickpos.x * pickpos.x + pickpos.y * pickpos.y > 4.0 ){ 
+    return vec4f(0.0,0.0,0.0,0.0);
+  }
+  var count = mandlebrot(pickpos );
 
   return gradient(count);
 }
