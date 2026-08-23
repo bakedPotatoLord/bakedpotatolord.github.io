@@ -173,8 +173,8 @@ export function destroy() {
 
 export function getInfo(): ShaderInfo {
   return {
-    description: "",
-    image: "",
+    description: "A mouse controlled fractal generator, displaying the mandlebrot set by default",
+    image: "/images/shaders/fractal.png",
     type: "webGPU",
   }
 }
