@@ -221,8 +221,8 @@ export function destroy() {
 
 export function getInfo(): ShaderInfo {
   return {
-    description: "A mouse controlled fractal generator, displaying the mandlebrot set by default",
-    image: "/images/shaders/fractal.png",
+    description: "A ray tracing implementation that supports scrolling to zoom. still working on more controls and options.",
+    image: "/images/shaders/raytrace.png",
     type: "webGPU",
   }
 }
