@@ -29,36 +29,29 @@ const lightColor = vec3f(1.0,1.0,1.0);
 
 const sphereColor = vec3f(1.0,0.5,0.5);
 
+const rotx = mat3x3<f32>(
+  1.0, 0.0, 0.0, 
+  0.0, 0.6,0.8, 
+  0.0, -0.8, 0.6, 
+);
 
-const mults = array< mat3x3<f32>, 3>(
-  mat3x3<f32>(
-    0.6,0.8, 0.0,
-    -0.8, 0.6, 0.0,
-    0.0,  .0, 1.0
-  )*mat3x3<f32>(
-    1.0, 0.0, 0.0, 
-    0.0, 0.6,0.8, 
-    0.0, -0.8, 0.6, 
-  ),
-  mat3x3<f32>(
-    cos(2.0),sin(2.0), 0.0,
-    -sin(2.0), cos(2.0), 0.0,
-    0.0,  .0, 1.0
-  )*mat3x3<f32>(
-    1.0, 0.0, 0.0, 
-    0.0, 0.6,0.8, 
-    0.0, -0.8, 0.6, 
-  ),
-  mat3x3<f32>(
-    cos(3.0),sin(3.0), 0.0,
-    -sin(3.0), cos(3.0), 0.0,
-    0.0,  .0, 1.0
-  )*mat3x3<f32>(
-    1.0, 0.0, 0.0, 
-    0.0, 0.6,0.8, 
-    0.0, -0.8, 0.6, 
-  ),
+const rotz = mat3x3<f32>(
+  0.6,0.8, 0.0,
+  -0.8, 0.6, 0.0,
+  0.0,  .0, 1.0
+);
+const roty = mat3x3<f32>(
+  0.6, 0.0, -.8,
+  0.0, 1.0, 0.0,
+  0.8, 0.0, 0.6
+);
 
+const mults = array< mat3x3<f32>,5>(
+  rotx*rotz*roty,
+  rotx*rotz*roty*rotz*roty,
+  rotx*rotz*roty*(-1.0*rotz)*rotx,
+  rotx*rotz*roty*(-1.0*rotx)*roty,
+  rotx*rotz*roty*(-1.0*rotx)*roty,
 );
 
 
@@ -127,39 +120,63 @@ fn gradNoise3(n:vec3f,transform: mat3x3<f32>)-> f32{
 
 fn spheresdf(p:vec3f)-> f32{
 
-  const noiseLayers = 4u;
+  const noiseLayers = 7u;
   const noiseParams = array<NoiseDescriptor,noiseLayers>(
     NoiseDescriptor(
       mat3x3<f32>( //scale by 10
-        10.0,0.0,0.0, 
-        0.0,10.0,0.0,
-        0.0,0.0,10.0,
+        20.0,0.0,0.0, 
+        0.0,20.0,0.0,
+        0.0,0.0,20.0,
       ) * mults[0],
-      0.03
+      0.005
     ),
     NoiseDescriptor(
       mat3x3<f32>( //scale by 10
         10.0,0.0,0.0, 
         0.0,10.0,0.0,
         0.0,0.0,10.0,
+      ) * mults[1],
+      0.01
+    ),
+    NoiseDescriptor(
+      mat3x3<f32>( //scale by 10
+        6.0,0.0,0.0, 
+        0.0,6.0,0.0,
+        0.0,0.0,6.0,
       ) * mults[2],
-      0.03
+      0.01
+    ),
+    NoiseDescriptor(
+      mat3x3<f32>( //scale by 10
+        9.0,0.0,0.0, 
+        0.0,9.0,0.0,
+        0.0,0.0,9.0,
+      ) * mults[3],
+      0.02
     ),
     NoiseDescriptor(
       mat3x3<f32>( //scale by 8
         8.0,0.0,0.0, 
         0.0,8.0,0.0,
         0.0,0.0,8.0,
-      ) * mults[1],
+      ) * mults[4],
       0.02
+    ),
+    NoiseDescriptor(
+      mat3x3<f32>(
+        2.0,0.0,0.0, 
+        0.0,2.0,0.0,
+        0.0,0.0,2.0,
+      ) * mults[0],
+      0.4
     ),
     NoiseDescriptor(
       mat3x3<f32>(
         1.0,0.0,0.0, 
         0.0,1.0,0.0,
         0.0,0.0,1.0,
-      ) * mults[1],
-      1.4
+      ) * mults[4],
+      2.4
     )
   );
 
