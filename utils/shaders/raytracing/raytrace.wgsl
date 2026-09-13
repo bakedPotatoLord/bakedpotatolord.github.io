@@ -6,7 +6,7 @@ struct VertexOutput {
 };
 
 struct UniformData {
-  origin: vec2f,
+  modelView: mat4x4<f32>,
   zoom: f32,
   depth: f32
 }
@@ -235,9 +235,9 @@ fn fs_main(input:VertexOutput) -> @location(0) vec4f {
   var pickpos = input.pos * uniforms.zoom;
 
   //generally pointing in the +z direction
-  var direction = normalize( vec3f(pickpos, 1.0) );
+  var direction =  (uniforms.modelView * normalize( vec4f(pickpos, 1.0,1.0) )).xyz;
 
-  var pos = origin ;
+  var pos = (uniforms.modelView * vec4(origin,1.0) ).xyz;
 
   var accumulatedDist = 0f;
   var dist: f32;
@@ -256,11 +256,13 @@ fn fs_main(input:VertexOutput) -> @location(0) vec4f {
 
   // let ident = identity(pos);
 
+  let transformedLightDir = (uniforms.modelView * vec4f(lightDirection,1.0)).xyz;
+
   // let color = hash33(ident);
   let color = hash33(vec3f(.5,.2,.4));
 
   let normal = sphereSDFNormal(pos);
-  let reflection = dot(normal,lightDirection);
+  let reflection = dot(normal,transformedLightDir);
   return vec4f( 
     (color*0.2  )+
     (lightColor * reflection * 0.2 ),

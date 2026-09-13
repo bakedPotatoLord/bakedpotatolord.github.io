@@ -1,3 +1,4 @@
+import { Matrix3, Matrix4 } from "@math.gl/core";
 import shaderCode from "./raytrace.wgsl?raw"
 
 
@@ -54,6 +55,7 @@ let lastx: number;
 let lasty:number;
 let moving = false
 let zoom = 1
+let transform= new Matrix4().identity()
 
 export function handleMouseEvent(e: MouseEvent,type:MouseEventType,) {
   
@@ -71,8 +73,10 @@ export function handleMouseEvent(e: MouseEvent,type:MouseEventType,) {
       let movex = (e.offsetX - lastx) * 1e-2 * scale;
       let movey = (e.offsetY - lasty) * 1e-2 * scale;
       
-      uniformBufferValues[0] -= movex
-      uniformBufferValues[1] += movey
+      // uniformBufferValues[0] -= movex
+      // uniformBufferValues[1] += movey
+      transform.rotateY(movex)
+      transform.rotateX(movey)
 
       lastx = e.offsetX
       lasty = e.offsetY
@@ -145,7 +149,7 @@ export async function shaderSetup(p: { gpuDevice: GPUDevice, gpuContext: GPUCanv
     primitive: { topology: 'triangle-strip' },
   });
 
-  const uniformBufferSize = 4 * 4; // Account for alignment/padding (vec4 = 16 bytes, f32 = 4 bytes)
+  const uniformBufferSize = 16 * 4 + 4 * 4; // Account for alignment/padding (vec4 = 16 bytes, f32 = 4 bytes)
   uniformBuffer = device.createBuffer({
     size: uniformBufferSize,
     usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
@@ -200,7 +204,11 @@ export function shaderLoop() {
   const commandEncoder = device.createCommandEncoder();
 
   if(uniformsDirty){
-    uniformBufferValues[2] = 0.5 ** zoom; // set as log of zoom val
+    //set 0-15
+    uniformBufferValues.set(transform, 0)
+
+    //set 16
+    uniformBufferValues[16] = 0.5 ** zoom; // set as log of zoom val
     
     device.queue.writeBuffer(uniformBuffer, 0, uniformBufferValues);
     
