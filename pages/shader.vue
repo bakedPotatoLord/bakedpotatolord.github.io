@@ -67,10 +67,12 @@ onMounted(async () => {
   gpuContext = gpucanvas.value?.getContext("webgpu") ?? err("no webgpu context");
   const canvasFormat = navigator.gpu.getPreferredCanvasFormat();
 
+
   gpuContext.configure({
     device: gpuDevice,
     format: canvasFormat,
-    alphaMode: "opaque"
+    alphaMode: "opaque",
+    usage: GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.COPY_DST,
   });
 
   resizeCanvas()
@@ -125,15 +127,18 @@ function shaderSwitch() {
 }
 
 function resizeCanvas() {
-  const width = window.innerWidth * 0.9
-  if (gl && glcanvas.value) {
-    gl.viewport(0, 0, glcanvas.value.width , glcanvas.value.height )
-  }
+  // const width = gpuDevice?.limits.maxTextureDimension2D ?? 8_192;
+  const width = window.innerWidth * 0.9;
+  const height = width;
+  getShader()?.handleResize?.(width, height)
   for (const canvas of [glcanvas.value, gpucanvas.value]) {
     if (canvas) {
-      canvas.width = width
-      canvas.height = width
+      canvas.width = width;
+      canvas.height = height;
     }
+  }
+  if (gl && glcanvas.value) {
+    gl.viewport(0, 0, glcanvas.value.width , glcanvas.value.height )
   }
 }
 
@@ -225,7 +230,7 @@ function validateUniformVals(uniform: UniformInput) {
   .webglCanvas {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    max-width: 60rem;
+    max-width: min(95vw, 60rem);
     border: none;
   }
 
