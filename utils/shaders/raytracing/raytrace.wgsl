@@ -22,13 +22,44 @@ const origin = vec3(0.0,0.0,-2.0);
 const maxSteps = 256u;
 
 const rayDistMin = 0.1;
-const rayDistMax = 32.0;
+const rayDistMax = 4.0;
 
 const lightDirection = normalize(vec3f(0.05,1.0,0.15));
 const lightColor = vec3f(1.0,1.0,1.0);
 
 const sphereColor = vec3f(1.0,0.5,0.5);
 
+
+const mults = array< mat3x3<f32>, 3>(
+  mat3x3<f32>(
+    0.6,0.8, 0.0,
+    -0.8, 0.6, 0.0,
+    0.0,  .0, 1.0
+  )*mat3x3<f32>(
+    1.0, 0.0, 0.0, 
+    0.0, 0.6,0.8, 
+    0.0, -0.8, 0.6, 
+  ),
+  mat3x3<f32>(
+    cos(2.0),sin(2.0), 0.0,
+    -sin(2.0), cos(2.0), 0.0,
+    0.0,  .0, 1.0
+  )*mat3x3<f32>(
+    1.0, 0.0, 0.0, 
+    0.0, 0.6,0.8, 
+    0.0, -0.8, 0.6, 
+  ),
+  mat3x3<f32>(
+    cos(3.0),sin(3.0), 0.0,
+    -sin(3.0), cos(3.0), 0.0,
+    0.0,  .0, 1.0
+  )*mat3x3<f32>(
+    1.0, 0.0, 0.0, 
+    0.0, 0.6,0.8, 
+    0.0, -0.8, 0.6, 
+  ),
+
+);
 
 
 // returns a nice face from [1,0] and outputs [1,0]
@@ -96,18 +127,22 @@ fn gradNoise3(n:vec3f,transform: mat3x3<f32>)-> f32{
 
 fn spheresdf(p:vec3f)-> f32{
 
-  const noiseLayers = 3u;
-  const noiseParams: array<NoiseDescriptor,noiseLayers> = array<NoiseDescriptor,noiseLayers>(
+  const noiseLayers = 4u;
+  const noiseParams = array<NoiseDescriptor,noiseLayers>(
     NoiseDescriptor(
       mat3x3<f32>( //scale by 10
         10.0,0.0,0.0, 
         0.0,10.0,0.0,
         0.0,0.0,10.0,
-      )* mat3x3<f32>( //rotate around
-        1.0,0.0,2.0, 
-        0.0,2.0,4.0,
-        2.0,3.0,1.0,
-      ),
+      ) * mults[0],
+      0.03
+    ),
+    NoiseDescriptor(
+      mat3x3<f32>( //scale by 10
+        10.0,0.0,0.0, 
+        0.0,10.0,0.0,
+        0.0,0.0,10.0,
+      ) * mults[2],
       0.03
     ),
     NoiseDescriptor(
@@ -115,24 +150,21 @@ fn spheresdf(p:vec3f)-> f32{
         8.0,0.0,0.0, 
         0.0,8.0,0.0,
         0.0,0.0,8.0,
-      )* mat3x3<f32>( //rotate around
-        1.0,2.0,0.0, 
-        0.3,1.0,3.5,
-        2.0,3.0,1.0,
-      ),
-      0.003
+      ) * mults[1],
+      0.02
     ),
     NoiseDescriptor(
       mat3x3<f32>(
         1.0,0.0,0.0, 
         0.0,1.0,0.0,
         0.0,0.0,1.0,
-      ),
-      0.4
+      ) * mults[1],
+      1.4
     )
   );
 
   var n = length(p) -1.0;
+  
   for(var i=0u;i<noiseLayers;i++){
     n += gradNoise3(p,noiseParams[i].transform)*noiseParams[i].amplitude;
   }
@@ -178,10 +210,10 @@ fn identity(p:vec3f) -> vec3f{
 }
 
 fn sdf(p:vec3f) -> f32{
-  let i = identity(p);
-  let h = hash33(i);
+  // let i = identity(p);
+  // let h = hash33(i);
   
-  return spheresdf(repeat(p) + ( (h*1.5) - 0.75) );
+  return spheresdf(p);
 }
 
 
@@ -198,12 +230,14 @@ fn vs_main(@builtin(vertex_index) in_vertex_index: u32) -> VertexOutput {
 
 @fragment
 fn fs_main(input:VertexOutput) -> @location(0) vec4f {
+
+  //
   var pickpos = input.pos * uniforms.zoom;
 
   //generally pointing in the +z direction
   var direction = normalize( vec3f(pickpos, 1.0) );
 
-  var pos = origin + vec3f(uniforms.origin,0.0) ;
+  var pos = origin ;
 
   var accumulatedDist = 0f;
   var dist: f32;
@@ -220,14 +254,15 @@ fn fs_main(input:VertexOutput) -> @location(0) vec4f {
     }
   }
 
-  let ident = identity(pos);
+  // let ident = identity(pos);
 
-  let color = hash33(ident);
+  // let color = hash33(ident);
+  let color = hash33(vec3f(.5,.2,.4));
 
   let normal = sphereSDFNormal(pos);
   let reflection = dot(normal,lightDirection);
   return vec4f( 
-    (color*0.7  )+
+    (color*0.2  )+
     (lightColor * reflection * 0.2 ),
     1.0
   );
