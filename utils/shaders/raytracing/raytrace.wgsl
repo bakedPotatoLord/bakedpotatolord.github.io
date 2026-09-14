@@ -18,11 +18,11 @@ struct NoiseDescriptor{
  
 @group(0) @binding(0) var<uniform> uniforms:UniformData;
 
-const origin = vec3(0.0,0.0,-2.0);
+const origin = vec3(0.0,0.0,-4.0);
 const maxSteps = 256u;
 
 const rayDistMin = 0.1;
-const rayDistMax = 4.0;
+const rayDistMax = 10.0;
 
 const lightDirection = normalize(vec3f(0.05,1.0,0.15));
 const lightColor = vec3f(1.0,1.0,1.0);
