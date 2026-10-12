@@ -4,7 +4,7 @@ titleUrl: "sem-2-mines"
 description: "The things I did in my second semester of college"
 coverImg:  "/images/blog/sem-2-mines/cover.png"
 coverImgAlt: "sunset over the McNeil center on the School of Mines campus"
-inProgress: "true"
+inProgress: "false"
 keywords: "Colorado School of Mines, college semester recap, engineering student, computer science, robotics, FRC, 3D printing, makerspace, Labriola Makerspace, embroidery, custom patches, electric longboard, VESC, rope making, hunting, deer processing, organ meat cooking, Advent of Code, hackathon, Rocky Mountain RepRap Festival, college projects, engineering student life"
 datePublished: 1791838052441
 dateEdited: 1791838052441
