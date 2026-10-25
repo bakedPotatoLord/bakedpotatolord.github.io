@@ -26,6 +26,13 @@ var<storage, read_write> destination: array<Boid>;
 
 const size = 0.08;
 
+const perceptionRadius = 0.25;
+const separationRadius = 0.40;
+
+const maxSpeed = 0.45;
+const maxAcceleration = 0.50;
+const dt = 1.0 / 60.0;
+
 fn insideEllipse(
     point: vec2f,
     center: vec2f,
@@ -51,17 +58,77 @@ fn insideEllipse(
     return dot(local, local) <= 1.0;
 }
 
+fn limitLength(value: vec2f, maximum: f32) -> vec2f {
+    let lengthSquared = dot(value, value);
+    if (lengthSquared > maximum * maximum) {
+        return value * (maximum * inverseSqrt(lengthSquared));
+    }
+    return value;
+}
+
 @compute @workgroup_size(64)
 fn cs_main(@builtin(global_invocation_id) id: vec3u) {
     let i = id.x;
-    if (i >= arrayLength(&source)) {
+    let count = arrayLength(&source);
+    if (i >= count) {
         return;
     }
 
     var boid = source[i];
 
-    // Compute steering using source[...] here.
-    boid.position += boid.velocity * 0.01;
+    var separation = vec2f(0.0);
+    var velocitySum = vec2f(0.0);
+    var positionSum = vec2f(0.0);
+    var neighborCount = 0u;
+
+    for (var j = 0u; j < count; j++) {
+      if(j == i){
+        continue;
+      }
+
+      let other = source[j];
+
+      let delta = other.position - boid.position;
+      let distanceSquared = dot(delta, delta);
+
+
+      if (distanceSquared < perceptionRadius * perceptionRadius) {
+        velocitySum += other.velocity;
+        positionSum += other.position;
+        neighborCount++;
+      }
+
+      if (distanceSquared < separationRadius * separationRadius) {
+        // Stronger repulsion for closer neighbors.
+        separation -= delta / max(distanceSquared, 0.000001);
+      }
+    }
+
+    var alignment = vec2f(0.0);
+    var cohesion = vec2f(0.0);
+
+    if(neighborCount > 0u){
+      let inverseCount = 1.0 / f32(neighborCount);
+
+      alignment = velocitySum * inverseCount - boid.velocity;
+      cohesion = positionSum * inverseCount - boid.position;
+    }
+
+    let acceleration = limitLength(
+        separation * 1.5 +
+        alignment * 1.5 +
+        cohesion * 0.8,
+        maxAcceleration,
+    );
+
+    let velocity = limitLength(
+        boid.velocity + acceleration * dt,
+        maxSpeed,
+    );
+
+    boid.position = boid.position + velocity * dt;
+    boid.velocity = velocity;
+  
 
     if(boid.position.x > 1.1){
        boid.position.x -= 2.2;
