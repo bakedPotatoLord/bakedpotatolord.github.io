@@ -165,7 +165,7 @@ export function destroy() {
 
 export function getInfo(): ShaderInfo {
   return {
-    description: "boids",
+    description: "Simulation of flocking behavior observed in birds. https://en.wikipedia.org/wiki/Boids",
     image: "/images/shaders/boids.png",
     type: "webGPU",
   }
